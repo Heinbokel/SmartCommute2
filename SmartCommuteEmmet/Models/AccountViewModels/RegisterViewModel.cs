@@ -14,6 +14,31 @@ namespace SmartCommuteEmmet.Models.AccountViewModels
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Birth")]
+        public DateTime DateOfBirth { get; set; }
+
+        [Display(Name = "Street Address")]
+        public string UserStreet { get; set; }
+
+        [Display(Name = "City")]
+        public string UserCity { get; set; }
+
+        [Display(Name = "ZIP")]
+        public string UserZIP { get; set; }
+
+        [Required]
+        [Display(Name = "Business")]
+        public Business Business { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

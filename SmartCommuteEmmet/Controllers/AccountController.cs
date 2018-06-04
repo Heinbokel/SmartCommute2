@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SmartCommuteEmmet.Data;
 using SmartCommuteEmmet.Models;
 using SmartCommuteEmmet.Models.AccountViewModels;
 using SmartCommuteEmmet.Services;
@@ -20,6 +21,7 @@ namespace SmartCommuteEmmet.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -29,8 +31,10 @@ namespace SmartCommuteEmmet.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext context)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -208,6 +212,7 @@ namespace SmartCommuteEmmet.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
+            ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "Id");
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -217,6 +222,7 @@ namespace SmartCommuteEmmet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
+            
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
@@ -238,6 +244,7 @@ namespace SmartCommuteEmmet.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            ViewData["BusinessId"] = new SelectList(_context.Set<CommuteType>(), "Id", "Id");
             return View(model);
         }
 
