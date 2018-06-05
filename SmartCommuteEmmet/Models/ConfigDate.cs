@@ -8,8 +8,8 @@ namespace SmartCommuteEmmet.Models
     public class ConfigDate
     {
         public int Id { get; set; }
-        public string ConfigDateName { get; set; }
-        public string ConfigDateDescription { get; set; }
-        public DateTime ConfigDateDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public DateTime RegisterByDate { get; set; }
     }
 }
