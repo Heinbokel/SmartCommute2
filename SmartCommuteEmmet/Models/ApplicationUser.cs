@@ -18,13 +18,13 @@ namespace SmartCommuteEmmet.Models
         [StringLength(maximumLength: 25, MinimumLength = 2, ErrorMessage = "Last name must be between 2 and 25 characters.")]
         public string LastName { get; set; }
 
-        [Required]//Do custom attribute to ensure date is between 120 years ago and 14 years ago.
+        [Required]
         public DateTime DateOfBirth { get; set; }
 
         [StringLength(maximumLength: 50, MinimumLength = 4, ErrorMessage ="Street address must be between 4 and 50 characters.")]
         public string UserStreet { get; set; }
 
-        [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "City must be between 2 and 50 characters.")]
+        [StringLength(maximumLength: 50, MinimumLength = 1, ErrorMessage = "City must be between 1 and 50 characters.")]
         public string UserCity { get; set; }
 
         [RegularExpression(@"^(\d{5})$",ErrorMessage ="ZIP must be 5 digits.")]

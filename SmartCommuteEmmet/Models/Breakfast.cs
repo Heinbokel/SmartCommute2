@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,16 +10,23 @@ namespace SmartCommuteEmmet.Models
     public class Breakfast
     {
         public int Id { get; set; }
-        public string BreakfastName { get; set; }
-        public string BreakfastDescription { get; set; }
-        public string BreakfastStreet { get; set; }
-        public string BreakfastCity { get; set; }
-        public string BreakfastZIP { get; set; }
-        public string BreakfastLink { get; set; }
 
-        //FK
-        public int DocumentId { get; set; }
-        [ForeignKey("DocumentId")]
-        public Document BreakfastDocument { get; set; }
+        [Required][Display(Name ="Breakfast Provider Name")]
+        public string BreakfastName { get; set; }
+
+        [Required][Display(Name ="Breakfast Provider Description")]
+        public string BreakfastDescription { get; set; }
+
+        [Required][Display(Name ="Breakfast Provider Street")]
+        public string BreakfastStreet { get; set; }
+
+        [Required][Display(Name ="Breakfast Provider City")]
+        public string BreakfastCity { get; set; }
+
+        [Required][Display(Name ="Breakfast Provider ZIP")]
+        public string BreakfastZIP { get; set; }
+
+        [Required][Display(Name ="Breakfast Provider URL")]
+        public string BreakfastLink { get; set; }
     }
 }
