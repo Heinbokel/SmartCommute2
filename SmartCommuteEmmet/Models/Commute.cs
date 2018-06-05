@@ -20,11 +20,13 @@ namespace SmartCommuteEmmet.Models
         [ForeignKey("CommuteTypeId")]
         public CommuteType CommuteType { get; set; }
 
-        public int PointId { get; set; }
-        [ForeignKey("PointId")]
-        public Point StartPoint { get; set; }
+        public int StartPointId { get; set; }
+        [ForeignKey("StartPointId")]
+        public StartPoint StartPoint { get; set; }
 
-        //add end point here
+        public int EndPointId { get; set; }
+        [ForeignKey("EndPointId")]
+        public EndPoint EndPoint { get; set; }
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]

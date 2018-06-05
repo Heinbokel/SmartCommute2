@@ -11,9 +11,10 @@ using System;
 namespace SmartCommuteEmmet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180605122613_ModelComplete")]
+    partial class ModelComplete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,9 +244,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.Property<int>("CommuteTypeId");
 
-                    b.Property<int>("EndPointId");
-
-                    b.Property<int>("StartPointId");
+                    b.Property<int>("PointId");
 
                     b.Property<string>("UserId");
 
@@ -253,9 +252,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.HasIndex("CommuteTypeId");
 
-                    b.HasIndex("EndPointId");
-
-                    b.HasIndex("StartPointId");
+                    b.HasIndex("PointId");
 
                     b.HasIndex("UserId");
 
@@ -278,40 +275,22 @@ namespace SmartCommuteEmmet.Data.Migrations
                     b.ToTable("CommuteType");
                 });
 
-            modelBuilder.Entity("SmartCommuteEmmet.Models.EndPoint", b =>
+            modelBuilder.Entity("SmartCommuteEmmet.Models.Point", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("EndPointDescription");
+                    b.Property<string>("PointDescription");
 
-                    b.Property<float>("EndPointLatitude");
+                    b.Property<float>("PointLatitude");
 
-                    b.Property<float>("EndPointLongitude");
+                    b.Property<float>("PointLongitude");
 
-                    b.Property<string>("EndPointName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EndPoint");
-                });
-
-            modelBuilder.Entity("SmartCommuteEmmet.Models.StartPoint", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("StartPointDescription");
-
-                    b.Property<float>("StartPointLatitude");
-
-                    b.Property<float>("StartPointLongitude");
-
-                    b.Property<string>("StartPointName");
+                    b.Property<string>("PointName");
 
                     b.HasKey("Id");
 
-                    b.ToTable("StartPoint");
+                    b.ToTable("Point");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -381,14 +360,9 @@ namespace SmartCommuteEmmet.Data.Migrations
                         .HasForeignKey("CommuteTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SmartCommuteEmmet.Models.EndPoint", "EndPoint")
+                    b.HasOne("SmartCommuteEmmet.Models.Point", "StartPoint")
                         .WithMany()
-                        .HasForeignKey("EndPointId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmartCommuteEmmet.Models.StartPoint", "StartPoint")
-                        .WithMany()
-                        .HasForeignKey("StartPointId")
+                        .HasForeignKey("PointId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SmartCommuteEmmet.Models.ApplicationUser", "User")

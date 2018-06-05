@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,8 +20,8 @@ namespace SmartCommuteEmmet.Models
 
         public string BusinessZIP { get; set; }
 
-        public string BusinessTeamCaptain { get; set; }
-
-        public string BusinessEmail { get; set; }
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
+        public ApplicationUser BusinessTeamCaptain { get; set; }//Which user is the leader of this team?
     }
 }

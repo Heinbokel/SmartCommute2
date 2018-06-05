@@ -9,10 +9,10 @@ namespace SmartCommuteEmmet.Models
     {
         public int Id { get; set; }
 
-        public string CommuteName { get; set; }
+        public string CommuteTypeName { get; set; }
 
         public int CommutePointsAwarded { get; set; }
 
-        public string CommuteDescription { get; set; }
+        public string CommuteTypeDescription { get; set; }
     }
 }

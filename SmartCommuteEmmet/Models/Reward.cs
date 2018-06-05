@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,6 +15,8 @@ namespace SmartCommuteEmmet.Models
         public int RequiredMiles { get; set; }
 
         //FK
+        public int DocumentId { get; set; }
+        [ForeignKey("DocumentId")]
         public Document RewardDocument { get; set; }
     }
 }
