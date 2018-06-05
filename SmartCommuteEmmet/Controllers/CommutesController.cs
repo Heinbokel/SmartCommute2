@@ -64,7 +64,7 @@ namespace SmartCommuteEmmet.Controllers
         public async Task<IActionResult> Create([Bind("Id,CommuteDistance,CommuteDescription,CommuteSaved,CommuteName,CommuteDate,CommuteTypeId,PointId,UserId")] Commute commute)
         {
             if (ModelState.IsValid)
-            {
+            {//gittest
                 _context.Add(commute);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
