@@ -24,5 +24,7 @@ namespace SmartCommuteEmmet.Data
         }
 
         public DbSet<SmartCommuteEmmet.Models.Commute> Commute { get; set; }
+
+        public DbSet<SmartCommuteEmmet.Models.CommuteType> CommuteType { get; set; }
     }
 }

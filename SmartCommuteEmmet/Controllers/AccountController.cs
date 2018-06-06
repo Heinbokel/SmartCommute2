@@ -212,7 +212,7 @@ namespace SmartCommuteEmmet.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
-            ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "Id");
+            ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
