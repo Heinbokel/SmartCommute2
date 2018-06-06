@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,9 @@ namespace SmartCommuteEmmet.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+        [Display(Name ="Profile Picture")]
+        public string UserAvatar { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -35,7 +39,9 @@ namespace SmartCommuteEmmet.Models.AccountViewModels
         public string UserZIP { get; set; }
 
         [Required]
+        public int BusinessId { get; set; }
         [Display(Name = "Business")]
+        [ForeignKey("BusinessId")]
         public Business Business { get; set; }
 
         [Required]
