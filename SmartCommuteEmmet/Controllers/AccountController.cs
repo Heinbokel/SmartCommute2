@@ -226,7 +226,7 @@ namespace SmartCommuteEmmet.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BusinessId = model.BusinessId, DateOfBirth = model.DateOfBirth, DateRegistered = DateTime.Now, FirstName = model.FirstName, LastName = model.LastName, UserCity = model.UserCity, UserStreet = model.UserStreet, UserZIP = model.UserZIP, UserAvatar = null };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -244,7 +244,7 @@ namespace SmartCommuteEmmet.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ViewData["BusinessId"] = new SelectList(_context.Set<CommuteType>(), "Id", "Id");
+            ViewData["BusinessId"] = new SelectList(_context.Set<CommuteType>(), "Id", "BusinessName");
             return View(model);
         }
 
