@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +11,7 @@ namespace SmartCommuteEmmet.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Display(Name ="Profile Picture")]
-        public string UserAvatar { get; set; }
+        public string UserPhoto { get; set; }
 
         [Required]
         [EmailAddress]

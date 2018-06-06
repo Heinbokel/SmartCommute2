@@ -11,7 +11,8 @@ namespace SmartCommuteEmmet.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public string UserAvatar { get; set; }
+        [Required]
+        public string UserPhoto { get; set; }
 
         [Required][StringLength(maximumLength: 25,MinimumLength = 2, ErrorMessage ="First name must be between 2 and 25 characters.")]
         public string FirstName { get; set; }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -222,11 +224,32 @@ namespace SmartCommuteEmmet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
-            
+            string uploadPath = "uploads/img";
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BusinessId = model.BusinessId, DateOfBirth = model.DateOfBirth, DateRegistered = DateTime.Now, FirstName = model.FirstName, LastName = model.LastName, UserCity = model.UserCity, UserStreet = model.UserStreet, UserZIP = model.UserZIP, UserAvatar = null };
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+                var files = HttpContext.Request.Form.Files;
+                foreach (var file in files)
+                {
+                    if (file != null && file.Length > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                        var uploadPathWithfileName = Path.Combine(uploadPath, fileName);
+
+                        using (var fileStream = new FileStream(uploadPathWithfileName, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                            model.UserPhoto = uploadPathWithfileName;
+                        }
+                    }
+                }
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BusinessId = model.BusinessId, DateOfBirth = model.DateOfBirth, DateRegistered = DateTime.Now, FirstName = model.FirstName, LastName = model.LastName, UserCity = model.UserCity, UserStreet = model.UserStreet, UserZIP = model.UserZIP, UserPhoto = model.UserPhoto };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

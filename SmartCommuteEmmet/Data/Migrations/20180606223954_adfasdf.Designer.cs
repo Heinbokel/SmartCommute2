@@ -11,9 +11,10 @@ using System;
 namespace SmartCommuteEmmet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180606223954_adfasdf")]
+    partial class adfasdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,7 +210,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
             modelBuilder.Entity("SmartCommuteEmmet.Models.Business", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BusinessId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("BusinessCity");
@@ -225,7 +226,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("Id");
+                    b.HasKey("BusinessId");
 
                     b.HasIndex("UserId");
 
