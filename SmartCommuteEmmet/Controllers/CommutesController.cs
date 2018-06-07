@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -49,12 +52,13 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         // GET: Commutes/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CommuteTypeId"] = new SelectList(_context.Set<CommuteType>(), "Id", "CommuteTypeName");
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName");
             ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+
             return View();
         }
 
@@ -62,19 +66,20 @@ namespace SmartCommuteEmmet.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CommuteDistance,CommuteDescription,CommuteSaved,CommuteName,CommuteDate,CommuteTypeId,StartPointId,StartPointCustom,EndPointId,EndPointCustom,UserId")] Commute commute)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(commute);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CommuteTypeId"] = new SelectList(_context.Set<CommuteType>(), "Id", "CommuteTypeDescription", commute.CommuteTypeId);
-            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointDescription", commute.EndPointId);
-            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointDescription", commute.StartPointId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", commute.UserId);
+            ViewData["CommuteTypeId"] = new SelectList(_context.Set<CommuteType>(), "Id", "CommuteTypeName", commute.CommuteTypeId);
+            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
+            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName", commute.StartPointId);
             return View(commute);
         }
 
@@ -91,9 +96,9 @@ namespace SmartCommuteEmmet.Controllers
             {
                 return NotFound();
             }
-            ViewData["CommuteTypeId"] = new SelectList(_context.Set<CommuteType>(), "Id", "CommuteTypeDescription", commute.CommuteTypeId);
-            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointDescription", commute.EndPointId);
-            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointDescription", commute.StartPointId);
+            ViewData["CommuteTypeId"] = new SelectList(_context.Set<CommuteType>(), "Id", "CommuteTypeName", commute.CommuteTypeId);
+            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
+            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName", commute.StartPointId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", commute.UserId);
             return View(commute);
         }
