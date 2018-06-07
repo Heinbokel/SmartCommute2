@@ -35,6 +35,9 @@ namespace SmartCommuteEmmet.Models
 
         public DateTime DateRegistered { get; set; }
 
+        [Display(Name ="Biography")]
+        public string UserBio { get; set; }
+
         //FK
         [Required]
         public int BusinessId { get; set; }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,19 +30,23 @@ namespace SmartCommuteEmmet.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IHostingEnvironment _environment;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IHostingEnvironment environment
+            )
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _environment = environment;
         }
 
         [TempData]
@@ -224,16 +230,41 @@ namespace SmartCommuteEmmet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
-            string uploadPath = "uploads/img";
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                if (!Directory.Exists(uploadPath))
-                {
-                    Directory.CreateDirectory(uploadPath);
-                }
                 var files = HttpContext.Request.Form.Files;
+
                 foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        //Getting FileName
+                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                        //Assigning Unique Filename (Guid)
+                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                        //Getting file Extension
+                        var FileExtension = Path.GetExtension(fileName);
+
+                        // concating  FileName + FileExtension
+                        var newFileName = myUniqueFileName + FileExtension;
+
+                        // Combines two strings into a path.
+                        fileName = Path.Combine(_environment.WebRootPath, "userPhotos") + $@"\{newFileName}";
+
+                        // if you want to store path of folder in database
+                        model.UserPhoto = "userPhotos/" + newFileName;
+
+                        using (FileStream fs = System.IO.File.Create(fileName))
+                        {
+                            file.CopyTo(fs);
+                            fs.Flush();
+                        }
+                    }
+                }
+                    /*foreach (var file in files)
                 {
                     if (file != null && file.Length > 0)
                     {
@@ -246,7 +277,7 @@ namespace SmartCommuteEmmet.Controllers
                             model.UserPhoto = uploadPathWithfileName;
                         }
                     }
-                }
+                }*/
 
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BusinessId = model.BusinessId, DateOfBirth = model.DateOfBirth, DateRegistered = DateTime.Now, FirstName = model.FirstName, LastName = model.LastName, UserCity = model.UserCity, UserStreet = model.UserStreet, UserZIP = model.UserZIP, UserPhoto = model.UserPhoto };
 

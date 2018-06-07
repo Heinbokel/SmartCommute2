@@ -1,0 +1,11 @@
+﻿@model SmartCommuteEmmet.Models.ProfileViewModels.ProfileViewModel
+
+@{
+    ViewData["Title"] = Model.FirstName + " " + Model.LastName;
+}
+
+<h2>@Model.FirstName @Model.LastName</h2>
+<h3>Member Since: @Model.DateRegistered.Month - @Model.DateRegistered.Year</h3>
+<img src="~/@Model.UserPhoto" />
+<p>@Model.UserBio</p>
+
