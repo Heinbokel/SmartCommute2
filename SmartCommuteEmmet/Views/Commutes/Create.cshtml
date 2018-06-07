@@ -1,12 +1,11 @@
 ﻿@model SmartCommuteEmmet.Models.Commute
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Commute Entry";
 }
 
-<h2>Create</h2>
+<h1>Log Your Smart Commute</h1>
 
-<h4>Commute</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -41,11 +40,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="CommuteTypeId" class="control-label"></label>
-                <select asp-for="CommuteTypeId" class="form-control" asp-items="ViewBag.CommuteTypeId"></select>
+                <select asp-for="CommuteTypeId" class ="form-control" asp-items="ViewBag.CommuteTypeId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="StartPointId" class="control-label"></label>
-                <select asp-for="StartPointId" class="form-control" asp-items="ViewBag.StartPointId"></select>
+                <select asp-for="StartPointId" class ="form-control" asp-items="ViewBag.StartPointId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="StartPointCustom" class="control-label"></label>
@@ -54,14 +53,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="EndPointId" class="control-label"></label>
-                <select asp-for="EndPointId" class="form-control" asp-items="ViewBag.EndPointId"></select>
+                <select asp-for="EndPointId" class ="form-control" asp-items="ViewBag.EndPointId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="EndPointCustom" class="control-label"></label>
                 <input asp-for="EndPointCustom" class="form-control" />
                 <span asp-validation-for="EndPointCustom" class="text-danger"></span>
             </div>
-            <input asp-for="UserId" value="ViewBag.CurrentUserId" hidden="hidden" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -70,7 +68,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Return to Your Commute Log</a>
 </div>
 
 @section Scripts {

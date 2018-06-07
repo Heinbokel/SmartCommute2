@@ -26,8 +26,5 @@ namespace SmartCommuteEmmet.Models
         [Display(Name = "Business ZIP")]
         public string BusinessZIP { get; set; }
 
-        public string UserId { get; set; }
-        [ForeignKey("UserId")][Display(Name ="Team Captain")]
-        public ApplicationUser BusinessTeamCaptain { get; set; }//Which user is the leader of this team?
     }
 }

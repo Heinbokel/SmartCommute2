@@ -1,0 +1,57 @@
+﻿@model SmartCommuteEmmet.Models.Business
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Business</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessStreet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessStreet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessZIP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessZIP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

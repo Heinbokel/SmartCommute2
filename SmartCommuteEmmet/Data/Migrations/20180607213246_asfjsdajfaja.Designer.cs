@@ -11,9 +11,10 @@ using System;
 namespace SmartCommuteEmmet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180607213246_asfjsdajfaja")]
+    partial class asfjsdajfaja
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,8 +254,9 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.Property<int>("StartPointId");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<Guid>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.HasKey("Id");
 
@@ -264,7 +266,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.HasIndex("StartPointId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Commute");
                 });
@@ -405,8 +407,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.HasOne("SmartCommuteEmmet.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

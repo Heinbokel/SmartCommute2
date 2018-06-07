@@ -11,9 +11,10 @@ using System;
 namespace SmartCommuteEmmet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180607210429_virtualuser")]
+    partial class virtualuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,7 +194,8 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BusinessId");
+                    b.HasIndex("BusinessId")
+                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -221,6 +223,8 @@ namespace SmartCommuteEmmet.Data.Migrations
                     b.Property<string>("BusinessStreet");
 
                     b.Property<string>("BusinessZIP");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
@@ -253,8 +257,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.Property<int>("StartPointId");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
@@ -381,8 +384,8 @@ namespace SmartCommuteEmmet.Data.Migrations
             modelBuilder.Entity("SmartCommuteEmmet.Models.ApplicationUser", b =>
                 {
                     b.HasOne("SmartCommuteEmmet.Models.Business", "Business")
-                        .WithMany()
-                        .HasForeignKey("BusinessId")
+                        .WithOne("BusinessTeamCaptain")
+                        .HasForeignKey("SmartCommuteEmmet.Models.ApplicationUser", "BusinessId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -405,8 +408,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.HasOne("SmartCommuteEmmet.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

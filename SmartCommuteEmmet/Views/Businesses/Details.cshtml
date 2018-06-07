@@ -1,0 +1,54 @@
+﻿@model SmartCommuteEmmet.Models.Business
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Business</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessStreet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessStreet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessZIP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessZIP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
