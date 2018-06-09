@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using SmartCommuteEmmet.Data;
 using System;
 
-namespace SmartCommuteEmmet.Data.Migrations
+namespace SmartCommuteEmmet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180607210429_virtualuser")]
-    partial class virtualuser
+    [Migration("20180609164249_June2")]
+    partial class June2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,6 +178,8 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
+                    b.Property<string>("UserBio");
+
                     b.Property<string>("UserCity")
                         .HasMaxLength(50);
 
@@ -194,8 +196,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BusinessId")
-                        .IsUnique();
+                    b.HasIndex("BusinessId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -223,8 +224,6 @@ namespace SmartCommuteEmmet.Data.Migrations
                     b.Property<string>("BusinessStreet");
 
                     b.Property<string>("BusinessZIP");
-
-                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
@@ -257,7 +256,8 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.Property<int>("StartPointId");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -384,8 +384,8 @@ namespace SmartCommuteEmmet.Data.Migrations
             modelBuilder.Entity("SmartCommuteEmmet.Models.ApplicationUser", b =>
                 {
                     b.HasOne("SmartCommuteEmmet.Models.Business", "Business")
-                        .WithOne("BusinessTeamCaptain")
-                        .HasForeignKey("SmartCommuteEmmet.Models.ApplicationUser", "BusinessId")
+                        .WithMany()
+                        .HasForeignKey("BusinessId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -408,7 +408,8 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.HasOne("SmartCommuteEmmet.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

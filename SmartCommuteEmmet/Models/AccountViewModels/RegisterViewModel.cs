@@ -39,6 +39,9 @@ namespace SmartCommuteEmmet.Models.AccountViewModels
         [Display(Name = "ZIP")]
         public string UserZIP { get; set; }
 
+        [Display(Name ="Biography")]
+        public string UserBio { get; set; }
+
         [Required]
         public int BusinessId { get; set; }
         [Display(Name = "Business")]

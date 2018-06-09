@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using SmartCommuteEmmet.Data;
 using System;
 
-namespace SmartCommuteEmmet.Data.Migrations
+namespace SmartCommuteEmmet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180606004959_DataAnnotationsComplete")]
-    partial class DataAnnotationsComplete
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,13 +177,16 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<string>("UserAvatar");
+                    b.Property<string>("UserBio");
 
                     b.Property<string>("UserCity")
                         .HasMaxLength(50);
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("UserPhoto")
+                        .IsRequired();
 
                     b.Property<string>("UserStreet")
                         .HasMaxLength(50);
@@ -193,8 +195,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BusinessId")
-                        .IsUnique();
+                    b.HasIndex("BusinessId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -223,11 +224,7 @@ namespace SmartCommuteEmmet.Data.Migrations
 
                     b.Property<string>("BusinessZIP");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Business");
                 });
@@ -386,16 +383,9 @@ namespace SmartCommuteEmmet.Data.Migrations
             modelBuilder.Entity("SmartCommuteEmmet.Models.ApplicationUser", b =>
                 {
                     b.HasOne("SmartCommuteEmmet.Models.Business", "Business")
-                        .WithOne()
-                        .HasForeignKey("SmartCommuteEmmet.Models.ApplicationUser", "BusinessId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SmartCommuteEmmet.Models.Business", b =>
-                {
-                    b.HasOne("SmartCommuteEmmet.Models.ApplicationUser", "BusinessTeamCaptain")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("BusinessId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SmartCommuteEmmet.Models.Commute", b =>

@@ -5,7 +5,8 @@
 }
 
 <h2>@Model.FirstName @Model.LastName</h2>
-<h3>Member Since: @Model.DateRegistered.Month - @Model.DateRegistered.Year</h3>
+<h3>Total Commutes: @Model.Commutes.Count</h3>
+<h3>Member Since: @Model.DateRegistered.Year</h3>
 <img src="~/@Model.UserPhoto" />
 <p>@Model.UserBio</p>
 
