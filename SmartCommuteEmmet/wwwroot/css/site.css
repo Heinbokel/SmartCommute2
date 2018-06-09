@@ -6,14 +6,18 @@
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
+}
+
+.carousel-inner {
+    height: 325px !important;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
@@ -28,8 +32,5 @@
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+
 }
