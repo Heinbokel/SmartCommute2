@@ -1,0 +1,12 @@
+﻿@model SmartCommuteEmmet.Models.LeaderboardViewModels.LeaderboardViewModel
+@{
+    ViewData["Title"] = "Leaderboards";
+}
+
+<h2>Leaderboards</h2>
+
+@foreach(var item in Model.Users)
+{
+    <p>Name: @item.FirstName @item.LastName | Commutes: @Model.Commutes.Where(c => c.UserId == item.Id).Count()</p>
+
+}

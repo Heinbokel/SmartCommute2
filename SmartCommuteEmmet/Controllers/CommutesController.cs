@@ -146,8 +146,28 @@ namespace SmartCommuteEmmet.Controllers
 
         public IActionResult Leaderboards()
         {
-          
-            return View();
+            var model = new LeaderboardViewModel();
+
+            model.Commutes =
+             (from p in _context.Commute
+              select new Commute()
+              {
+                  UserId = p.UserId,
+                  CommuteDistance = p.CommuteDistance,
+                  CommuteType = p.CommuteType
+              }).ToList();
+
+            model.Users =
+             (from p in _context.Users
+              select new ApplicationUser()
+              {
+                  Id = p.Id,
+                  FirstName = p.FirstName,
+                  LastName = p.LastName
+              }).ToList();
+
+
+            return View(model);
         }
 
         // GET: Commutes/Delete/5
