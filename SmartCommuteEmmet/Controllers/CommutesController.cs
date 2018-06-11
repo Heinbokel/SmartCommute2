@@ -146,11 +146,7 @@ namespace SmartCommuteEmmet.Controllers
 
         public IActionResult Leaderboards()
         {
-            var model = new LeaderboardViewModel
-            {
-                Commutes = _context.Commute.ToList(),
-                Users = _context.Users.ToList()
-            };
+          
             return View();
         }
 
