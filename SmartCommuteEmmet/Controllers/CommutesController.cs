@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmartCommuteEmmet.Data;
 using SmartCommuteEmmet.Models;
+using SmartCommuteEmmet.Models.LeaderboardViewModels;
+using SmartCommuteEmmet.Models.ProfileViewModels;
 
 namespace SmartCommuteEmmet.Controllers
 {
@@ -140,6 +142,12 @@ namespace SmartCommuteEmmet.Controllers
             ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointDescription", commute.StartPointId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", commute.UserId);
             return View(commute);
+        }
+
+        public IActionResult Leaderboards()
+        {
+            
+            return View();
         }
 
         // GET: Commutes/Delete/5
