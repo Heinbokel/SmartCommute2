@@ -3,10 +3,18 @@
 @{
     ViewData["Title"] = Model.FirstName + " " + Model.LastName;
 }
-
-<h2>@Model.FirstName @Model.LastName</h2>
-<h3>@Model.Commutes.Sum(c=>c.CommuteDistance) miles traveled over @Model.Commutes.Count commutes.</h3>
-<h3>Member Since: @Model.DateRegistered.Year</h3>
-<img src="~/@Model.UserPhoto" />
-<p>@Model.UserBio</p>
+<div class="profileOverview">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="~/@Model.UserPhoto" class="profilePhoto" />
+        </div>
+        <div class="col-md-7">
+            <h1 class="profileName">@Model.FirstName @Model.LastName</h1>
+            <h3 class="profileStats">@Model.Commutes.Sum(c => c.CommuteDistance) Miles traveled over @Model.Commutes.Count commutes.</h3>
+            <p class="profileMemberSince">Member Since: @Model.DateRegistered.Year</p>
+            <hr />
+            <p class="profileBio">@Model.UserBio</p>
+        </div>
+    </div>
+</div>
 

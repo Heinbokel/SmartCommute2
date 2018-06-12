@@ -38,6 +38,28 @@
     display: inline;
 }
 
+.profilePhoto{
+    width:100%;
+    height:auto;
+    border-radius:100%;
+    display:inline;
+}
+
+/*Profile*/
+.profileOverview{
+    padding:1%;
+    background-color:darkcyan;
+    color:white;
+    border-radius:10px;
+}
+
+.profileName{
+    padding:0px;
+    margin:0;
+}
+
+/*Leaderboards*/
+
 .leaderboardNameDiv{
     background-color:inherit;
     transition: background-color 0.5s, color 0.5s;
@@ -47,6 +69,11 @@
 .leaderboardNameDiv:hover{
     background-color:darkcyan;
     color:white;
+}
+
+/*Footer*/
+footer{
+    text-align:center;
 }
 
 /* Hide/rearrange for smaller screens */
