@@ -38,10 +38,10 @@ namespace SmartCommuteEmmet.Controllers
             //}
 
             var user = await _context.Users.FindAsync(id);
-
+            var business = _context.Business.Where(c => c.Id == user.BusinessId);
             var model = new ProfileViewModel
             {
-                FirstName = user.FirstName, LastName = user.LastName, Business = user.Business, DateRegistered = user.DateRegistered, UserBio = user.UserBio, UserPhoto = user.UserPhoto,
+                FirstName = user.FirstName, LastName = user.LastName, BusinessName = business.Select(c=>c.BusinessName).Single() , DateRegistered = user.DateRegistered, UserBio = user.UserBio, UserPhoto = user.UserPhoto,
                 Commutes = _context.Commute.Where(c => c.UserId == user.Id).ToList()
             };
             return View(model);

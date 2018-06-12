@@ -58,6 +58,16 @@
     margin:0;
 }
 
+.profileOverview a{
+    color:white;
+    transition:color 0.5s, text-decoration 0.5s;
+}
+
+.profileOverview a:hover{
+    color:cyan;
+    text-decoration:none;
+}
+
 /*Leaderboards*/
 
 .leaderboardNameDiv{

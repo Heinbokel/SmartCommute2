@@ -14,7 +14,7 @@ namespace SmartCommuteEmmet.Models.ProfileViewModels
         public DateTime DateRegistered { get; set; }
         public string UserPhoto { get; set; }
 
-        public Business Business { get; set; }
+        public string BusinessName { get; set; }
 
         public List<Commute> Commutes { get; set; }
     }

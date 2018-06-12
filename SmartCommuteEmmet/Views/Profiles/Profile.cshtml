@@ -11,9 +11,15 @@
         <div class="col-md-7">
             <h1 class="profileName">@Model.FirstName @Model.LastName</h1>
             <h3 class="profileStats">@Model.Commutes.Sum(c => c.CommuteDistance) Miles traveled over @Model.Commutes.Count commutes.</h3>
-            <p class="profileMemberSince">Member Since: @Model.DateRegistered.Year</p>
+            <p class="profileMemberSince">Smart Commuter with @Model.BusinessName since @Model.DateRegistered.Year</p>
             <hr />
             <p class="profileBio">@Model.UserBio</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr />
+            <a asp-controller="Commutes" asp-action="Leaderboards">View Leaderboards</a>
         </div>
     </div>
 </div>
