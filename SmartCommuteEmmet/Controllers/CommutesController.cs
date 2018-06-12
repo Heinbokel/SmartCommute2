@@ -146,28 +146,28 @@ namespace SmartCommuteEmmet.Controllers
 
         public IActionResult Leaderboards()
         {
-            var model = new LeaderboardViewModel();
+            var model = new List<LeaderboardViewModel>();
+            var Commutes = _context.Commute.ToList();
+            var Users = _context.Users.ToList();
 
-            model.Commutes =
-             (from p in _context.Commute
-              select new Commute()
-              {
-                  UserId = p.UserId,
-                  CommuteDistance = p.CommuteDistance,
-                  CommuteType = p.CommuteType
-              }).ToList();
-
-            model.Users =
-             (from p in _context.Users
-              select new ApplicationUser()
-              {
-                  Id = p.Id,
-                  FirstName = p.FirstName,
-                  LastName = p.LastName
-              }).ToList();
+            foreach(var user in Users)
+            {
+                var userViewModel = new LeaderboardViewModel
+                {
+                    UserName = user.FirstName + " " + user.LastName,
+                    UserPhoto = user.UserPhoto,
+                    UserId = user.Id,
+                    TotalCommutes = Commutes.Where(c => c.UserId == user.Id).Count(),
+                    BikeCommutes = Commutes.Where(c=> c.UserId == user.Id && c.CommuteTypeId == 1).Count(),
+                    RunCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 3).Count(),
+                    CarpoolCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 2).Count(),
+                    TotalDistance = Commutes.Where(c => c.UserId == user.Id).Sum(c=> c.CommuteDistance)
+                };
+                model.Add(userViewModel);
+            }
 
 
-            return View(model);
+            return View(model.ToList());
         }
 
         // GET: Commutes/Delete/5
