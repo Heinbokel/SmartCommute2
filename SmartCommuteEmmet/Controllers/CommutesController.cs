@@ -166,8 +166,7 @@ namespace SmartCommuteEmmet.Controllers
                 model.Add(userViewModel);
             }
 
-
-            return View(model.ToList());
+            return View(model.ToList().OrderByDescending(c=> c.TotalCommutes));
         }
 
         // GET: Commutes/Delete/5

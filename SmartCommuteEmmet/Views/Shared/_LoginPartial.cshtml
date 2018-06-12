@@ -13,7 +13,7 @@
                     @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Profiles" asp-action="Profile" title="Profile">My Profile</a>
+                    <a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Profiles" asp-action="Profile" asp-route-id="@UserManager.GetUserAsync(User).Result.Id" title="Profile">My Profile</a>
                     <a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Manage Account</a>
                     <div class="nav-divider"></div>
                     <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>

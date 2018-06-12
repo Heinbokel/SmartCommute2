@@ -31,11 +31,13 @@ namespace SmartCommuteEmmet.Controllers
         // GET: Profiles/Details/5
         public async Task<ActionResult> Profile(string id)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
+            //var user = await _userManager.GetUserAsync(User);
+            //if (user == null)
+            //{
+            //    throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            //}
+
+            var user = await _context.Users.FindAsync(id);
 
             var model = new ProfileViewModel
             {

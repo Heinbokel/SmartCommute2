@@ -30,6 +30,15 @@
     margin: 15px;
 }
 
+/*Images*/
+.thumbnailTiny image {
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 5px !important;
+    display: inline !important;
+}
+
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
 
