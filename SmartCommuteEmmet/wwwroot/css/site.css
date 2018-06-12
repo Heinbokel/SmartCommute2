@@ -31,11 +31,11 @@
 }
 
 /*Images*/
-.thumbnailTiny image {
-    width: 25px !important;
-    height: 25px !important;
-    border-radius: 5px !important;
-    display: inline !important;
+.thumbnailTiny {
+    width: 50px;
+    height: auto;
+    border-radius: 10px;
+    display: inline;
 }
 
 

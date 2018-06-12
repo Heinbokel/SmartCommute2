@@ -34,7 +34,7 @@
         {
             <tr>
                 <td>
-                    <a asp-controller="Profiles" asp-action="Profile" asp-route-id="@item.UserId"><img src="~/@item.UserPhoto" style="width:40px;height:auto;border-radius:10px;display:inline;" />@Html.DisplayFor(modelItem => item.UserName)</a>
+                    <a asp-controller="Profiles" asp-action="Profile" asp-route-id="@item.UserId"><img src="~/@item.UserPhoto" class="thumbnailTiny" />@Html.DisplayFor(modelItem => item.UserName)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TotalCommutes)
