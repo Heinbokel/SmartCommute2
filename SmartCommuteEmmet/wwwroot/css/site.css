@@ -21,7 +21,7 @@
 }
 
 .navbar-nav > li > a:hover {
-    background-color:darkcyan;
+    background-color:darkorange;
 }
 
 /* Carousel */
@@ -31,13 +31,9 @@
 }
 
 .carousel-inner {
-    height: 325px;
+    max-height: 325px;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
 
 /* QR code generator */
 #qrCode {
@@ -109,5 +105,8 @@ footer{
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-
+    .carousel-caption p {
+        font-size: 10px;
+        line-height: 1.4;
+    }
 }
