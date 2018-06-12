@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = Model.FirstName + " " + Model.LastName;
 }
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 <div class="profileOverview">
     <div class="row">
         <div class="col-md-3">
@@ -16,10 +20,32 @@
             <p class="profileBio">@Model.UserBio</p>
         </div>
     </div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        if (UserManager.GetUserAsync(User).Result.Id == Model.UserId)
+        {
+            <div class="row">
+                <hr />
+                <div class="col-md-9">
+                    <a asp-controller="Manage" asp-action="Index"><h3>Manage Account</h3></a>
+                    <h3>Rewards</h3>
+                    <h3>Commute Entry</h3>
+                    <h3>My Commutes</h3>
+                    <h3>Logout</h3>
+                </div>
+                <div class="col-md-3">
+                    <h3>Documents:</h3>
+                    <p>Breakfast Vouchers</p>
+                    <p>Coupons</p>
+                </div>
+            </div>
+        }
+
+    }
     <div class="row">
         <div class="col-md-12">
             <hr />
-            <a asp-controller="Commutes" asp-action="Leaderboards">View Leaderboards</a>
+            <a asp-controller="Commutes" asp-action="Leaderboards" class="profileLeaderboardLink">View Leaderboards</a>
         </div>
     </div>
 </div>

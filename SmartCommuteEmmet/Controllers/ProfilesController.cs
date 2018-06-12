@@ -42,7 +42,8 @@ namespace SmartCommuteEmmet.Controllers
             var model = new ProfileViewModel
             {
                 FirstName = user.FirstName, LastName = user.LastName, BusinessName = business.Select(c=>c.BusinessName).Single() , DateRegistered = user.DateRegistered, UserBio = user.UserBio, UserPhoto = user.UserPhoto,
-                Commutes = _context.Commute.Where(c => c.UserId == user.Id).ToList()
+                Commutes = _context.Commute.Where(c => c.UserId == user.Id).ToList(),
+                UserId = user.Id
             };
             return View(model);
         }
