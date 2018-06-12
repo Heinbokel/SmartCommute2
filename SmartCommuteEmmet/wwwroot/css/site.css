@@ -10,6 +10,20 @@
     padding-right: 5px;
 }
 
+.navbar{
+    background-color: rgba(0,0,0,0.8);
+}
+
+.navbar-nav > li > a{
+    line-height: 27px;
+    font-size:18px;
+    transition:background-color 0.5s;
+}
+
+.navbar-nav > li > a:hover {
+    background-color:darkcyan;
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
@@ -17,7 +31,7 @@
 }
 
 .carousel-inner {
-    height: 325px !important;
+    height: 325px;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
@@ -35,6 +49,13 @@
     width: 50px;
     height: auto;
     border-radius: 10px;
+    display: inline;
+}
+
+.thumbnailNavBar {
+    width: 20px;
+    height: auto;
+    border-radius: 3px;
     display: inline;
 }
 
@@ -60,7 +81,7 @@
 
 .profileOverview a{
     color:white;
-    transition:color 0.5s, text-decoration 0.5s;
+    transition:color 0.5s;
 }
 
 .profileOverview a:hover{
