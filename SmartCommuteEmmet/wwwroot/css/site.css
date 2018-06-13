@@ -6,8 +6,7 @@
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 5px;
-    padding-right: 5px;
+ 
 }
 
 .navbar{
@@ -31,9 +30,14 @@
 }
 
 .carousel-inner {
-    max-height: 325px;
+    max-height: 310px;
 }
 
+.carousel-caption{
+    background-color:rgba(0,0,0,0.6);
+    border-radius:25px;
+    color:white;
+}
 
 /* QR code generator */
 #qrCode {
@@ -62,12 +66,6 @@ a:hover{
     color:cyan;
     text-decoration:none;
 }
-.textButton{
-    background-color:black;
-    color:white;
-    border-radius 10px;
-    padding:20px;
-}
 
 /*Buttons*/
 .nav-pills{
@@ -77,6 +75,23 @@ a:hover{
 .nav-pills > li:hover{
     background-color:darkorange;
 }
+
+.btn-main {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 10px 0px;
+    margin: 5px 5px;
+    width: 150px;
+    transition: background-color 0.5s, border-color 0.5s;
+}
+
+    .btn-main:hover {
+        background-color: darkorange;
+        border-color:orange;
+    }
+
 /*Images*/
 .thumbnailTiny {
     width: 50px;

@@ -49,8 +49,9 @@
         <div class="item">
             <img src="~/images/Cara5.jpg" alt="Microsoft Azure" class="img-responsive" />
             <div class="carousel-caption" role="option">
+                <h1>Smart Commute Week:</h1>
                 <p>
-                    There are only 34 days remaining until Smart Commute Week!
+                    There are only 34 days remaining!
                 </p>
             </div>
         </div>
@@ -60,6 +61,8 @@
                 <div class="carousel-caption" role="option">
                     <h1>Sign Up Now.</h1>
                     <p>Ready to join the Smart Commute?</p>
+                    <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
+                    <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
                 </div>
             </a>
         </div>
@@ -90,8 +93,8 @@
         <h2>Ready to Join Smart Commute?</h2>
         <hr />
         <p>Improve your health and your community while reducing your footprint on the earth. As an added incentive your participation earns you rewards to local businesses and the opportunity to win prizes!</p>
-        <input type="button" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
-        <input type="button" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
+        <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
+        <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
         <hr />
         <p>Contact Admin@TrailsCouncil.org by June 1st to sign up your organization and indicate your number of members.</p>
     </div>
