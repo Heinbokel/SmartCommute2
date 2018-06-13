@@ -231,6 +231,7 @@ namespace SmartCommuteEmmet.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
             if (ModelState.IsValid)
             {
                 if (model.UserPhoto == null)
@@ -291,7 +292,7 @@ namespace SmartCommuteEmmet.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ViewData["BusinessId"] = new SelectList(_context.Set<CommuteType>(), "Id", "BusinessName");
+            //ViewData["BusinessId"] = new SelectList(_context.Set<CommuteType>(), "Id", "BusinessName");
             return View(model);
         }
 

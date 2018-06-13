@@ -81,9 +81,9 @@ a:hover{
     color: white;
     border-radius: 5px;
     border: 1px solid gray;
-    padding: 10px 0px;
+    padding: 10px 5px;
     margin: 5px 5px;
-    width: 150px;
+    min-width: 150px;
     transition: background-color 0.5s, border-color 0.5s;
 }
 
@@ -187,6 +187,10 @@ table a{
 .genericForm label{
     font-size:18px;
     text-align:left;
+}
+
+.genericForm input[type=submit]{
+    color:white;
 }
 
 /*Footer*/
