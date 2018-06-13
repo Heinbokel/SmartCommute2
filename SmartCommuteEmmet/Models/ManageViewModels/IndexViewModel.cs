@@ -17,9 +17,8 @@ namespace SmartCommuteEmmet.Models.ManageViewModels
         [EmailAddress]
         public string Email { get; set; }
 
-        //[Required]
-        //[Display(Name = "Profile Picture")]
-        //public string UserPhoto { get; set; }
+        [Display(Name = "Profile Picture")]
+        public string UserPhoto { get; set; }
 
         [Required]
         [Display(Name = "First Name")]

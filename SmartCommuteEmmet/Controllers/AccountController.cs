@@ -233,51 +233,44 @@ namespace SmartCommuteEmmet.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var files = HttpContext.Request.Form.Files;
-
-                foreach (var file in files)
+                if (model.UserPhoto == null)
                 {
-                    if (file.Length > 0)
+                    model.UserPhoto = "userPhotos/defaultUserPhoto.png";
+                }
+                else
+                {
+                    var files = HttpContext.Request.Form.Files;
+
+                    foreach (var file in files)
                     {
-                        //Getting FileName
-                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                        //Assigning Unique Filename (Guid)
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-                        //Getting file Extension
-                        var FileExtension = Path.GetExtension(fileName);
-
-                        // concating  FileName + FileExtension
-                        var newFileName = myUniqueFileName + FileExtension;
-
-                        // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "userPhotos") + $@"\{newFileName}";
-
-                        // if you want to store path of folder in database
-                        model.UserPhoto = "userPhotos/" + newFileName;
-
-                        using (FileStream fs = System.IO.File.Create(fileName))
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(fs);
-                            fs.Flush();
+                            //Getting FileName
+                            var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            var newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, "userPhotos") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            model.UserPhoto = "userPhotos/" + newFileName;
+
+                            using (FileStream fs = System.IO.File.Create(fileName))
+                            {
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
                         }
                     }
                 }
-                    /*foreach (var file in files)
-                {
-                    if (file != null && file.Length > 0)
-                    {
-                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-                        var uploadPathWithfileName = Path.Combine(uploadPath, fileName);
-
-                        using (var fileStream = new FileStream(uploadPathWithfileName, FileMode.Create))
-                        {
-                            await file.CopyToAsync(fileStream);
-                            model.UserPhoto = uploadPathWithfileName;
-                        }
-                    }
-                }*/
 
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BusinessId = model.BusinessId, DateOfBirth = model.DateOfBirth, DateRegistered = DateTime.Now, FirstName = model.FirstName, LastName = model.LastName, UserCity = model.UserCity, UserStreet = model.UserStreet, UserZIP = model.UserZIP, UserPhoto = model.UserPhoto, UserBio = model.UserBio };
 
