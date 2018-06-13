@@ -13,12 +13,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CommuteDistance" class="control-label"></label>
-                <input asp-for="CommuteDistance" class="form-control" />
+                <input asp-for="CommuteDistance" placeholder="Enter a value from 1-20" class="form-control" />
                 <span asp-validation-for="CommuteDistance" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CommuteDescription" class="control-label"></label>
-                <textarea asp-for="CommuteDescription" class="form-control" rows="5" cols="40"></textarea>
+                <textarea asp-for="CommuteDescription" placeholder="Enter your commute's description here." class="form-control" rows="5" cols="40"></textarea>
                 <span asp-validation-for="CommuteDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,12 +30,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="CommuteName" class="control-label"></label>
-                <input asp-for="CommuteName" class="form-control" />
+                <input asp-for="CommuteName"  placeholder="Enter your commute's name here." class="form-control" />
                 <span asp-validation-for="CommuteName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CommuteDate" class="control-label"></label>
-                <input asp-for="CommuteDate" class="form-control" />
+                <input asp-for="CommuteDate" placeholder="MM/DD/YYYY" class="form-control" />
                 <span asp-validation-for="CommuteDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartPointCustom" class="control-label"></label>
-                <input asp-for="StartPointCustom" class="form-control" />
+                <input asp-for="StartPointCustom" placeholder="Enter a custom start point here." class="form-control" />
                 <span asp-validation-for="StartPointCustom" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -57,7 +57,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="EndPointCustom" class="control-label"></label>
-                <input asp-for="EndPointCustom" class="form-control" />
+                <input asp-for="EndPointCustom" placeholder="Enter a custom end point here." class="form-control" />
                 <span asp-validation-for="EndPointCustom" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -29,6 +29,7 @@ namespace SmartCommuteEmmet.Models.AccountViewModels
         public string LastName { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
@@ -44,12 +45,12 @@ namespace SmartCommuteEmmet.Models.AccountViewModels
         [RegularExpression(@"^(\d{5})$", ErrorMessage = "ZIP must be 5 digits.")]
         public string UserZIP { get; set; }
 
-        [Display(Name ="Biography")]
+        [Display(Name ="Biography")][StringLength(maximumLength:500,ErrorMessage ="Biography must be less than 500 characters.")]
         public string UserBio { get; set; }
 
         [Required]
-        public int BusinessId { get; set; }
         [Display(Name = "Business")]
+        public int BusinessId { get; set; }
         [ForeignKey("BusinessId")]
         public Business Business { get; set; }
 
