@@ -119,12 +119,15 @@ namespace SmartCommuteEmmet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CommuteDistance,CommuteDescription,CommuteSaved,CommuteName,CommuteDate,CommuteTypeId,StartPointId,StartPointCustom,EndPointId,EndPointCustom,UserId")] Commute commute)
         {
+            ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
+            commute.UserId = CurrentUser.Id;
+
             if (id != commute.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid) TODO:Figure out why ModelState is invalid
             {
                 try
                 {

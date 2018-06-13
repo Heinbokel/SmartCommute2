@@ -4,13 +4,13 @@
     ViewData["Title"] = "Leaderboards";
 }
 
-<h2>Leaderboards</h2>
 
 <table class="table">
+    <h1>Leaderboards</h1>
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserName )
+                @Html.DisplayNameFor(model => model.UserName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TotalCommutes)
@@ -52,10 +52,10 @@
                     @Html.DisplayFor(modelItem => item.CarpoolCommutes)
                 </td>
                 @*<td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>*@
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>*@
             </tr>
         }
     </tbody>

@@ -4,12 +4,11 @@
     ViewData["Title"] = "Edit Your Commute";
 }
 
-<h2>Edit Your Commute</h2>
-
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-12">
+        <form asp-action="Edit" class="genericForm">
+            <h2>Edit Your Commute</h2>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -19,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CommuteDescription" class="control-label"></label>
-                <input asp-for="CommuteDescription" class="form-control" />
+                <textarea asp-for="CommuteDescription" class="form-control"></textarea>
                 <span asp-validation-for="CommuteDescription" class="text-danger"></span>
             </div>
             <div class="form-group">

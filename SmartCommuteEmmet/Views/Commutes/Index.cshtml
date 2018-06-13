@@ -70,13 +70,13 @@
                 @Html.DisplayFor(modelItem => item.EndPointCustom)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CommuteType.CommuteTypeDescription)
+                @Html.DisplayFor(modelItem => item.CommuteType.CommuteTypeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EndPoint.EndPointDescription)
+                @Html.DisplayFor(modelItem => item.EndPoint.EndPointName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartPoint.StartPointDescription)
+                @Html.DisplayFor(modelItem => item.StartPoint.StartPointName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
