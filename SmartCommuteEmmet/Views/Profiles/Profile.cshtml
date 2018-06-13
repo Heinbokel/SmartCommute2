@@ -10,7 +10,7 @@
 <div class="profileOverview">
     <div class="row">
         <div class="col-md-3">
-            <img src="~/@Model.UserPhoto" class="profilePhoto" />
+            <img src="~/@Model.UserPhoto" class="profilePhoto img-responsive" />
         </div>
         <div class="col-md-7">
             <h1 class="profileName">@Model.FirstName @Model.LastName</h1>
@@ -27,7 +27,7 @@
             <div class="row">
                 <hr />
                 <div class="col-md-9">
-                    <a asp-controller="Manage" asp-action="Index"><h3>Manage Account</h3></a>
+                    <a asp-controller="Manage" asp-action="Index" class="profileButtonLink"><h3>Manage Account</h3></a>
                     <h3>Rewards</h3>
                     <h3>Commute Entry</h3>
                     <h3>My Commutes</h3>

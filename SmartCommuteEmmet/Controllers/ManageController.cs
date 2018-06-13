@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SmartCommuteEmmet.Data;
 using SmartCommuteEmmet.Models;
 using SmartCommuteEmmet.Models.ManageViewModels;
 using SmartCommuteEmmet.Services;
@@ -25,6 +27,7 @@ namespace SmartCommuteEmmet.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private readonly ApplicationDbContext _context;
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
@@ -34,13 +37,15 @@ namespace SmartCommuteEmmet.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _context = context;
         }
 
         [TempData]
@@ -49,6 +54,8 @@ namespace SmartCommuteEmmet.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -59,9 +66,12 @@ namespace SmartCommuteEmmet.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = StatusMessage,
+                BusinessId = user.BusinessId,
+                DateOfBirth = user.DateOfBirth,
+                FirstName = user.FirstName, LastName = user.LastName, UserBio = user.UserBio, UserCity = user.UserCity,
+                UserStreet = user.UserStreet, UserPhoto = user.UserPhoto, UserZIP = user.UserZIP
             };
 
             return View(model);
@@ -73,6 +83,7 @@ namespace SmartCommuteEmmet.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
                 return View(model);
             }
 
@@ -92,15 +103,6 @@ namespace SmartCommuteEmmet.Controllers
                 }
             }
 
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
-                }
-            }
 
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
