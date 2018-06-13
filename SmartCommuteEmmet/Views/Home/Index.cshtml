@@ -55,11 +55,13 @@
             </div>
         </div>
         <div class="item">
-            <img src="~/images/Cara6.jpg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <h1>Sign Up Now.</h1>
-                <p>Ready to join the Smart Commute?</p>
-            </div>
+            <a asp-controller="Account" asp-action="Register">
+                <img src="~/images/Cara6.jpg" alt="Microsoft Azure" class="img-responsive" />
+                <div class="carousel-caption" role="option">
+                    <h1>Sign Up Now.</h1>
+                    <p>Ready to join the Smart Commute?</p>
+                </div>
+            </a>
         </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -71,7 +73,6 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
 <div class="indexWrapper">
 <div class="row">
     <div class="col-md-6">
@@ -89,8 +90,8 @@
         <h2>Ready to Join Smart Commute?</h2>
         <hr />
         <p>Improve your health and your community while reducing your footprint on the earth. As an added incentive your participation earns you rewards to local businesses and the opportunity to win prizes!</p>
-        <a asp-area="" asp-controller="Account" asp-action="Login" title="Login">Login</a>
-        <a asp-area="" asp-controller="Account" asp-action="Register" title="Register">Register</a>
+        <input type="button" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
+        <input type="button" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
         <hr />
         <p>Contact Admin@TrailsCouncil.org by June 1st to sign up your organization and indicate your number of members.</p>
     </div>

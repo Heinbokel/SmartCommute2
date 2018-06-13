@@ -40,6 +40,14 @@
     margin: 15px;
 }
 
+/*Home Pages*/
+.indexWrapper{
+    background-color:darkcyan;
+    color:white;
+    padding:2%;
+    text-align:center;
+}
+
 /*General Text*/
 h1,h2,h3,h4,h5,h6,p{
     text-align:center;
@@ -53,6 +61,12 @@ a{
 a:hover{
     color:cyan;
     text-decoration:none;
+}
+.textButton{
+    background-color:black;
+    color:white;
+    border-radius 10px;
+    padding:20px;
 }
 
 /*Buttons*/
