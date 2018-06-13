@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -26,6 +27,7 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         // GET: Commutes
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -34,6 +36,7 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         // GET: Commutes/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -56,6 +59,7 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         // GET: Commutes/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName");
@@ -86,6 +90,7 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         // GET: Commutes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,14 +98,16 @@ namespace SmartCommuteEmmet.Controllers
                 return NotFound();
             }
 
+            ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
+
             var commute = await _context.Commute.SingleOrDefaultAsync(m => m.Id == id);
-            if (commute == null)
+            if (commute == null || commute.UserId != CurrentUser.Id)
             {
                 return NotFound();
             }
-            ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeDescription", commute.CommuteTypeId);
-            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointDescription", commute.EndPointId);
-            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointDescription", commute.StartPointId);
+            ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
+            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
+            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName", commute.StartPointId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", commute.UserId);
             return View(commute);
         }
@@ -137,9 +144,9 @@ namespace SmartCommuteEmmet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeDescription", commute.CommuteTypeId);
-            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointDescription", commute.EndPointId);
-            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointDescription", commute.StartPointId);
+            ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
+            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
+            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName", commute.StartPointId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", commute.UserId);
             return View(commute);
         }
@@ -170,6 +177,7 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         // GET: Commutes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -177,13 +185,15 @@ namespace SmartCommuteEmmet.Controllers
                 return NotFound();
             }
 
+            ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
+
             var commute = await _context.Commute
                 .Include(c => c.CommuteType)
                 .Include(c => c.EndPoint)
                 .Include(c => c.StartPoint)
                 .Include(c => c.User)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (commute == null)
+            if (commute == null || commute.UserId != CurrentUser.Id)
             {
                 return NotFound();
             }

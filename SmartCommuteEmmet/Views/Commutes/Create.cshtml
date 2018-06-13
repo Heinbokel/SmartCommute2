@@ -4,12 +4,12 @@
     ViewData["Title"] = "Commute Entry";
 }
 
-<h1>Log Your Smart Commute</h1>
-
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-12">
+        <form asp-action="Create" class="genericForm">
+            <h2>@ViewData["Title"]</h2>
+            <h4>Log your Smart Commute.</h4>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CommuteDistance" class="control-label"></label>
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CommuteDescription" class="control-label"></label>
-                <input asp-for="CommuteDescription" class="form-control" />
+                <textarea asp-for="CommuteDescription" class="form-control" rows="5" cols="40"></textarea>
                 <span asp-validation-for="CommuteDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -40,11 +40,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="CommuteTypeId" class="control-label"></label>
-                <select asp-for="CommuteTypeId" class ="form-control" asp-items="ViewBag.CommuteTypeId"></select>
+                <select asp-for="CommuteTypeId" class="form-control" asp-items="ViewBag.CommuteTypeId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="StartPointId" class="control-label"></label>
-                <select asp-for="StartPointId" class ="form-control" asp-items="ViewBag.StartPointId"></select>
+                <select asp-for="StartPointId" class="form-control" asp-items="ViewBag.StartPointId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="StartPointCustom" class="control-label"></label>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="EndPointId" class="control-label"></label>
-                <select asp-for="EndPointId" class ="form-control" asp-items="ViewBag.EndPointId"></select>
+                <select asp-for="EndPointId" class="form-control" asp-items="ViewBag.EndPointId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="EndPointCustom" class="control-label"></label>

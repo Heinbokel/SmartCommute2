@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmartCommuteEmmet.Data;
@@ -71,7 +72,7 @@ namespace SmartCommuteEmmet.Controllers
                 BusinessId = user.BusinessId,
                 DateOfBirth = user.DateOfBirth,
                 FirstName = user.FirstName, LastName = user.LastName, UserBio = user.UserBio, UserCity = user.UserCity,
-                UserStreet = user.UserStreet, UserPhoto = user.UserPhoto, UserZIP = user.UserZIP
+                UserStreet = user.UserStreet, UserZIP = user.UserZIP
             };
 
             return View(model);
@@ -91,6 +92,30 @@ namespace SmartCommuteEmmet.Controllers
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    user.BusinessId = model.BusinessId;
+                    user.DateOfBirth = model.DateOfBirth;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.UserBio = model.UserBio;
+                    user.UserCity = model.UserCity;
+                    user.UserStreet = model.UserStreet;
+                    user.UserZIP = model.UserZIP;
+                    user.Email = model.Email;
+
+                    _context.Update(user);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                return RedirectToAction(nameof(Index));
             }
 
             var email = user.Email;
