@@ -43,23 +43,28 @@
 /*Images*/
 .thumbnailTiny {
     width: 50px;
-    height: auto;
+    height: 50px;
     border-radius: 10px;
     display: inline;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .thumbnailNavBar {
     width: 20px;
-    height: auto;
+    height: 20px;
     border-radius: 3px;
     display: inline;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
-.profilePhoto{
-    width:100%;
-    height:auto;
-    border-radius:100%;
-    display:inline;
+.profilePhoto {
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 /*Profile*/
