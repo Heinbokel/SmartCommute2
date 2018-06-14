@@ -197,6 +197,32 @@ input[type=file]{
     color:white;
 }
 
+.genericFormWide {
+    width: 100;
+    margin: 0 auto;
+    text-align: center;
+    background-color: darkcyan;
+    color: white;
+    padding: 2%;
+    border-radius: 25px;
+}
+
+    .genericFormWide input, .genericFormWide textarea, .genericFormWide select {
+        border-radius: 10px;
+        color: black;
+        width:75%;
+        margin:0 auto;
+    }
+
+    .genericFormWide label {
+        font-size: 18px;
+        text-align: left;
+    }
+
+.genericFormWide input[type=submit] {
+    color: white;
+}
+
 /*Footer*/
 footer{
     text-align:center;
