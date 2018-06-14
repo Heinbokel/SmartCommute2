@@ -234,11 +234,6 @@ namespace SmartCommuteEmmet.Controllers
             ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
             if (ModelState.IsValid)
             {
-                if (model.UserPhoto == null)
-                {
-                    model.UserPhoto = "userPhotos/defaultUserPhoto.png";
-                }
-                else
                 {
                     var files = HttpContext.Request.Form.Files;
 
@@ -269,6 +264,9 @@ namespace SmartCommuteEmmet.Controllers
                                 file.CopyTo(fs);
                                 fs.Flush();
                             }
+                        }
+                        else {
+                            model.UserPhoto = "userPhotos/defaultUserPhoto.png";
                         }
                     }
                 }
