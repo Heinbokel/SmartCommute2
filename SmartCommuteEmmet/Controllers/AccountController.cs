@@ -290,7 +290,6 @@ namespace SmartCommuteEmmet.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            //ViewData["BusinessId"] = new SelectList(_context.Set<CommuteType>(), "Id", "BusinessName");
             return View(model);
         }
 

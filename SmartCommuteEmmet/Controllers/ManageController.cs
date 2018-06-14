@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -29,6 +32,7 @@ namespace SmartCommuteEmmet.Controllers
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _environment;
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
@@ -39,7 +43,8 @@ namespace SmartCommuteEmmet.Controllers
           IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder,
-          ApplicationDbContext context)
+          ApplicationDbContext context,
+          IHostingEnvironment environment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -47,6 +52,7 @@ namespace SmartCommuteEmmet.Controllers
             _logger = logger;
             _urlEncoder = urlEncoder;
             _context = context;
+            _environment = environment;
         }
 
         [TempData]
@@ -72,7 +78,7 @@ namespace SmartCommuteEmmet.Controllers
                 BusinessId = user.BusinessId,
                 DateOfBirth = user.DateOfBirth,
                 FirstName = user.FirstName, LastName = user.LastName, UserBio = user.UserBio, UserCity = user.UserCity,
-                UserStreet = user.UserStreet, UserZIP = user.UserZIP
+                UserStreet = user.UserStreet, UserZIP = user.UserZIP, UserPhoto = user.UserPhoto 
             };
 
             return View(model);
@@ -98,7 +104,42 @@ namespace SmartCommuteEmmet.Controllers
             {
                 try
                 {
-                    user.BusinessId = model.BusinessId;
+                    var files = HttpContext.Request.Form.Files;
+
+                    foreach (var file in files)
+                    {
+                        if (file.Length > 0)
+                        {
+                            //Getting FileName
+                            var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            var newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, "userPhotos") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            model.UserPhoto = "userPhotos/" + newFileName;
+
+                            using (FileStream fs = System.IO.File.Create(fileName))
+                            {
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
+                        }
+                        else
+                        {
+                            model.UserPhoto = user.UserPhoto;
+                        }
+                    }
+                        user.BusinessId = model.BusinessId;
                     user.DateOfBirth = model.DateOfBirth;
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
@@ -107,6 +148,7 @@ namespace SmartCommuteEmmet.Controllers
                     user.UserStreet = model.UserStreet;
                     user.UserZIP = model.UserZIP;
                     user.Email = model.Email;
+                    user.UserPhoto = model.UserPhoto;
 
                     _context.Update(user);
                     await _context.SaveChangesAsync();
