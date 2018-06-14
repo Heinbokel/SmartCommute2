@@ -198,7 +198,7 @@ input[type=file]{
 }
 
 .genericFormWide {
-    width: 100;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     background-color: darkcyan;
@@ -221,6 +221,17 @@ input[type=file]{
 
 .genericFormWide input[type=submit] {
     color: white;
+}
+
+/*Secitons*/
+.genericSection {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: darkcyan;
+    color: white;
+    padding: 2%;
+    border-radius: 25px;
 }
 
 /*Footer*/
