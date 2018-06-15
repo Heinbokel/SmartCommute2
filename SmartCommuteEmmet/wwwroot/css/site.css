@@ -157,6 +157,11 @@ a:hover{
     text-indent:10px;
 }
 
+.profileBio {
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
 /*Leaderboards*/
 
 .leaderboardNameDiv{
