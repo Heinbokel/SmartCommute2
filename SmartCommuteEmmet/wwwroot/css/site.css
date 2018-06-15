@@ -33,10 +33,12 @@
     max-height: 310px;
 }
 
-.carousel-caption{
-    background-color:rgba(0,0,0,0.6);
-    border-radius:25px;
-    color:white;
+.carousel-caption {
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 25px;
+    color: white;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* QR code generator */
@@ -65,6 +67,11 @@ a{
 a:hover{
     color:cyan;
     text-decoration:none;
+}
+
+.text-danger{
+    background-color:rgba(0,0,0,0.6);
+    border-radius:5px;
 }
 
 /*Buttons*/

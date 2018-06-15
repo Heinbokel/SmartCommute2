@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data" class="genericForm">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data" class="genericForm" id="registerForm">
             <h2>@ViewData["Title"]</h2>
             <br />
             <h4>Create your Smart Commute Account.</h4>
@@ -52,7 +52,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="BusinessId" class="control-label"></label>
-                <select asp-for="BusinessId" class="form-control" asp-items="ViewBag.BusinessId"></select>
+                <select asp-for="BusinessId" id="businessDropdown" class="form-control" asp-items="ViewBag.BusinessId">
+                    <option value="">Please Select your Business.</option>
+                    <option value="Other">-Add New Business-</option>
+                </select>
+                <span asp-validation-for="BusinessId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomBusiness"></label>
+                <input asp-for="CustomBusiness" id="customBusiness" disabled="disabled" placeholder="Select -Add New Business- above to enable this input." class="form-control"/>
+                <span asp-validation-for="CustomBusiness" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email"></label>
@@ -73,6 +82,21 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+        $('#businessDropdown').change(function () {
+            alert("Changed");
+            if ($(this).val() == "Other") {
+                $('#customBusiness').removeAttr("disabled");
+                $('#customBusiness').removeProp("disabled");
+                document.getElementById('customBusiness').disabled = false;
+            } else {
+                $('#customBusiness').attr("disabled", "disabled");
+                $('#customBusiness').prop("disabled", true);
+            }
+    });
+    
+</script>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
