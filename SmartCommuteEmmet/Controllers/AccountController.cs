@@ -232,6 +232,18 @@ namespace SmartCommuteEmmet.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
             ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
+
+            if(model.BusinessId == 0)
+            {
+                var business = new Business()
+                {
+                    BusinessName = model.CustomBusiness
+                };
+                _context.Business.Add(business);
+                await _context.SaveChangesAsync();
+                model.BusinessId = business.Id;
+            }
+
             if (ModelState.IsValid)
             {
                 {

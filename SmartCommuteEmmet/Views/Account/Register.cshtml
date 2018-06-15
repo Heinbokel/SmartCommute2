@@ -52,9 +52,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="BusinessId" class="control-label"></label>
-                <select asp-for="BusinessId" id="businessDropdown" class="form-control" asp-items="ViewBag.BusinessId">
+                <select asp-for="BusinessId" id="businessDropdown" class="form-control" asp-items="ViewBag.BusinessId" onchange="CheckBusinessSelect();">
                     <option value="">Please Select your Business.</option>
-                    <option value="Other">-Add New Business-</option>
+                    <option value="0">-Add New Business-</option>
                 </select>
                 <span asp-validation-for="BusinessId" class="text-danger"></span>
             </div>
@@ -83,18 +83,14 @@
     </div>
 </div>
 
-<script type="text/javascript">
-        $('#businessDropdown').change(function () {
-            alert("Changed");
-            if ($(this).val() == "Other") {
-                $('#customBusiness').removeAttr("disabled");
-                $('#customBusiness').removeProp("disabled");
-                document.getElementById('customBusiness').disabled = false;
-            } else {
-                $('#customBusiness').attr("disabled", "disabled");
-                $('#customBusiness').prop("disabled", true);
-            }
-    });
+<script>
+    function CheckBusinessSelect() {
+        if ($('#businessDropdown').val() == 0) {
+            $('#customBusiness').removeAttr('disabled');
+        } else {
+            $('#customBusiness').attr('disabled', 'disabled');
+        }
+    }
     
 </script>
 
