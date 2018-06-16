@@ -58,6 +58,10 @@ namespace SmartCommuteEmmet.Models.ManageViewModels
         [ForeignKey("BusinessId")]
         public Business Business { get; set; }
 
+        [Display(Name = "Custom Business")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Business must be less than 50 characters.")]
+        public string CustomBusiness { get; set; }
+
 
         public string StatusMessage { get; set; }
     }

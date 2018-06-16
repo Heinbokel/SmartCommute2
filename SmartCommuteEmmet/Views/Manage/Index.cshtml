@@ -70,7 +70,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="BusinessId" class="control-label"></label>
-                <select asp-for="BusinessId" class="form-control" asp-items="ViewBag.BusinessId"></select>
+                <select asp-for="BusinessId" id="businessDropdown" class="form-control" asp-items="ViewBag.BusinessId" onchange="CheckBusinessSelect();">
+                    <option value="0">-Add New Business-</option>
+                </select>
+                <span asp-validation-for="BusinessId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomBusiness"></label>
+                <input asp-for="CustomBusiness" id="customBusiness" disabled="disabled" placeholder="Select -Add New Business- above to enable this input." class="form-control" />
+                <span asp-validation-for="CustomBusiness" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UserBio"></label>
@@ -81,6 +89,17 @@
         </form>
     </div>
 </div>
+
+<script>
+    function CheckBusinessSelect() {
+        if ($('#businessDropdown').val() == 0) {
+            $('#customBusiness').removeAttr('disabled');
+        } else {
+            $('#customBusiness').attr('disabled', 'disabled');
+        }
+    }
+
+</script>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
