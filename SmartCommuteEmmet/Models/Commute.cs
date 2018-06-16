@@ -37,6 +37,7 @@ namespace SmartCommuteEmmet.Models
         public StartPoint StartPoint { get; set; }
 
         [Display(Name ="Custom Start Point")]
+        [StringLength(maximumLength: 25, MinimumLength = 2, ErrorMessage = "Start Point name must be between 2 and 25 characters.")]
         public string StartPointCustom { get; set; }
 
         public int? EndPointId { get; set; }
@@ -44,6 +45,7 @@ namespace SmartCommuteEmmet.Models
         public EndPoint EndPoint { get; set; }
 
         [Display(Name = "Custom End Point")]
+        [StringLength(maximumLength: 25, MinimumLength = 2, ErrorMessage = "End Point name must be between 2 and 25 characters.")]
         public string EndPointCustom { get; set; }
 
         public string UserId { get; set; }

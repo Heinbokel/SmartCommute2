@@ -60,11 +60,13 @@ namespace SmartCommuteEmmet.Controllers
 
         // GET: Commutes/Create
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
+
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName");
-            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>().OrderBy(c=> c.EndPointName), "Id", "EndPointName");
-            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>().OrderBy(c => c.StartPointName), "Id", "StartPointName");
+            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>().Where(c=>c.UserId == null || c.UserId == CurrentUser.Id).OrderBy(c=> c.EndPointName), "Id", "EndPointName");
+            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>().Where(c => c.UserId == null || c.UserId == CurrentUser.Id).OrderBy(c => c.StartPointName), "Id", "StartPointName");
             return View();
         }
 
@@ -84,7 +86,8 @@ namespace SmartCommuteEmmet.Controllers
 
                 commute.StartPoint = new StartPoint()
                 {
-                    StartPointName = commute.StartPointCustom
+                    StartPointName = commute.StartPointCustom,
+                    UserId = CurrentUser.Id
                 };
             }
 
@@ -94,7 +97,8 @@ namespace SmartCommuteEmmet.Controllers
 
                 commute.EndPoint = new EndPoint()
                 {
-                    EndPointName = commute.EndPointCustom
+                    EndPointName = commute.EndPointCustom,
+                    UserId = CurrentUser.Id
                 };
             }
 

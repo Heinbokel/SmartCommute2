@@ -17,5 +17,7 @@ namespace SmartCommuteEmmet.Models
 
         [Display(Name = "Start Point Latitude")][RegularExpression(@"^(\-?\d+(\.\d+)?)",ErrorMessage ="This is not a valid coordinate.")]
         public float? StartPointLatitude { get; set; }
+
+        public string UserId { get; set; }
     }
 }
