@@ -220,7 +220,7 @@ namespace SmartCommuteEmmet.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
-            ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
+            ViewData["BusinessId"] = new SelectList(_context.Set<Business>().OrderBy(c => c.BusinessName), "Id", "BusinessName");
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -231,7 +231,7 @@ namespace SmartCommuteEmmet.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
+            ViewData["BusinessId"] = new SelectList(_context.Set<Business>().OrderBy(c=> c.BusinessName), "Id", "BusinessName");
 
             if(model.BusinessId == 0)
             {

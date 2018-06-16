@@ -85,7 +85,7 @@
 
 <script>
     function CheckBusinessSelect() {
-        if ($('#businessDropdown').val() == 0) {
+        if ($('#businessDropdown').val() == 0 && $('#businessDropdown').val() != "") {
             $('#customBusiness').removeAttr('disabled');
         } else {
             $('#customBusiness').attr('disabled', 'disabled');

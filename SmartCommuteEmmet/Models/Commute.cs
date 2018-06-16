@@ -32,14 +32,14 @@ namespace SmartCommuteEmmet.Models
         [Required][ForeignKey("CommuteTypeId")][Display(Name ="Commute Type")]
         public CommuteType CommuteType { get; set; }
 
-        public int StartPointId { get; set; }
+        public int? StartPointId { get; set; }
         [Required][ForeignKey("StartPointId")][Display(Name ="Starting Point")]
         public StartPoint StartPoint { get; set; }
 
         [Display(Name ="Custom Start Point")]
         public string StartPointCustom { get; set; }
 
-        public int EndPointId { get; set; }
+        public int? EndPointId { get; set; }
         [Required][ForeignKey("EndPointId")][Display(Name ="Ending Point")]
         public EndPoint EndPoint { get; set; }
 

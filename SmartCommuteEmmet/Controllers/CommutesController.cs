@@ -63,8 +63,8 @@ namespace SmartCommuteEmmet.Controllers
         public IActionResult Create()
         {
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName");
-            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName");
-            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName");
+            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>().OrderBy(c=> c.EndPointName), "Id", "EndPointName");
+            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>().OrderBy(c => c.StartPointName), "Id", "StartPointName");
             return View();
         }
 
@@ -77,6 +77,27 @@ namespace SmartCommuteEmmet.Controllers
         {
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
             commute.UserId = CurrentUser.Id;
+
+            if (commute.StartPointId == 0)
+            {
+                commute.StartPointId = null;
+
+                commute.StartPoint = new StartPoint()
+                {
+                    StartPointName = commute.StartPointCustom
+                };
+            }
+
+            if (commute.EndPointId == 0)
+            {
+                commute.EndPointId = null;
+
+                commute.EndPoint = new EndPoint()
+                {
+                    EndPointName = commute.EndPointCustom
+                };
+            }
+
             //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
             {
                 _context.Add(commute);

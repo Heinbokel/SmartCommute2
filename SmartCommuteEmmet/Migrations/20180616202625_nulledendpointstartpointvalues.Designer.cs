@@ -11,9 +11,10 @@ using System;
 namespace SmartCommuteEmmet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180616202625_nulledendpointstartpointvalues")]
+    partial class nulledendpointstartpointvalues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -299,6 +300,7 @@ namespace SmartCommuteEmmet.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("EndPointDescription")
+                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<float?>("EndPointLatitude");
@@ -320,6 +322,7 @@ namespace SmartCommuteEmmet.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("StartPointDescription")
+                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<float?>("StartPointLatitude");

@@ -61,7 +61,7 @@ namespace SmartCommuteEmmet.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
+            ViewData["BusinessId"] = new SelectList(_context.Set<Business>().OrderBy(c => c.BusinessName), "Id", "BusinessName");
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -102,7 +102,7 @@ namespace SmartCommuteEmmet.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewData["BusinessId"] = new SelectList(_context.Set<Business>(), "Id", "BusinessName");
+                ViewData["BusinessId"] = new SelectList(_context.Set<Business>().OrderBy(c => c.BusinessName), "Id", "BusinessName");
                 return View(model);
             }
 
