@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SmartCommuteEmmet.Models.HomeViewModels.HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -81,10 +83,10 @@
         <h2>What Have We Accomplished?</h2>
         <hr />
         <p>
-            Distance Traveled: 19452 miles.<br />
-            Commutes Completed: 3794 trips.<br />
-            Gas Saved: 846 gallons.<br />
-            Carbon Reduced: 16915 pounds.<br />
+            Distance Traveled: @Model.TotalDistance miles.<br />
+            Commutes Completed: @Model.TotalCommutes trips.<br />
+            Gas Saved: @Model.GasSaved gallons.<br />
+            Carbon Reduced: @Model.CarbonReduced pounds.<br />
         </p>
         
     </div>
@@ -95,7 +97,7 @@
         <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
         <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
         <hr />
-        <p>Contact Admin@TrailsCouncil.org by June 1st to sign up your organization and indicate your number of members.</p>
+        <p>Contact Admin@TrailsCouncil.org by @Model.ConfigDate.RegisterByDate.ToLongDateString() to sign up your organization and indicate your number of members.</p>
     </div>
 </div>
     </div>
