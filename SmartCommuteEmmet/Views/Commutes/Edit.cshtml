@@ -45,22 +45,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartPointId" class="control-label"></label>
-                <select asp-for="StartPointId" class="form-control" asp-items="ViewBag.StartPointId"></select>
-                <span asp-validation-for="StartPointId" class="text-danger"></span>
+                <select asp-for="StartPointId" id="startPointDropdown" class="form-control" asp-items="ViewBag.StartPointId" onchange="CheckStartPointSelect();">
+                    <option value="0">Enter Custom Start Point</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="StartPointCustom" class="control-label"></label>
-                <input asp-for="StartPointCustom" class="form-control" />
+                <input asp-for="StartPointCustom" id="customStartPoint" placeholder="Enter a custom start point here." class="form-control" disabled="disabled" />
                 <span asp-validation-for="StartPointCustom" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndPointId" class="control-label"></label>
-                <select asp-for="EndPointId" class="form-control" asp-items="ViewBag.EndPointId"></select>
-                <span asp-validation-for="EndPointId" class="text-danger"></span>
+                <select asp-for="EndPointId" id="endPointDropdown" class="form-control" asp-items="ViewBag.EndPointId" onchange="CheckEndPointSelect();">
+                    <option value="0">Enter Custom End Point</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="EndPointCustom" class="control-label"></label>
-                <input asp-for="EndPointCustom" class="form-control" />
+                <input asp-for="EndPointCustom" id="customEndPoint" placeholder="Enter a custom end point here." class="form-control" disabled="disabled" />
                 <span asp-validation-for="EndPointCustom" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -73,6 +75,24 @@
 <div>
     <a asp-action="Index">Return to Your Commute Log</a>
 </div>
+
+<script>
+    function CheckStartPointSelect() {
+        if ($('#startPointDropdown').val() == 0 && $('#startPointDropdown').val() != "") {
+            $('#customStartPoint').removeAttr('disabled');
+        } else {
+            $('#customStartPoint').attr('disabled', 'disabled');
+        }
+    }
+    function CheckEndPointSelect() {
+        if ($('#endPointDropdown').val() == 0 && $('#endPointDropdown').val() != "") {
+            $('#customEndPoint').removeAttr('disabled');
+        } else {
+            $('#customEndPoint').attr('disabled', 'disabled');
+        }
+    }
+
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

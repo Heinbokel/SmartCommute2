@@ -147,6 +147,28 @@ namespace SmartCommuteEmmet.Controllers
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
             commute.UserId = CurrentUser.Id;
 
+            if (commute.StartPointId == 0)
+            {
+                commute.StartPointId = null;
+
+                commute.StartPoint = new StartPoint()
+                {
+                    StartPointName = commute.StartPointCustom,
+                    UserId = CurrentUser.Id
+                };
+            }
+
+            if (commute.EndPointId == 0)
+            {
+                commute.EndPointId = null;
+
+                commute.EndPoint = new EndPoint()
+                {
+                    EndPointName = commute.EndPointCustom,
+                    UserId = CurrentUser.Id
+                };
+            }
+
             if (id != commute.Id)
             {
                 return NotFound();
