@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SmartCommuteEmmet.Models.CommuteViewModels.SavedCommuteViewModel>
+<h2>Saved Commutes</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CommuteName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommuteDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommuteDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndPoint)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommuteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommuteDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommuteDistance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndPoint)
+                </td>
+                <td>
+                    <a asp-action="CreateFromSaved">Use</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

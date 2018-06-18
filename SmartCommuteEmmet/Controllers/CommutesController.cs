@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmartCommuteEmmet.Data;
 using SmartCommuteEmmet.Models;
+using SmartCommuteEmmet.Models.CommuteViewModels;
 using SmartCommuteEmmet.Models.LeaderboardViewModels;
 using SmartCommuteEmmet.Models.ProfileViewModels;
 
@@ -33,6 +34,31 @@ namespace SmartCommuteEmmet.Controllers
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
             var applicationDbContext = _context.Commute.Include(c => c.CommuteType).Include(c => c.EndPoint).Include(c => c.StartPoint).Include(c => c.User).Where(c => c.UserId == CurrentUser.Id);
             return View(await applicationDbContext.ToListAsync());
+        }
+
+        //Get Saved Commutes
+        [Authorize]
+        public async Task<IActionResult> GetSavedCommutes()
+        {
+            ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var savedCommutes = _context.Commute.Where(c => c.UserId == CurrentUser.Id & c.CommuteSaved == true).ToList();
+
+            List<SavedCommuteViewModel> model = new List<SavedCommuteViewModel>();
+
+            foreach(var item in savedCommutes)
+            {
+                SavedCommuteViewModel newModel = new SavedCommuteViewModel()
+                {
+                    CommuteName = item.CommuteName,
+                    CommuteDescription = item.CommuteDescription,
+                    CommuteDistance = item.CommuteDistance,
+                    StartPointId = item.StartPointId,
+                    EndPointId = item.EndPointId,
+                    UserId = item.UserId
+                };
+                model.Add(newModel);
+            }
+            return PartialView("_SavedCommutesForm",savedCommutes.ToList());
         }
 
         // GET: Commutes/Details/5
