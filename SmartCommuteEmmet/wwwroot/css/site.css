@@ -74,6 +74,11 @@ a:hover{
     border-radius:5px;
 }
 
+.emphasizeOrange{
+    color:darkorange;
+    font-weight:bolder;
+}
+
 /*Buttons*/
 .nav-pills{
     background-color:black;
