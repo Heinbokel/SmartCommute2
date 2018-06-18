@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SmartCommuteEmmet.Models.CommuteViewModels.SavedCommuteViewModel>
+
 <h2>Saved Commutes</h2>
 
 <table class="table">
@@ -14,10 +15,10 @@
                 @Html.DisplayNameFor(model => model.CommuteDistance)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartPoint)
+                @Html.DisplayNameFor(model => model.StartPointName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndPoint)
+                @Html.DisplayNameFor(model => model.EndPointName)
             </th>
             <th></th>
         </tr>
@@ -36,13 +37,13 @@
                     @Html.DisplayFor(modelItem => item.CommuteDistance)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartPoint)
+                    @Html.DisplayFor(modelItem => item.StartPointName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EndPoint)
+                    @Html.DisplayFor(modelItem => item.EndPointName)
                 </td>
                 <td>
-                    <a asp-action="CreateFromSaved">Use</a>
+                    <a asp-action="CreateFromSaved" asp-route-id="@item.CommuteId">Use</a>
                 </td>
             </tr>
         }

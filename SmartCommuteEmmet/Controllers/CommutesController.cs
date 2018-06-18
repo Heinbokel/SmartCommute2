@@ -38,27 +38,55 @@ namespace SmartCommuteEmmet.Controllers
 
         //Get Saved Commutes
         [Authorize]
-        public async Task<IActionResult> GetSavedCommutes()
+        public List<SavedCommuteViewModel> GetSavedCommutes(ApplicationUser currentUser)
         {
-            ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
+            ApplicationUser CurrentUser = currentUser;
             var savedCommutes = _context.Commute.Where(c => c.UserId == CurrentUser.Id & c.CommuteSaved == true).ToList();
 
             List<SavedCommuteViewModel> model = new List<SavedCommuteViewModel>();
 
-            foreach(var item in savedCommutes)
+            foreach (var item in savedCommutes)
             {
                 SavedCommuteViewModel newModel = new SavedCommuteViewModel()
                 {
                     CommuteName = item.CommuteName,
                     CommuteDescription = item.CommuteDescription,
                     CommuteDistance = item.CommuteDistance,
-                    StartPointId = item.StartPointId,
-                    EndPointId = item.EndPointId,
-                    UserId = item.UserId
+                    StartPointName = item.StartPoint.StartPointName,
+                    EndPointName = item.EndPoint.EndPointName,
+                    UserId = item.UserId,
+                    CommuteId = item.Id
                 };
                 model.Add(newModel);
             }
-            return PartialView("_SavedCommutesForm",savedCommutes.ToList());
+            return model.ToList();
+        }
+
+        // POST: Commutes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateFromSaved(int id)
+        {
+
+            var savedCommute = _context.Commute.Find(id);
+            var commute = new Commute()
+            {
+                CommuteDate = Date
+            };
+
+            //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
+            {
+                _context.Add(commute);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
+            ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
+            ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
+            ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName", commute.StartPointId);
+            return View(commute);
         }
 
         // GET: Commutes/Details/5
@@ -90,6 +118,7 @@ namespace SmartCommuteEmmet.Controllers
         {
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
 
+            ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName");
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>().Where(c=>c.UserId == null || c.UserId == CurrentUser.Id).OrderBy(c=> c.EndPointName), "Id", "EndPointName");
             ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>().Where(c => c.UserId == null || c.UserId == CurrentUser.Id).OrderBy(c => c.StartPointName), "Id", "StartPointName");
@@ -134,6 +163,7 @@ namespace SmartCommuteEmmet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
             ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName", commute.StartPointId);

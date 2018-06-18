@@ -26,16 +26,12 @@ namespace SmartCommuteEmmet.Models.CommuteViewModels
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
-        public int? StartPointId { get; set; }
-        [Required]
-        [ForeignKey("StartPointId")]
-        [Display(Name = "Starting Point")]
-        public StartPoint StartPoint { get; set; }
+        public int CommuteId { get; set; }
 
-        public int? EndPointId { get; set; }
-        [Required]
-        [ForeignKey("EndPointId")]
+        [Display(Name = "Starting Point")]
+        public string StartPointName { get; set; }
+
         [Display(Name = "Ending Point")]
-        public EndPoint EndPoint { get; set; }
+        public string EndPointName { get; set; }
     }
 }

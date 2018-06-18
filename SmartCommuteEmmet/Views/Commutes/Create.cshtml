@@ -1,11 +1,11 @@
 ﻿@model SmartCommuteEmmet.Models.Commute
+@using SmartCommuteEmmet.Models.CommuteViewModels
 
 @{
     ViewData["Title"] = "Commute Entry";
 }
 
-
-@await Html.PartialAsync("_SavedCommutesForm", new List<SmartCommuteEmmet.Models.CommuteViewModels.SavedCommuteViewModel>())
+@await Html.PartialAsync("_SavedCommutesForm", ViewData["SavedCommutes"])
 
 <div class="row">
     <div class="col-md-12">
@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartPointCustom" class="control-label"></label>
-                <input asp-for="StartPointCustom" id="customStartPoint" placeholder="Enter a custom start point here." class="form-control" disabled="disabled"/>
+                <input asp-for="StartPointCustom" id="customStartPoint" placeholder="Enter a custom start point here." class="form-control" disabled="disabled" />
                 <span asp-validation-for="StartPointCustom" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -80,7 +80,7 @@
 
 <script>
     function CheckStartPointSelect() {
-        if ($('#startPointDropdown').val() == 0 && $('#startPointDropdown').val() != "" ) {
+        if ($('#startPointDropdown').val() == 0 && $('#startPointDropdown').val() != "") {
             $('#customStartPoint').removeAttr('disabled');
         } else {
             $('#customStartPoint').attr('disabled', 'disabled');
