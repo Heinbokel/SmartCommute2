@@ -28,10 +28,10 @@ namespace SmartCommuteEmmet.Models.CommuteViewModels
 
         public int CommuteId { get; set; }
 
-        [Display(Name = "Starting Point")]
-        public string StartPointName { get; set; }
+        //[Display(Name = "Starting Point")]
+        //public string StartPointName { get; set; }
 
-        [Display(Name = "Ending Point")]
-        public string EndPointName { get; set; }
+        //[Display(Name = "Ending Point")]
+        //public string EndPointName { get; set; }
     }
 }

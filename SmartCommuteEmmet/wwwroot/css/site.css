@@ -182,6 +182,7 @@ a:hover{
 table{
     background-color:darkcyan;
     color:white;
+    border-radius:10px;
 }
 table a{
     color:white;

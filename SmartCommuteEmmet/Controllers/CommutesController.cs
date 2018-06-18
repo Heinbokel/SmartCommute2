@@ -41,23 +41,21 @@ namespace SmartCommuteEmmet.Controllers
         public List<SavedCommuteViewModel> GetSavedCommutes(ApplicationUser currentUser)
         {
             ApplicationUser CurrentUser = currentUser;
-            var savedCommutes = _context.Commute.Where(c => c.UserId == CurrentUser.Id & c.CommuteSaved == true).ToList();
+            var savedCommutes = _context.Commute.Where(c => c.UserId == CurrentUser.Id && c.CommuteSaved == true).ToList();
 
-            List<SavedCommuteViewModel> model = new List<SavedCommuteViewModel>();
+            var model = new List<SavedCommuteViewModel>();
 
             foreach (var item in savedCommutes)
             {
-                SavedCommuteViewModel newModel = new SavedCommuteViewModel()
+                var commute = new SavedCommuteViewModel
                 {
                     CommuteName = item.CommuteName,
                     CommuteDescription = item.CommuteDescription,
                     CommuteDistance = item.CommuteDistance,
-                    StartPointName = item.StartPoint.StartPointName,
-                    EndPointName = item.EndPoint.EndPointName,
                     UserId = item.UserId,
                     CommuteId = item.Id
                 };
-                model.Add(newModel);
+                model.Add(commute);
             }
             return model.ToList();
         }
@@ -69,11 +67,19 @@ namespace SmartCommuteEmmet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateFromSaved(int id)
         {
-
+            ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
             var savedCommute = _context.Commute.Find(id);
             var commute = new Commute()
             {
-                CommuteDate = Date
+                CommuteDate = DateTime.Now,
+                CommuteTypeId = savedCommute.CommuteTypeId,
+                CommuteDescription = savedCommute.CommuteDescription,
+                CommuteDistance = savedCommute.CommuteDistance,
+                CommuteName = savedCommute.CommuteName,
+                CommuteSaved = false,
+                EndPointId = savedCommute.EndPointId,
+                StartPointId = savedCommute.StartPointId,
+                UserId = savedCommute.UserId
             };
 
             //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
