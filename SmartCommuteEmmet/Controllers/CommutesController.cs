@@ -36,6 +36,17 @@ namespace SmartCommuteEmmet.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        //Check Two commutes per day rule
+        public bool CheckCommuteCountForDate(Commute commute, ApplicationUser currentUser)
+        {
+            var commuteCountForDate = _context.Commute.Where(c => c.UserId == currentUser.Id && c.CommuteDate.ToShortDateString() == commute.CommuteDate.ToShortDateString()).Count();
+            if(commuteCountForDate >= 2)
+            {
+                return false;//False = Too many commutes for this date.
+            }
+            return true;//True = May add this commute for this date.
+        }
+
         //Get Saved Commutes
         [Authorize]
         public List<SavedCommuteViewModel> GetSavedCommutes(ApplicationUser currentUser)
@@ -78,17 +89,23 @@ namespace SmartCommuteEmmet.Controllers
                 UserId = savedCommute.UserId
             };
 
-            //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
+            //If this date contains 2 or more commutes for this user, do not let them post.
+            if (CheckCommuteCountForDate(commute, CurrentUser))
             {
-                _context.Add(commute);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
+                {
+                    _context.Add(commute);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+
+            ViewData["ErrorMessage"] = "There are already 2 commutes entered for this date.";
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
             ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName", commute.StartPointId);
-            return View(commute);
+            return RedirectToAction("Create", commute);
         }
 
         // GET: Commutes/Details/5
@@ -159,12 +176,18 @@ namespace SmartCommuteEmmet.Controllers
                 };
             }
 
-            //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
+            //If date has 2 or more commutes entered, prevent this entry.
+            if(CheckCommuteCountForDate(commute, CurrentUser))
             {
-                _context.Add(commute);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
+                {
+                    _context.Add(commute);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+
+            ViewData["ErrorMessage"] = "There are already 2 commutes entered for this date.";
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
