@@ -9,4 +9,6 @@ when they registered, and other information. There are also resources for reward
 Version 1.0 was created in PHP with no framework or prior web development (or programming) knowledge to speak of. This is a much needed update
 to the original project and utilizes SOLID programming principles, .Net Core MVC, Entity Framework, and other technologies.
 
+This is is a work in progress.
+
 
