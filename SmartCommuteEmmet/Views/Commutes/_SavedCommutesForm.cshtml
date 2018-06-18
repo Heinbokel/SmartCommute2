@@ -49,7 +49,7 @@
                         </td>*@
                         <td>
                             <a asp-action="CreateFromSaved" asp-route-id="@item.CommuteId">Use</a>
-                            <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("Login", "Account", new { id = item.CommuteId })'" />
+                            <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("CreateFromSaved", "Commutes", new { id = item.CommuteId })'" />
                         </td>
                     </tr>
                 }
