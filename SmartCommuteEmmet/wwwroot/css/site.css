@@ -267,6 +267,8 @@ input[type=file]{
     color: white;
     padding: 2%;
     border-radius: 25px;
+    align-content:center;
+    align-items:center;
 }
 
 #savedCommutesDiv {
@@ -313,6 +315,18 @@ footer{
         color: white;
         padding: 2%;
         border-radius: 25px;
+    }
+    .genericForm input, .genericFormWide textarea, .genericFormWide select {
+        border-radius: 10px;
+        color: black;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .genericFormWide input, .genericFormWide textarea, .genericFormWide select {
+        border-radius: 10px;
+        color: black;
+        width: 90%;
+        margin: 0 auto;
     }
     .tableContainer {
         background-color: darkcyan;

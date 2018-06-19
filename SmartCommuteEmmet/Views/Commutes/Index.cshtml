@@ -4,16 +4,18 @@
     ViewData["Title"] = "My Commute Log";
 }
 
-<h1>My Commute Log</h1>
-<p>@Model.Sum(c => c.CommuteDistance) Miles traveled over @Model.Count() commutes.</p>
+<div class="tableContainer">
+    <h1>My Commute Log</h1>
+    <p>@Model.Sum(c => c.CommuteDistance) Miles traveled over @Model.Count() commutes.</p>
 
-@* Make this into a button *@
-<p>
-    <a asp-action="Create">Log new commute</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+    @* Make this into a button *@
+    <p>
+        <input type="button" class="btn-main" value="Create Commute" onclick="location.href='@Url.Action("Create", "Commutes")'" />
+    </p>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.CommuteDistance)
                 </th>
@@ -29,51 +31,53 @@
                 <th>
                     @Html.DisplayNameFor(model => model.CommuteDate)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommuteType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndPoint)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartPoint)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommuteDistance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommuteDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommuteSaved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommuteName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommuteDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommuteType.CommuteTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndPoint.EndPointName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartPoint.StartPointName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.CommuteType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndPoint)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartPoint)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommuteDistance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommuteDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommuteSaved)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommuteName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommuteDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommuteType.CommuteTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndPoint.EndPointName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartPoint.StartPointName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

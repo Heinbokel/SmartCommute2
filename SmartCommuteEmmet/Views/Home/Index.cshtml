@@ -4,15 +4,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+@inject SignInManager<ApplicationUser> SignInManager
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
     @*<ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-        <li data-target="#myCarousel" data-slide-to="4"></li>
-        <li data-target="#myCarousel" data-slide-to="5"></li>
-    </ol>*@
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
+        </ol>*@
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <img src="~/images/Cara1.jpg" alt="ASP.NET" class="img-responsive" />
@@ -65,9 +67,18 @@
             <a asp-controller="Account" asp-action="Register">
                 <img src="~/images/Cara6.jpg" alt="Microsoft Azure" class="img-responsive" />
                 <div class="carousel-caption" role="option">
-                    <h1>Sign Up Now.</h1>
-                    <p>Ready to join the Smart Commute?</p>
-                    <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <h1>Thank you for joining Smart Commute.</h1>
+                        <p>We are happy to have you. Enjoy the trails!</p>
+
+                    }
+                    else
+                    {
+                        <h1>Sign Up Now.</h1>
+                        <p>Ready to join the Smart Commute?</p>
+                        <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
+                    }
                 </div>
             </a>
         </div>
@@ -82,26 +93,37 @@
     </a>
 </div>
 <div class="indexWrapper">
-<div class="row">
-    <div class="col-md-6">
-        <h2>What Have We Accomplished?</h2>
-        <hr />
-        <p>
-            Distance Traveled: @Model.TotalDistance miles.<br />
-            Commutes Completed: @Model.TotalCommutes trips.<br />
-            Gas Saved: @Model.GasSaved gallons.<br />
-            Carbon Reduced: @Model.CarbonReduced pounds.<br />
-        </p>
-        
-    </div>
-    <div class="col-md-6">
-        <h2>Ready to Join Smart Commute?</h2>
-        <hr />
-        <p>Improve your health and your community while reducing your footprint on the earth. As an added incentive your participation earns you rewards to local businesses and the opportunity to win prizes!</p>
-        <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
-        <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
-        <hr />
-        <p>Contact Admin@TrailsCouncil.org by @Model.ConfigDate.RegisterByDate.ToLongDateString() to sign up your organization and indicate your number of members.</p>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>What Have We Accomplished?</h2>
+            <hr />
+            <p>
+                Distance Traveled: @Model.TotalDistance miles.<br />
+                Commutes Completed: @Model.TotalCommutes trips.<br />
+                Gas Saved: @Model.GasSaved gallons.<br />
+                Carbon Reduced: @Model.CarbonReduced pounds.<br />
+            </p>
+            <hr />
+        </div>
+
+        <div class="col-md-6">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <h2>Thank you for participating.</h2>
+                <hr />
+                <p>We are happy to have you.<br />Log your commutes and make sure to check the leaderboards to see your progress.<br /> Enjoy the trails!</p>
+                <hr />
+            }
+            else
+            {
+                <h2>Ready to Join Smart Commute?</h2>
+                <hr />
+                <p>Improve your health and your community while reducing your footprint on the earth. As an added incentive your participation earns you rewards to local businesses and the opportunity to win prizes!</p>
+                <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
+                <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
+                <hr />
+            }
+            <p>Contact Admin@TrailsCouncil.org by @Model.ConfigDate.RegisterByDate.ToLongDateString() to sign up your organization and indicate your number of members.</p>
+        </div>
     </div>
 </div>
-    </div>
