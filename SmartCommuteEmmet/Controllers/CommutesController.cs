@@ -32,7 +32,7 @@ namespace SmartCommuteEmmet.Controllers
         public async Task<IActionResult> Index()
         {
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
-            var applicationDbContext = _context.Commute.Include(c => c.CommuteType).Include(c => c.EndPoint).Include(c => c.StartPoint).Include(c => c.User).Where(c => c.UserId == CurrentUser.Id);
+            var applicationDbContext = _context.Commute.Include(c => c.CommuteType).Include(c => c.EndPoint).Include(c => c.StartPoint).Include(c => c.User).Where(c => c.UserId == CurrentUser.Id).OrderBy(c=>c.CommuteDate);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -100,12 +100,12 @@ namespace SmartCommuteEmmet.Controllers
                 }
             }
 
-            ViewData["ErrorMessage"] = "There are already 2 commutes entered for this date.";
+            ViewBag.DateError = "There are already 2 commutes entered for this date.";
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
             ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>(), "Id", "StartPointName", commute.StartPointId);
-            return RedirectToAction("Create", commute);
+            return View("Create", commute);
         }
 
         // GET: Commutes/Details/5
@@ -137,6 +137,7 @@ namespace SmartCommuteEmmet.Controllers
         {
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
 
+            ViewBag.DateError = "";
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName");
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>().Where(c=>c.UserId == null || c.UserId == CurrentUser.Id).OrderBy(c=> c.EndPointName), "Id", "EndPointName");
@@ -187,7 +188,7 @@ namespace SmartCommuteEmmet.Controllers
                 }
             }
 
-            ViewData["ErrorMessage"] = "There are already 2 commutes entered for this date.";
+            ViewBag.DateError = "There are already 2 commutes entered for this date.";
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);

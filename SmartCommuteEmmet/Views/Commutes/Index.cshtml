@@ -5,7 +5,9 @@
 }
 
 <h1>My Commute Log</h1>
+<p>@Model.Sum(c => c.CommuteDistance) Miles traveled over @Model.Count() commutes.</p>
 
+@* Make this into a button *@
 <p>
     <a asp-action="Create">Log new commute</a>
 </p>

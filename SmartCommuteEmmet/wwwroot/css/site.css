@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 60px;
     padding-bottom: 20px;
 }
 
@@ -186,6 +186,12 @@ table{
 }
 table a{
     color:white;
+}
+
+.tableContainer{
+    background-color:darkcyan;
+    color:white;
+    border-radius:10px;
 }
 
 /*Forms*/
