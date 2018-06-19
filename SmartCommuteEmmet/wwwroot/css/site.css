@@ -79,6 +79,12 @@ a:hover{
     font-weight:bolder;
 }
 
+#savedCommutesDiv{
+    align-content:center;
+    text-align:center;
+    align-items:center;
+}
+
 /*Buttons*/
 .nav-pills{
     background-color:black;
