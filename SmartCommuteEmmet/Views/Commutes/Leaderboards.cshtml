@@ -4,60 +4,62 @@
     ViewData["Title"] = "Leaderboards";
 }
 
-
-<table class="table">
+<div class="tableContainerWide">
     <h1>Leaderboards</h1>
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalCommutes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalDistance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BikeCommutes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RunCommutes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarpoolCommutes)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>@Model.Count() Smart Commuters have traveled @Model.Sum(c => c.TotalDistance) miles over @Model.Sum(c => c.TotalCommutes) commutes.</p>
+    <hr />
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    <a asp-controller="Profiles" asp-action="Profile" asp-route-id="@item.UserId"><div class="leaderboardNameDiv"><img src="~/@item.UserPhoto" class="thumbnailTiny" />@Html.DisplayFor(modelItem => item.UserName)</div></a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalCommutes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalDistance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BikeCommutes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RunCommutes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CarpoolCommutes)
-                </td>
-                @*<td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalCommutes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalDistance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BikeCommutes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RunCommutes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CarpoolCommutes)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Profiles" asp-action="Profile" asp-route-id="@item.UserId"><div class="leaderboardNameDiv"><img src="~/@item.UserPhoto" class="thumbnailTiny" />@Html.DisplayFor(modelItem => item.UserName)</div></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalCommutes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalDistance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BikeCommutes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RunCommutes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarpoolCommutes)
+                    </td>
+                    @*<td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

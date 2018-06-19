@@ -79,11 +79,7 @@ a:hover{
     font-weight:bolder;
 }
 
-#savedCommutesDiv{
-    align-content:center;
-    text-align:center;
-    align-items:center;
-}
+
 
 /*Buttons*/
 .nav-pills{
@@ -201,6 +197,13 @@ table a{
     width:66%;
     margin:0 auto;
 }
+.tableContainerWide {
+    background-color: darkcyan;
+    color: white;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto;
+}
 
 /*Forms*/
 .genericForm{
@@ -266,6 +269,12 @@ input[type=file]{
     border-radius: 25px;
 }
 
+#savedCommutesDiv {
+    align-content: center;
+    text-align: center;
+    align-items: center;
+}
+
 /*Footer*/
 footer{
     text-align:center;
@@ -278,15 +287,23 @@ footer{
         line-height: 1.4;
     }
     .carousel-caption h1{
-        font-size: 16px;
+        font-size: 14px;
     }
     .carousel-inner {
         max-height: 100px;
     }
+    .carousel-caption {
+        background-color: rgba(0,0,0,0.6);
+        border-radius: 25px;
+        color: white;
+        top: 25%;
+        transform: translateY(-50%);
+    }
+
     .btn-main{
-        font-size: 10px;
-        min-width: 80px;
-        padding:5px 5px;
+        font-size: 12px;
+        min-width: 100px;
+        padding:5px;
     }
     .genericForm {
         width: 100%;
@@ -296,5 +313,12 @@ footer{
         color: white;
         padding: 2%;
         border-radius: 25px;
+    }
+    .tableContainer {
+        background-color: darkcyan;
+        color: white;
+        border-radius: 10px;
+        width: 100%;
+        margin: 0 auto;
     }
 }
