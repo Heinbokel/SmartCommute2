@@ -94,7 +94,7 @@ a:hover{
     border-radius: 5px;
     border: 1px solid gray;
     padding: 10px 5px;
-    margin: 5px 5px;
+    margin: 5px auto;
     min-width: 150px;
     transition: background-color 0.5s, border-color 0.5s;
 }
@@ -192,6 +192,8 @@ table a{
     background-color:darkcyan;
     color:white;
     border-radius:10px;
+    width:66%;
+    margin:0 auto;
 }
 
 /*Forms*/

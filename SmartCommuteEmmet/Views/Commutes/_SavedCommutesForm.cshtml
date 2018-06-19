@@ -3,61 +3,63 @@
 
 
 <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-        <div class="tableContainer">
-            <h2>Saved Commutes</h2>
-            <p class="text-danger">@ViewBag.DateError</p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CommuteName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CommuteDescription)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CommuteDistance)
-                        </th>
-                        @*<th>
-                            @Html.DisplayNameFor(model => model.StartPointName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.EndPointName)
-                        </th>*@
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+    <div class="col-md-12">
+        <button data-toggle="collapse" data-target="#savedCommutes" class="btn-main">Saved Commutes</button>
+        <div id="savedCommutes" class="collapse">
+            <div class="tableContainer">
+                <h2>Saved Commutes</h2>
+                <hr />
+                <p class="text-danger">@ViewBag.DateError</p>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CommuteName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CommuteDescription)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CommuteDistance)
-                            </td>
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.StartPointName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EndPointName)
-                            </td>*@
-                            <td>
-                                <input type="button" class="btn-main" value="Re-Use" onclick="location.href='@Url.Action("CreateFromSaved", "Commutes", new { id = item.CommuteId })'" />
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CommuteName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CommuteDescription)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CommuteDistance)
+                            </th>
+                            @*<th>
+                                @Html.DisplayNameFor(model => model.StartPointName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EndPointName)
+                            </th>*@
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CommuteName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CommuteDescription)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CommuteDistance)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.StartPointName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EndPointName)
+                                </td>*@
+                                <td>
+                                    <input type="button" class="btn-main" value="Re-Use" onclick="location.href='@Url.Action("CreateFromSaved", "Commutes", new { id = item.CommuteId })'" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="col-md-3"></div>
 </div>
 
 

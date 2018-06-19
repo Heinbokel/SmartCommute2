@@ -100,7 +100,7 @@ namespace SmartCommuteEmmet.Controllers
                 }
             }
 
-            ViewBag.DateError = "There are already 2 commutes entered for this date.";
+            ViewBag.DateError = "There are already 2 commutes entered for this date. Please change the date.";
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
@@ -188,7 +188,7 @@ namespace SmartCommuteEmmet.Controllers
                 }
             }
 
-            ViewBag.DateError = "There are already 2 commutes entered for this date.";
+            ViewBag.DateError = "There are already 2 commutes entered for this date. Please change the date.";
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
