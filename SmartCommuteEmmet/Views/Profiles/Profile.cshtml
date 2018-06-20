@@ -36,9 +36,8 @@
                         <div id="rewardsCheck" class="collapse">
                             @*TODO: Put rewards check in partialView and refactor the code to utilize rewards from database.*@
                             @{
-                                var totalMiles = @Model.Commutes.Sum(c => c.CommuteDistance);
-                                var totalCommutes = @Model.Commutes.Count();
-
+                                var totalMiles = @Model.Commutes.Where(c=>c.CommuteDate.Year == DateTime.Now.Year).Sum(c => c.CommuteDistance);
+                                var totalCommutes = @Model.Commutes.Where(c => c.CommuteDate.Year == DateTime.Now.Year).Count();
                             }
 
                             <h2>Rewards For @DateTime.Now.Year</h2>

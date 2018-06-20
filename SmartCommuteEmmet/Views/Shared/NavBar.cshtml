@@ -14,7 +14,16 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Contact">Rewards</a></li>
                 <li><a asp-area="" asp-controller="Commutes" asp-action="LeaderBoards">Leaderboards</a></li>
-                <li><a asp-area="" asp-controller="Commutes" asp-action="Create">Commute Entry</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Commutes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Commutes" asp-action="Index">My Commute Log</a>
+                        <a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Commutes" asp-action="Create">Commute Entry</a>
+                    </div>
+                </li>
+                <li></li>
             </ul>
             @await Html.PartialAsync("_LoginPartial")
         </div>
