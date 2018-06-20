@@ -276,6 +276,10 @@ input[type=file]{
     text-align: center;
     align-items: center;
 }
+#rewardsCheck{
+    background-color:rgba(0,0,0,0.3);
+    border-radius:10px;
+}
 
 /*Footer*/
 footer{
@@ -319,13 +323,13 @@ footer{
     .genericForm input, .genericFormWide textarea, .genericFormWide select {
         border-radius: 10px;
         color: black;
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
     }
     .genericFormWide input, .genericFormWide textarea, .genericFormWide select {
         border-radius: 10px;
         color: black;
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
     }
     .tableContainer {

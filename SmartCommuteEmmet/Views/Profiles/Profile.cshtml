@@ -29,13 +29,24 @@
                 <div class="col-md-9">
                     <div class="genericSection">
                         <input type="button" class="btn-main" value="Manage Account" onclick="location.href='@Url.Action("Index", "Manage")'" />
-                        <input type="button" class="btn-main" value="Rewards" />
+                        <input type="button" class="btn-main" data-toggle="collapse" data-target="#rewardsCheck" value="Rewards" />
                         <input type="button" class="btn-main" value="Commute Entry" onclick="location.href='@Url.Action("Create", "Commutes")'" />
                         <input type="button" class="btn-main" value="My Commutes" onclick="location.href='@Url.Action("Index", "Commutes")'" />
+                        <div id="rewardsCheck" class="collapse">
+                            <h2>For year: 2018</h2>
+                            <p>
+                                Total Miles: 3<br />
+                                Total Trips: 1
+                            </p>
+                            <p>You currently do not have any rewards. Commute at least 10 miles or 2 trips to earn your first!</p>
+                            
+                            <p>Remember you can pick up your rewards at the Top Of Michigan Trails Council Office on M-119. The Grand Prize drawing will take place at the Smart Commute Celebration in October.</p>
+                        </div>
                         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
                             <button type="submit" class="btn-main">Log out</button>
                         </form>
-                        </div>
+
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h3>Documents:</h3>
