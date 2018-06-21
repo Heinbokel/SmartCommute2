@@ -13,13 +13,13 @@ namespace SmartCommuteEmmet.Models
         [Required][Display(Name ="Sponsor Name")][StringLength(maximumLength:20,MinimumLength =2,ErrorMessage="Sponsor name must be between 2 and 20 characters.")]
         public string SponsorName { get; set; }
 
-        [Required][Display(Name ="Sponsor Description")][StringLength(maximumLength:50,MinimumLength =2,ErrorMessage="Sponsor description must be between 2 and 50 characters.")]
+        [Display(Name ="Sponsor Description")][StringLength(maximumLength:50,MinimumLength =2,ErrorMessage="Sponsor description must be between 2 and 50 characters.")]
         public string SponsorDescription { get; set; }
 
         [Required][Display(Name ="Sponsor Link")][Url]
         public string SponsorLink { get; set; }
 
-        [Required][Display(Name ="Sponsor Image")]
+        [Display(Name ="Sponsor Image")]
         public string SponsorImagePath { get; set; }
     }
 }

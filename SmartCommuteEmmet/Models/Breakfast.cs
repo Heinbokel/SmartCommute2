@@ -14,7 +14,7 @@ namespace SmartCommuteEmmet.Models
         [Required][Display(Name ="Breakfast Provider Name")]
         public string BreakfastName { get; set; }
 
-        [Required][Display(Name ="Breakfast Provider Description")]
+        [Display(Name ="Breakfast Provider Description")]
         public string BreakfastDescription { get; set; }
 
         [Required][Display(Name ="Breakfast Provider Street")]
@@ -23,10 +23,10 @@ namespace SmartCommuteEmmet.Models
         [Required][Display(Name ="Breakfast Provider City")]
         public string BreakfastCity { get; set; }
 
-        [Required][Display(Name ="Breakfast Provider ZIP")]
+        [Display(Name ="Breakfast Provider ZIP")]
         public string BreakfastZIP { get; set; }
 
-        [Required][Display(Name ="Breakfast Provider URL")]
+        [Display(Name ="Breakfast Provider URL")]
         public string BreakfastLink { get; set; }
     }
 }

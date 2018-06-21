@@ -35,24 +35,31 @@ namespace SmartCommuteEmmet.Controllers
 
         public IActionResult About()
         {
-            var model = new List<AboutViewModel>();
+            var sponsorModel = new AboutViewModel();
             var Sponsors = _context.Sponsor.ToList();
             var Breakfasts = _context.Breakfast.ToList();
 
             foreach (var sponsor in Sponsors)
             {
-                var userViewModel = new AboutViewModel
+                var userViewModel = new Sponsor
                 {
-                    UserName = user.FirstName + " " + user.LastName,
-                    UserPhoto = user.UserPhoto,
-                    UserId = user.Id,
-                    TotalCommutes = Commutes.Where(c => c.UserId == user.Id).Count(),
-                    BikeCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 1).Count(),
-                    RunCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 3).Count(),
-                    CarpoolCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 2).Count(),
-                    TotalDistance = Commutes.Where(c => c.UserId == user.Id).Sum(c => c.CommuteDistance)
+                    Id = sponsor.Id,
+                    SponsorLink = sponsor.SponsorLink,
+                    SponsorImagePath = sponsor.SponsorImagePath,
+                    SponsorDescription = sponsor.SponsorDescription,
+                    SponsorName = sponsor.SponsorName
                 };
-                model.Add(userViewModel);
+                sponsorModel.Sponsors.Add(userViewModel);
+            }
+
+            foreach (var breakfast in Breakfasts)
+            {
+                var userViewModel = new Breakfast
+                {
+                    Id = break
+                    
+                };
+                sponsorModel.Sponsors.Add(userViewModel);
             }
 
             return View();
