@@ -1,0 +1,55 @@
+﻿@model SmartCommuteEmmet.Models.Breakfast
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Breakfast</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BreakfastName" class="control-label"></label>
+                <input asp-for="BreakfastName" class="form-control" />
+                <span asp-validation-for="BreakfastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreakfastDescription" class="control-label"></label>
+                <input asp-for="BreakfastDescription" class="form-control" />
+                <span asp-validation-for="BreakfastDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreakfastStreet" class="control-label"></label>
+                <input asp-for="BreakfastStreet" class="form-control" />
+                <span asp-validation-for="BreakfastStreet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreakfastCity" class="control-label"></label>
+                <input asp-for="BreakfastCity" class="form-control" />
+                <span asp-validation-for="BreakfastCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreakfastZIP" class="control-label"></label>
+                <input asp-for="BreakfastZIP" class="form-control" />
+                <span asp-validation-for="BreakfastZIP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreakfastLink" class="control-label"></label>
+                <input asp-for="BreakfastLink" class="form-control" />
+                <span asp-validation-for="BreakfastLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

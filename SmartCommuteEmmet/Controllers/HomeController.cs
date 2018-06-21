@@ -35,7 +35,25 @@ namespace SmartCommuteEmmet.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            var model = new List<AboutViewModel>();
+            var Sponsors = _context.Sponsor.ToList();
+            var Breakfasts = _context.Breakfast.ToList();
+
+            foreach (var sponsor in Sponsors)
+            {
+                var userViewModel = new AboutViewModel
+                {
+                    UserName = user.FirstName + " " + user.LastName,
+                    UserPhoto = user.UserPhoto,
+                    UserId = user.Id,
+                    TotalCommutes = Commutes.Where(c => c.UserId == user.Id).Count(),
+                    BikeCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 1).Count(),
+                    RunCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 3).Count(),
+                    CarpoolCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 2).Count(),
+                    TotalDistance = Commutes.Where(c => c.UserId == user.Id).Sum(c => c.CommuteDistance)
+                };
+                model.Add(userViewModel);
+            }
 
             return View();
         }

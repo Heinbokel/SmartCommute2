@@ -1,0 +1,45 @@
+﻿@model SmartCommuteEmmet.Models.Sponsor
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Sponsor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SponsorName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SponsorName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SponsorDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SponsorDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SponsorLink)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SponsorLink)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SponsorImagePath)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SponsorImagePath)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

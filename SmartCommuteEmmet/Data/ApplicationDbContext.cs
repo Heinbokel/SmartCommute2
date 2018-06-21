@@ -30,5 +30,9 @@ namespace SmartCommuteEmmet.Data
         public DbSet<SmartCommuteEmmet.Models.Business> Business { get; set; }
 
         public DbSet<SmartCommuteEmmet.Models.ConfigDate> ConfigDate { get; set; }
+
+        public DbSet<SmartCommuteEmmet.Models.Sponsor> Sponsor { get; set; }
+
+        public DbSet<SmartCommuteEmmet.Models.Breakfast> Breakfast { get; set; }
     }
 }
