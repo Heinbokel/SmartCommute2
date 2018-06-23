@@ -10,10 +10,10 @@ namespace SmartCommuteEmmet.Models
     {
         public int Id { get; set; }
 
-        [Required][Display(Name ="Sponsor Name")][StringLength(maximumLength:20,MinimumLength =2,ErrorMessage="Sponsor name must be between 2 and 20 characters.")]
+        [Required][Display(Name ="Sponsor Name")][StringLength(maximumLength:50,MinimumLength =2,ErrorMessage="Sponsor name must be between 2 and 50 characters.")]
         public string SponsorName { get; set; }
 
-        [Display(Name ="Sponsor Description")][StringLength(maximumLength:50,MinimumLength =2,ErrorMessage="Sponsor description must be between 2 and 50 characters.")]
+        [Display(Name ="Sponsor Description")][StringLength(maximumLength:200,MinimumLength =2,ErrorMessage="Sponsor description must be between 2 and 200 characters.")]
         public string SponsorDescription { get; set; }
 
         [Required][Display(Name ="Sponsor Link")]
