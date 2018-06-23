@@ -572,6 +572,12 @@ namespace SmartCommuteEmmet.Controllers
             return View(nameof(ShowRecoveryCodes), model);
         }
 
+        [Authorize]
+        public IActionResult ManagementConsole()
+        {
+            return View();
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)

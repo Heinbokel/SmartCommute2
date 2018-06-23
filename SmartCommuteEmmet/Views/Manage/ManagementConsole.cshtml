@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "ManagementConsole";
+}
+<div class="genericSection">
+    <h1 class="aboutHeader">Management Console</h1>
+    <div class="aboutParagraph">
+        <input type="button" class="btn-main" value="Sponsors" onclick="location.href='@Url.Action("Index", "Sponsors")'" />
+        <input type="button" class="btn-main" value="Breakfasts" onclick="location.href='@Url.Action("Index", "Breakfasts")'" />
+        <input type="button" class="btn-main" value="Date Configs" onclick="location.href='@Url.Action("Index", "ConfigDates")'" />
+        <input type="button" class="btn-main" value="Documents" onclick="location.href='@Url.Action("Index", "Documents")'" />
+        <hr />
+        <input type="button" class="btn-main" value="Commute Types" onclick="location.href='@Url.Action("Index", "CommuteTypes")'" />
+        <input type="button" class="btn-main" value="Businesses" onclick="location.href='@Url.Action("Index", "Businesses")'" />
+        <input type="button" class="btn-main" value="Start Points" onclick="location.href='@Url.Action("Index", "StartPoints")'" />
+        <input type="button" class="btn-main" value="End Points" onclick="location.href='@Url.Action("Index", "EndPoints")'" />
+        <input type="button" class="btn-main" value="Rewards" onclick="location.href='@Url.Action("Index", "Rewards")'" />
+    </div>
+</div>
