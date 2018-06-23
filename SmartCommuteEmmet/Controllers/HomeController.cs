@@ -36,6 +36,9 @@ namespace SmartCommuteEmmet.Controllers
         public IActionResult About()
         {
             var sponsorModel = new AboutViewModel();
+            sponsorModel.Breakfasts = new List<Breakfast>();
+            sponsorModel.Sponsors = new List<Sponsor>();
+
             var Sponsors = _context.Sponsor.ToList();
             var Breakfasts = _context.Breakfast.ToList();
 
@@ -56,13 +59,19 @@ namespace SmartCommuteEmmet.Controllers
             {
                 var userViewModel = new Breakfast
                 {
-                    Id = break
+                    Id = breakfast.Id,
+                    BreakfastName = breakfast.BreakfastName,
+                    BreakfastDescription = breakfast.BreakfastDescription,
+                    BreakfastCity = breakfast.BreakfastCity,
+                    BreakfastLink = breakfast.BreakfastLink,
+                    BreakfastStreet = breakfast.BreakfastStreet,
+                    BreakfastZIP = breakfast.BreakfastZIP
                     
                 };
-                sponsorModel.Sponsors.Add(userViewModel);
+                sponsorModel.Breakfasts.Add(userViewModel);
             }
 
-            return View();
+            return View(sponsorModel);
         }
 
         public IActionResult Contact()

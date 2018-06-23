@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SmartCommuteEmmet.Models.HomeViewModels.AboutViewModel
+
+@{
     ViewData["Title"] = "About";
 }
 <div class="genericSection">
@@ -220,11 +222,10 @@
                     Free breakfasts abound for Smart Commuters Monday-Thursday at the following locations
                     (please note that times vary at each location):
                     <ul class="list">
-                        <li>Johan's of Petoskey and Harbor Springs</li>
-                        <li>Grain Train, Mitchell Street, Petoskey: 6:30 – 10 am</li>
-                        <li>Roast & Toast, Lake St. & Burns, Petoskey: 7 – 11 am</li>
-                        <li>Johan's Burger Express on (M 119)</li>
-                        <li>Crooked Tree Breadworks, M119, Petoskey: 8 - 10 am</li>
+                        @foreach(var item in Model.Breakfasts)
+                        {
+                            <li><a href="http://@item.BreakfastLink" target="_blank">@item.BreakfastName @item.BreakfastStreet - @item.BreakfastDescription</a></li>
+                        }
                     </ul><br>
                     *At breakfast locations you will need to submit your filled-out breakfast voucher.
                 </p>
