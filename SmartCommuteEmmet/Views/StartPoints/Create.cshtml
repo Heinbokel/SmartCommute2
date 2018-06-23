@@ -1,0 +1,45 @@
+﻿@model SmartCommuteEmmet.Models.StartPoint
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>StartPoint</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" class="genericForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StartPointName" class="control-label"></label>
+                <input asp-for="StartPointName" class="form-control" />
+                <span asp-validation-for="StartPointName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartPointDescription" class="control-label"></label>
+                <input asp-for="StartPointDescription" class="form-control" />
+                <span asp-validation-for="StartPointDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartPointLongitude" class="control-label"></label>
+                <input asp-for="StartPointLongitude" class="form-control" />
+                <span asp-validation-for="StartPointLongitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartPointLatitude" class="control-label"></label>
+                <input asp-for="StartPointLatitude" class="form-control" />
+                <span asp-validation-for="StartPointLatitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn-main" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

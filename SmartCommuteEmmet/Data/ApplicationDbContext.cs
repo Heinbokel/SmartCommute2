@@ -36,5 +36,11 @@ namespace SmartCommuteEmmet.Data
         public DbSet<SmartCommuteEmmet.Models.Breakfast> Breakfast { get; set; }
 
         public DbSet<SmartCommuteEmmet.Models.Document> Document { get; set; }
+
+        public DbSet<SmartCommuteEmmet.Models.StartPoint> StartPoint { get; set; }
+
+        public DbSet<SmartCommuteEmmet.Models.EndPoint> EndPoint { get; set; }
+
+        public DbSet<SmartCommuteEmmet.Models.Reward> Reward { get; set; }
     }
 }

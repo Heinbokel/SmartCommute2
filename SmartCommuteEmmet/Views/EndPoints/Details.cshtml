@@ -1,0 +1,48 @@
+﻿@model SmartCommuteEmmet.Models.EndPoint
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EndPoint</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EndPointName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndPointName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndPointDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndPointDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndPointLongitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndPointLongitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndPointLatitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndPointLatitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

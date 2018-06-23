@@ -6,60 +6,54 @@
 
 <h2>Businesses</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<input type="button" class="btn-main" value="Create New" onclick="location.href='@Url.Action("Create", "Businesses")'" />
+
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.BusinessName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BusinessDescription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BusinessStreet)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BusinessCity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BusinessZIP)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserId)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessStreet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessZIP)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessStreet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessCity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessZIP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessStreet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessZIP)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SmartCommuteEmmet.Models.Reward>
+
+@{
+    ViewData["Title"] = "Rewards";
+}
+
+<h2>Rewards</h2>
+
+<input type="button" class="btn-main" value="Create New" onclick="location.href='@Url.Action("Create", "Rewards")'" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RewardName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RewardDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequiredCommutes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequiredMiles)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RewardName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RewardDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequiredCommutes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequiredMiles)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

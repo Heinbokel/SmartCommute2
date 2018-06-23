@@ -8,7 +8,6 @@
     <h1>My Commute Log</h1>
     <p>@Model.Sum(c => c.CommuteDistance) Miles traveled over @Model.Count() commutes.</p>
 
-    @* Make this into a button *@
     <p>
         <input type="button" class="btn-main" value="Create Commute" onclick="location.href='@Url.Action("Create", "Commutes")'" />
     </p>

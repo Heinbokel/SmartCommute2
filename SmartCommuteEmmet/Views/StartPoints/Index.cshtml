@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SmartCommuteEmmet.Models.StartPoint>
+
+@{
+    ViewData["Title"] = "Start Points";
+}
+
+<h2>Start Points</h2>
+
+<input type="button" class="btn-main" value="Create New" onclick="location.href='@Url.Action("Create", "StartPoints")'" />
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartPointName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartPointDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartPointLongitude)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartPointLatitude)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartPointName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartPointDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartPointLongitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartPointLatitude)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
