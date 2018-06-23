@@ -105,6 +105,7 @@ namespace SmartCommuteEmmet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SponsorUploadError"] = "Please re-select your image if needed.";
             return View(sponsor);
         }
 
@@ -193,6 +194,7 @@ namespace SmartCommuteEmmet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SponsorUploadError"] = "Please re-select your image if needed.";
             return View(sponsor);
         }
 

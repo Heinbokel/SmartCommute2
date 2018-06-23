@@ -14,6 +14,7 @@
             <div class="form-group">
                 <label asp-for="UserPhoto"></label>
                 <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+                <span class="text-danger">@ViewData["UserPhotoError"]</span>
             </div>
             <div class="form-group">
                 <label asp-for="FirstName"></label>

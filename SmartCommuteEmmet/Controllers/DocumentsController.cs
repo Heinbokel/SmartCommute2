@@ -105,6 +105,7 @@ namespace SmartCommuteEmmet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["FileUploadError"] = "Please re-select your file.";
             return View(document);
         }
 
@@ -156,6 +157,7 @@ namespace SmartCommuteEmmet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["FileUploadError"] = "Please re-select your file.";
             return View(document);
         }
 
