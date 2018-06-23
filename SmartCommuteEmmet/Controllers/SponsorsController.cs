@@ -140,6 +140,43 @@ namespace SmartCommuteEmmet.Controllers
             {
                 try
                 {
+                    {
+                        var files = HttpContext.Request.Form.Files;
+
+                        foreach (var file in files)
+                        {
+                            if (file.Length > 0)
+                            {
+                                //Getting FileName
+                                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                                //Assigning Unique Filename (Guid)
+                                var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                                //Getting file Extension
+                                var FileExtension = Path.GetExtension(fileName);
+
+                                // concating  FileName + FileExtension
+                                var newFileName = myUniqueFileName + FileExtension;
+
+                                // Combines two strings into a path.
+                                fileName = Path.Combine(_environment.WebRootPath, "sponsorPhotos") + $@"\{newFileName}";
+
+                                // if you want to store path of folder in database
+                                sponsor.SponsorImagePath = "sponsorPhotos/" + newFileName;
+
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
+                            else
+                            {
+                                sponsor.SponsorImagePath = null;
+                            }
+                        }
+                    }
                     _context.Update(sponsor);
                     await _context.SaveChangesAsync();
                 }

@@ -9,8 +9,8 @@
 <h4>Sponsor</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data" class="genericFormWide">
+    <div class="col-md-12">
+        <form asp-action="Create" enctype="multipart/form-data" class="genericForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="SponsorImagePath"></label>
@@ -32,7 +32,7 @@
                 <span asp-validation-for="SponsorLink" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn-main" />
             </div>
         </form>
     </div>

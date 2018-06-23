@@ -9,10 +9,14 @@
 <h4>Sponsor</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-12">
+        <form asp-action="Edit" enctype="multipart/form-data" class="genericForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="SponsorImagePath"></label>
+                <input type="file" name="SponsorImagePath" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+            </div>
             <div class="form-group">
                 <label asp-for="SponsorName" class="control-label"></label>
                 <input asp-for="SponsorName" class="form-control" />
@@ -29,12 +33,7 @@
                 <span asp-validation-for="SponsorLink" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SponsorImagePath" class="control-label"></label>
-                <input asp-for="SponsorImagePath" class="form-control" />
-                <span asp-validation-for="SponsorImagePath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn-main" />
             </div>
         </form>
     </div>
