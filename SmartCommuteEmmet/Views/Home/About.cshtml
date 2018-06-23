@@ -330,26 +330,36 @@
                 Michigan College student Robert Heinbokel for developing the new Smart Commute Website.
             </p>
             <h3 class="aboutHeader">Rewards and Prizes provided by</h3>
-            <p class="aboutParagraph">
-                <a href="http://www.latitude45.com" target="_blank">Latitude 45 Bicycles and Fitness</a><br>
-                <a href="http://www.bearcuboutfitters.com" target="_blank">Bearcub Outfitters</a><br>
-                <a href="http://www.mcleanandeakin.com" target="_blank">McLean and Eakin Booksellers</a><br>
-                <a href="https://graintrain.coop" target="_blank">Grain Train Natural Foods Markets</a><br>
-                <a href="https://www.breadworks.com" target="_blank">Crooked Tree Breadworks</a><br>
-                <a href="http://yogaroots.com" target="_blank">Yoga Roots</a>
-            </p>
+            <div class="aboutParagraph">
+                <ul>
+                    @foreach (var item in Model.Sponsors)
+                    {
+                        <li><a href="http://@item.SponsorLink" target="_blank">@item.SponsorName</a></li>
+                    }
+                </ul>
+            </div>
             <h3 class="aboutHeader">Smart Commute Week Breakfasts provided by</h3>
-            <p class="aboutParagraph">
-                <a href="https://graintrain.coop" target="_blank">Grain Train Natural Foods Markets</a><br>
-                <a href="http://www.roastandtoast.com" target="_blank">Roast and Toast</a><br>
-                <a href="https://gtpie.com" target="_blank">Johan's Burger Express & Johan's of Petoskey and Harbor Springs</a><br>
-                <a href="https://www.breadworks.com" target="_blank">Crooked Tree Breadworks</a>
-            </p>
+            <div class="aboutParagraph">
+                <ul class="list">
+                    @foreach (var item in Model.Breakfasts)
+                    {
+                        <li><a href="http://@item.BreakfastLink" target="_blank">@item.BreakfastName</a></li>
+                    }
+                </ul>
+            </div>
             <h3 class="aboutHeader">Financial Support provided by</h3>
-            <p class="aboutParagraph">
-                <img src="~/images/health%20department.jpg" alt="Health Department of NorthWest Michigan." class="img-responsive"><br>
-                <a href="http://www.nwhealth.org" target="_blank">Health Department of NW Michigan</a><br>
-            </p>
+            <div class="aboutParagraph">
+                <ul class="list">
+                    @foreach (var item in Model.Sponsors.Where(c=>c.SponsorImagePath != null))
+                    {
+                        
+                    <li>
+                        <img src="~/@item.SponsorImagePath" class="img-responsive" />
+                        <a href="http://@item.SponsorLink" target="_blank">@item.SponsorName - @item.SponsorDescription</a>
+                    </li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
 </div>

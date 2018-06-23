@@ -16,7 +16,7 @@ namespace SmartCommuteEmmet.Models
         [Display(Name ="Sponsor Description")][StringLength(maximumLength:50,MinimumLength =2,ErrorMessage="Sponsor description must be between 2 and 50 characters.")]
         public string SponsorDescription { get; set; }
 
-        [Required][Display(Name ="Sponsor Link")][Url]
+        [Required][Display(Name ="Sponsor Link")]
         public string SponsorLink { get; set; }
 
         [Display(Name ="Sponsor Image")]
