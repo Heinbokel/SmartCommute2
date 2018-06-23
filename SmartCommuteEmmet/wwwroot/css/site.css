@@ -6,7 +6,7 @@
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    
+ 
 }
 
 .navbar{
@@ -81,6 +81,9 @@ a:hover{
     border-radius: 0px 0px 10px 10px;
     padding: 10px;
     margin-bottom:10px;
+    align-content:center;
+    align-items:center;
+    text-align:center;
 }
 
 .text-danger{
@@ -147,6 +150,7 @@ a:hover{
 
 .img-responsive{
     border-radius:10px;
+    margin:0 auto;
 }
 
 /*Profile*/

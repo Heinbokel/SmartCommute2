@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +16,12 @@ namespace SmartCommuteEmmet.Controllers
     public class SponsorsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _environment;
 
-        public SponsorsController(ApplicationDbContext context)
+        public SponsorsController(ApplicationDbContext context, IHostingEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Sponsors
@@ -55,9 +60,47 @@ namespace SmartCommuteEmmet.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SponsorName,SponsorDescription,SponsorLink,SponsorImagePath")] Sponsor sponsor)
-        {
+        {//TODO: When an error occurs, the image upload is reset. Ensure image in upload slot remains the same.
             if (ModelState.IsValid)
             {
+                {
+                    var files = HttpContext.Request.Form.Files;
+
+                    foreach (var file in files)
+                    {
+                        if (file.Length > 0)
+                        {
+                            //Getting FileName
+                            var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            var newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, "sponsorPhotos") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            sponsor.SponsorImagePath = "sponsorPhotos/" + newFileName;
+
+                            using (FileStream fs = System.IO.File.Create(fileName))
+                            {
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
+                        }
+                        else
+                        {
+                            sponsor.SponsorImagePath = null;
+                        }
+                    }
+                }
+
                 _context.Add(sponsor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

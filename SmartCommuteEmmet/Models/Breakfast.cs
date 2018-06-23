@@ -14,7 +14,7 @@ namespace SmartCommuteEmmet.Models
         [Required][Display(Name ="Breakfast Provider Name")]
         public string BreakfastName { get; set; }
 
-        [Display(Name ="Breakfast Provider Description")]
+        [Display(Name ="Breakfast Provider Description/Time")]
         public string BreakfastDescription { get; set; }
 
         [Required][Display(Name ="Breakfast Provider Street")]
