@@ -16,7 +16,7 @@ namespace SmartCommuteEmmet.Models
         [Required][Display(Name ="Document Description")][StringLength(maximumLength:50, MinimumLength =2, ErrorMessage ="Document description must be between 2 and 50 characters.")]
         public string DocumentDescription { get; set; }
 
-        [Required][Display(Name ="Document Path or URL")]
+        [Display(Name ="Document Path or URL")]
         public string DocumentFilePath { get; set; }
     }
 }

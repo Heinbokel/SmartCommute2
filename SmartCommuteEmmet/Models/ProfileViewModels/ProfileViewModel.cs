@@ -18,5 +18,7 @@ namespace SmartCommuteEmmet.Models.ProfileViewModels
         public string BusinessName { get; set; }
 
         public List<Commute> Commutes { get; set; }
+
+        public List<Document> Documents { get; set; }
     }
 }

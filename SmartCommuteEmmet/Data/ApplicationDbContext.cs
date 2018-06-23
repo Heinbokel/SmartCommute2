@@ -34,5 +34,7 @@ namespace SmartCommuteEmmet.Data
         public DbSet<SmartCommuteEmmet.Models.Sponsor> Sponsor { get; set; }
 
         public DbSet<SmartCommuteEmmet.Models.Breakfast> Breakfast { get; set; }
+
+        public DbSet<SmartCommuteEmmet.Models.Document> Document { get; set; }
     }
 }
