@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<SmartCommuteEmmet.Models.ConfigDate>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Configuration Dates";
 }
 
 <h2>Configuration Dates</h2>
+<hr />
 <p>Set the start date, end date, and registration deadline date here.</p>
 <p>These dates are the dates that will appear in the Home and About pages. Commute entry is only available between the start and end dates.</p>
-
+<hr />
 <table class="table">
     <thead>
         <tr>
@@ -36,9 +37,7 @@
                 @Html.DisplayFor(modelItem => item.RegisterByDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <input type="button" class="btn-main" value="Edit" onclick="location.href='@Url.Action("Edit", "ConfigDates",new { id = item.Id })'" />
             </td>
         </tr>
 }

@@ -83,7 +83,12 @@
                             <div class="aboutParagraph">
                                 @foreach (var item in Model.Documents)
                                 {
-                                    <h3><a href="~/@item.DocumentFilePath" download><img src="~/images/downloadIcon.png" class="thumbnailNavBar" />@item.DocumentName</a></h3>
+                                    <h3>
+                                        <a href="~/@item.DocumentFilePath" download>
+                                        <img src="~/images/downloadIcon.png" class="thumbnailNavBar" />
+                                        @item.DocumentName
+                                        </a>
+                                    </h3>
                                     <p>@item.DocumentDescription</p>
                                     <hr />
 
