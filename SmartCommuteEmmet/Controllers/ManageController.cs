@@ -572,7 +572,7 @@ namespace SmartCommuteEmmet.Controllers
             return View(nameof(ShowRecoveryCodes), model);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult ManagementConsole()
         {
             return View();

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,7 @@ namespace SmartCommuteEmmet.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly IHostingEnvironment _environment;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -38,7 +40,8 @@ namespace SmartCommuteEmmet.Controllers
             IEmailSender emailSender,
             ILogger<AccountController> logger,
             ApplicationDbContext context,
-            IHostingEnvironment environment
+            IHostingEnvironment environment,
+            RoleManager<IdentityRole> roleManager
             )
         {
             _context = context;
@@ -47,6 +50,7 @@ namespace SmartCommuteEmmet.Controllers
             _emailSender = emailSender;
             _logger = logger;
             _environment = environment;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -296,6 +300,22 @@ namespace SmartCommuteEmmet.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
+
+                    //This will make any new registering users into admins.
+                    //if(!await _roleManager.RoleExistsAsync("Admin"))
+                    //{
+                    //    var role = new IdentityRole("Admin");
+                    //    var res = await _roleManager.CreateAsync(role);
+                    //    if (res.Succeeded)
+                    //    {
+                    //        await _userManager.AddToRoleAsync(user, "Admin");
+                    //        await _signInManager.SignInAsync(user, isPersistent: false);
+                    //        _logger.LogInformation("User created a new account with password.");
+                    //    }
+                    //}
+
+                    
+
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
