@@ -287,7 +287,7 @@ namespace SmartCommuteEmmet.Controllers
         {
             var model = new List<LeaderboardViewModel>();
             var Commutes = _context.Commute.ToList();
-            var Users = _context.Users.Include(c=>c.Business).ToList();
+            var Users = _context.Users.Include(c=>c.Business).Where(c=>c.Email != "Admin@smartcommuteemmet.org").ToList();
 
             foreach(var user in Users)
             {
