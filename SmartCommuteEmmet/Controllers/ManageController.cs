@@ -589,17 +589,10 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async void MakeAdmin(ApplicationUser user)
+        public IActionResult ManageCommutes()
         {
-            if(!await _roleManager.RoleExistsAsync("Admin"))
-            {
-                var role = new IdentityRole("Admin");
-                var res = await _roleManager.CreateAsync(role);
-                if (res.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, "Admin");
-                }
-            }
+            var model = _context.Commute.Include(c => c.User.Business).Include(c=>c.User).Include(c=>c.CommuteType).Include(c=>c.StartPoint).Include(c=>c.EndPoint).ToList();
+            return View(model.ToList());
         }
 
         #region Helpers
