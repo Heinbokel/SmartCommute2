@@ -14,7 +14,7 @@ using SmartCommuteEmmet.Models;
 
 namespace SmartCommuteEmmet.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin")]
     public class SponsorsController : Controller
     {
         private readonly ApplicationDbContext _context;

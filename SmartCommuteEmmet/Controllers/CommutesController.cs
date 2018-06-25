@@ -287,7 +287,7 @@ namespace SmartCommuteEmmet.Controllers
         {
             var model = new List<LeaderboardViewModel>();
             var Commutes = _context.Commute.ToList();
-            var Users = _context.Users.ToList();
+            var Users = _context.Users.Include(c=>c.Business).ToList();
 
             foreach(var user in Users)
             {
@@ -300,7 +300,8 @@ namespace SmartCommuteEmmet.Controllers
                     BikeCommutes = Commutes.Where(c=> c.UserId == user.Id && c.CommuteTypeId == 1).Count(),
                     RunCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 3).Count(),
                     CarpoolCommutes = Commutes.Where(c => c.UserId == user.Id && c.CommuteTypeId == 2).Count(),
-                    TotalDistance = Commutes.Where(c => c.UserId == user.Id).Sum(c=> c.CommuteDistance)
+                    TotalDistance = Commutes.Where(c => c.UserId == user.Id).Sum(c=> c.CommuteDistance),
+                    UserBusiness = user.Business
                 };
                 model.Add(userViewModel);
             }

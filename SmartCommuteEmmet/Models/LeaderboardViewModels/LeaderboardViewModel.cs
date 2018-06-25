@@ -29,5 +29,8 @@ namespace SmartCommuteEmmet.Models.LeaderboardViewModels
 
         [Display(Name = "Carpools")]
         public int CarpoolCommutes { get; set; }
+
+        [Display(Name = "Business")]
+        public Business UserBusiness { get; internal set; }
     }
 }
