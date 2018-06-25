@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SmartCommuteEmmet.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<div class="genericSection">
+    <h2>Manage Users</h2>
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                @Html.DisplayNameFor(model => model.UserPhoto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserStreet)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserZIP)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateRegistered)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Business.BusinessName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <img src="~/@Html.DisplayFor(modelItem => item.UserPhoto)" class="thumbnailTiny" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserStreet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserZIP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRegistered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Business.BusinessName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

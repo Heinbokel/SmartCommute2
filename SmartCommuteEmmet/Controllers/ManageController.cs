@@ -33,6 +33,7 @@ namespace SmartCommuteEmmet.Controllers
         private readonly UrlEncoder _urlEncoder;
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment _environment;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
@@ -44,7 +45,8 @@ namespace SmartCommuteEmmet.Controllers
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder,
           ApplicationDbContext context,
-          IHostingEnvironment environment)
+          IHostingEnvironment environment,
+          RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -53,6 +55,7 @@ namespace SmartCommuteEmmet.Controllers
             _urlEncoder = urlEncoder;
             _context = context;
             _environment = environment;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -576,6 +579,27 @@ namespace SmartCommuteEmmet.Controllers
         public IActionResult ManagementConsole()
         {
             return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult ManageUsers()
+        {
+            var model = _context.Users.Include(c=>c.Business).ToList();
+            return View(model.ToList());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async void MakeAdmin(ApplicationUser user)
+        {
+            if(!await _roleManager.RoleExistsAsync("Admin"))
+            {
+                var role = new IdentityRole("Admin");
+                var res = await _roleManager.CreateAsync(role);
+                if (res.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                }
+            }
         }
 
         #region Helpers
