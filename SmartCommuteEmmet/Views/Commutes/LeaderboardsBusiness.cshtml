@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SmartCommuteEmmet.Models.LeaderboardViewModels.LeaderboardsBusinessViewModel>
+
+@{
+    ViewData["Title"] = "Business Leaderboards";
+}
+
+<div class="tableContainerWide">
+    <h1>Business Leaderboards</h1>
+    <p>@Model.Count() Businesses have traveled @Model.Sum(c => c.TotalDistance) miles over @Model.Sum(c => c.TotalCommutes) commutes.</p>
+    <hr />
+    <table class="table" id="theTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BusinessName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TeamSize)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalCommutes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalDistance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalBikes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalRuns)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalCarpools)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <a asp-controller="Profiles" asp-action="ProfileBusiness" asp-route-id="@item.BusinessId"><div class="leaderboardNameDiv">@Html.DisplayFor(modelItem => item.BusinessName)</div></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCommutes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalDistance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalBikes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalRuns)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCarpools)
+                </td>
+                @*<td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </td>*@
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -55,6 +55,8 @@
 </html>
 <script>
     $(document).ready(function () {
-        $('#theTable').DataTable();
+        $('#theTable').DataTable({
+            "order": [[2, "desc"]]
+        });
     });
 </script>

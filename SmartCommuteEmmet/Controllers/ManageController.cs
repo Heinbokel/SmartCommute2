@@ -595,6 +595,14 @@ namespace SmartCommuteEmmet.Controllers
             return View(model.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult ManageCommutesBusiness()
+        {
+            var Commutes = _context.Commute.ToList();
+
+            return View();
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)

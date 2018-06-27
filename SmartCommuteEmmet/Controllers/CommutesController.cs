@@ -306,7 +306,32 @@ namespace SmartCommuteEmmet.Controllers
                 model.Add(userViewModel);
             }
 
-            return View(model.ToList().OrderByDescending(c=> c.TotalCommutes));
+            return View(model.ToList());
+        }
+
+        public IActionResult LeaderboardsBusiness()
+        {
+            var model = new List<LeaderboardsBusinessViewModel>();
+            var Commutes = _context.Commute.Include(c => c.User).ToList();
+            var Businesses = _context.Business.ToList();
+            var Users = _context.Users.Where(c => c.Email != "admin@smartcommuteemmet.org").ToList();
+
+            foreach (var business in Businesses)
+            {
+                var userViewModel = new LeaderboardsBusinessViewModel
+                {
+                    BusinessId = business.Id, BusinessName = business.BusinessName, TeamSize = Users.Where(c =>  c.BusinessId == business.Id).Count(),
+                    TotalCommutes = Commutes.Where(c=> c.User.BusinessId == business.Id).Count(),
+                    TotalDistance = Commutes.Where(c => c.User.BusinessId == business.Id).Sum(c=> c.CommuteDistance),
+                    TotalBikes = Commutes.Where(c => c.User.BusinessId == business.Id && c.CommuteTypeId == 1).Count(),
+                    TotalCarpools = Commutes.Where(c => c.User.BusinessId == business.Id && c.CommuteTypeId == 2).Count(),
+                    TotalRuns = Commutes.Where(c => c.User.BusinessId == business.Id && c.CommuteTypeId == 3).Count(),
+
+                };
+                model.Add(userViewModel);
+            }
+
+            return View(model.ToList());
         }
 
         // GET: Commutes/Delete/5

@@ -15,7 +15,16 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Contact">Rewards</a></li>
-                <li><a asp-area="" asp-controller="Commutes" asp-action="LeaderBoards">Leaderboards</a></li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Leaderboards
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Commutes" asp-action="LeaderBoards">Leaderboards</a>
+                        <a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Commutes" asp-action="LeaderBoardsBusiness">Business Leaderboards</a>
+                    </div>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Commutes
@@ -30,7 +39,7 @@
                     {
                         <a asp-area="" asp-controller="Manage" asp-action="ManagementConsole" title="Manage"><span class="emphasizeOrange">Management Console</span></a>
                     }
-               </li>
+                </li>
             </ul>
             @await Html.PartialAsync("_LoginPartial")
         </div>
