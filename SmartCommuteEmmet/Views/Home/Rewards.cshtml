@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "Rewards";
+}
+@inject SignInManager<ApplicationUser> SignInManager
+<div class="genericSection">
+    <h1>The Smart Commute Rewards Program</h1>
+    <hr />
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="aboutHeader">Why?</h2>
+            <p class="aboutParagraph">
+                Our thought was that If commuting smart for a week is good, then a month would
+                be great, and a whole season even better. The best way to get there was to
+                incentivize participation and that brings us to the rewards program.
+            </p>
+            <h2 class="aboutHeader">Which Trips Count?</h2>
+            <p class="aboutParagraph">
+                The goal of this program is to replace automobile travel with more sustainable and healthier alternatives.
+                Any local trip that would or could be made by car can be counted. Examples include trips to work, school,
+                the store, or running errands. Both the trip to your destination and the trip home count. Each day a
+                participant can record a maximum of 2 trips or 40 miles.
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <h2 class="aboutHeader">How to Participate?</h2>
+            <p class="aboutParagraph">
+                Commute smart, log your mileage and trips, and earn rewards. It’s as simple as that!
+                Continue reading for basic rules about which trips count and how much you can earn in a day.
+            </p>
+            <h2 class="aboutHeader">Methods of Travel</h2>
+            <p class="aboutParagraph">
+                The most common ways to participate are walking, running, and cycling. Other forms of human powered
+                travel are also encouraged. If your commute is to far to reasonable complete on foot or by bike
+                check out one of our <a href="about.php#smartCommuteWeek" style="color:orange;">Smart Commute Lots</a> to help shorten
+                the distance. Carpooling counts as well and requires at least three occupants in the vehicle.
+            </p>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="aboutHeader">When do I Earn Rewards?</h2>
+            <p class="aboutParagraph">
+                Rewards are based on mileage or number of commutes (Trips). You will be able to reach reward levels by
+                completing the required number of either. By doing this the program does not favor those with longer
+                commutes who can easily generate miles, or those with very short commutes who can easily participate every day.<br><br>
+
+                After achieving each level you will receive a gift certificate or discount to a participating business
+                and entries into the Grand Prize Drawing. You will receive a confirmation email from rewards@smartcommuteemmet.org
+                and can pick up your rewards at the Top Of Michigan Trails Council Office on M-119. The grand prize drawing will
+                take place at the Smart Commute Celebration in October.
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <h2 class="aboutHeader">Rewards</h2>
+            <div class="aboutParagraph">
+                <div class='table-responsive' id="rewardTable">
+                    <table class="table">
+                        <tr>
+                            <th>Distance</th>
+                            <th>Rewards</th>
+                        </tr>
+                        <tr>
+                            <td>10 Miles or 2 Trips</td>
+                            <td>Grand Prize Drawing Entry</td>
+                        </tr>
+                        <tr>
+                            <td>100 Miles or 25 Trips</td>
+                            <td>Reward + 1 Additional Drawing Entry</td>
+                        </tr>
+                        <tr>
+                            <td>250 Miles or 65 Trips</td>
+                            <td>Reward + 2 Additional Drawing Entries</td>
+                        </tr>
+                        <tr>
+                            <td>500 Miles or 125 Trips</td>
+                            <td>Reward + 4 Additional Drawing Entries</td>
+                        </tr>
+                    </table>
+                    <h3>Grand Prizes:</h3>
+                    <ul>
+                        <li>Latitude 45 $500 Gift Card </li>
+                        <li>Bearcub Outfitters $250 Gift Card</li>
+                        <li>McLean and Eakin $100 Gift Card</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h2>Thank you for participating.</h2>
+        <hr />
+        <p>We are happy to have you.<br />Log your commutes and make sure to check the leaderboards to see your progress.<br /> Enjoy the trails!</p>
+        <hr />
+    }
+    else
+    {
+        <h2>Ready to join the Smart Commute?<br></h2>
+        <h3>Log in or join the program now:</h3>
+        <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
+        <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
+    }
+
+
+</div>
