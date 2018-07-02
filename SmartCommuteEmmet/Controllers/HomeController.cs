@@ -83,7 +83,8 @@ namespace SmartCommuteEmmet.Controllers
 
         public IActionResult Rewards()
         {
-            return View();
+            var model = _context.Reward.ToList();
+            return View(model);
         }
 
         public IActionResult Error()

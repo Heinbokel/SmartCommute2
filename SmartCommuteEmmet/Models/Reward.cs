@@ -22,5 +22,8 @@ namespace SmartCommuteEmmet.Models
 
         [Required][Display(Name ="Miles Required")][Range(1,1000000,ErrorMessage ="Miles required must be greater than 0.")]
         public int RequiredMiles { get; set; }
+
+        [Display(Name ="Grand Prize?")]
+        public bool IsGrandPrize { get; set; }
     }
 }
