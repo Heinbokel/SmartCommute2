@@ -11,43 +11,48 @@
 <table class="table" id="theTable">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RewardName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RewardDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequiredCommutes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequiredMiles)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RewardName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RewardDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequiredCommutes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequiredMiles)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsGrandPrize)
+                </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RewardName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RewardDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RequiredCommutes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RequiredMiles)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RewardName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RewardDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequiredCommutes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequiredMiles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsGrandPrize)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

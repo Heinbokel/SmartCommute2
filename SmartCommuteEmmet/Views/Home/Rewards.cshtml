@@ -1,4 +1,4 @@
-﻿@model SmartCommuteEmmet.Models.Reward
+﻿@model IEnumerable<SmartCommuteEmmet.Models.Reward> 
 
 @{
     ViewData["Title"] = "Rewards";
@@ -42,7 +42,7 @@
     </div>
     <hr />
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <h2 class="aboutHeader">When do I Earn Rewards?</h2>
             <p class="aboutParagraph">
                 Rewards are based on mileage or number of commutes (Trips). You will be able to reach reward levels by
@@ -55,38 +55,49 @@
                 take place at the Smart Commute Celebration in October.
             </p>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <h2 class="aboutHeader">Rewards</h2>
             <div class="aboutParagraph">
-                <div class='table-responsive' id="rewardTable">
+                <div class='table-responsive'>
                     <table class="table">
-                        <tr>
-                            <th>Distance</th>
-                            <th>Rewards</th>
-                        </tr>
-                        <tr>
-                            <td>10 Miles or 2 Trips</td>
-                            <td>Grand Prize Drawing Entry</td>
-                        </tr>
-                        <tr>
-                            <td>100 Miles or 25 Trips</td>
-                            <td>Reward + 1 Additional Drawing Entry</td>
-                        </tr>
-                        <tr>
-                            <td>250 Miles or 65 Trips</td>
-                            <td>Reward + 2 Additional Drawing Entries</td>
-                        </tr>
-                        <tr>
-                            <td>500 Miles or 125 Trips</td>
-                            <td>Reward + 4 Additional Drawing Entries</td>
-                        </tr>
-                    </table>
-                    <h3>Grand Prizes:</h3>
-                    <ul>
-                        <li>Latitude 45 $500 Gift Card </li>
-                        <li>Bearcub Outfitters $250 Gift Card</li>
-                        <li>McLean and Eakin $100 Gift Card</li>
-                    </ul>
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RewardName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RewardDescription)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RequiredCommutes)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RequiredMiles)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                                {
+                                <tr>
+                            <td>
+                                <strong>@Html.DisplayFor(modelItem => item.RewardName)</strong>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RewardDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequiredCommutes)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequiredMiles)
+                            </td>
+                            </tr>
+                            }
+                            </tbody>
+</table>
+                    
+                    
                 </div>
             </div>
         </div>
@@ -101,8 +112,10 @@
     }
     else
     {
-        <h2>Ready to join the Smart Commute?<br></h2>
+        <h2>Ready to join the Smart Commute?</h2>
+        <br>
         <h3>Log in or join the program now:</h3>
+        <br />
         <input type="button" class="btn-main" value="Login" onclick="location.href='@Url.Action("Login", "Account")'" />
         <input type="button" class="btn-main" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
     }

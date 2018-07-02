@@ -203,6 +203,11 @@ a:hover{
     background-color:darkorange;
     color:white;
 }
+
+th{
+    text-align:center;
+}
+
 table{
     background-color:darkcyan;
     color:white;
