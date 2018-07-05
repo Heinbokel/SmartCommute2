@@ -590,9 +590,21 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult ManageCommutes()
+        public IActionResult ManageCommutes(DateTime? startDate, DateTime? endDate)
         {
-            var model = _context.Commute.Include(c => c.User.Business).Include(c=>c.User).Include(c=>c.CommuteType).Include(c=>c.StartPoint).Include(c=>c.EndPoint).ToList();
+            if(startDate == null)
+            {
+                startDate = new DateTime();
+            }
+            if(endDate == null)
+            {
+                endDate = DateTime.Now;
+            }
+
+            ViewData["StartDate"] = startDate.Value.ToShortDateString();
+            ViewData["EndDate"] = endDate.Value.ToShortDateString();
+
+            var model = _context.Commute.Include(c => c.User.Business).Include(c=>c.User).Include(c=>c.CommuteType).Include(c=>c.StartPoint).Include(c=>c.EndPoint).Where(c=>c.CommuteDate >= startDate && c.CommuteDate <= endDate).ToList();
             return View(model.ToList());
         }
 

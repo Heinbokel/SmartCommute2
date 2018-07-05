@@ -208,7 +208,7 @@ namespace SmartCommuteEmmet.Controllers
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
 
             var commute = await _context.Commute.SingleOrDefaultAsync(m => m.Id == id);
-            if (commute == null || commute.UserId != CurrentUser.Id)
+            if (commute == null || (commute.UserId != CurrentUser.Id && !User.IsInRole("Admin")))
             {
                 return NotFound();
             }
@@ -351,7 +351,7 @@ namespace SmartCommuteEmmet.Controllers
                 .Include(c => c.StartPoint)
                 .Include(c => c.User)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (commute == null || commute.UserId != CurrentUser.Id)
+            if (commute == null || (commute.UserId != CurrentUser.Id && !User.IsInRole("Admin")))
             {
                 return NotFound();
             }
