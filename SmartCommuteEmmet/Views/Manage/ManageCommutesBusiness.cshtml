@@ -56,7 +56,7 @@
             {
                 <tr>
                     <td>
-                        <a asp-controller="Businesses" asp-action="Details" asp-route-id="@item.BusinessId"><div class="leaderboardNameDiv">@Html.DisplayFor(modelItem => item.BusinessName)</div></a>
+                        <a asp-controller="Profiles" asp-action="BusinessProfile" asp-route-id="@item.BusinessId"><div class="leaderboardNameDiv">@Html.DisplayFor(modelItem => item.BusinessName)</div></a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TeamSize)

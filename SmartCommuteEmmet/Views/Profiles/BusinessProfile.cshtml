@@ -10,10 +10,12 @@
             <h1 class="aboutHeader">@Model.BusinessName</h1>
             <div class="aboutParagraph">
                 <h3 class="profileStats">@Model.Commutes.Sum(c => c.CommuteDistance) Miles traveled over @Model.Commutes.Count commutes by @Model.Users.Count() Smart Commuters.</h3>
+                <br />
                 <p class="profileBio">
                     @Model.BusinessDescription
-                    <br />
-                    @Model.BusinessStreet @Model.BusinessCity @Model.BusinessZIP
+                    <br /><br />
+                    @Model.BusinessStreet @Model.BusinessCity @Model.BusinessZIP<br />
+                    <a href="http://@Model.BusinessLink">@Model.BusinessLink</a>
                 </p>
 
             </div>

@@ -45,6 +45,7 @@ namespace SmartCommuteEmmet.Controllers
                 FirstName = user.FirstName, LastName = user.LastName, BusinessName = business.Select(c => c.BusinessName).Single(), DateRegistered = user.DateRegistered, UserBio = user.UserBio, UserPhoto = user.UserPhoto,
                 Commutes = _context.Commute.Where(c => c.UserId == user.Id).ToList(),
                 UserId = user.Id,
+                BusinessId = business.Select(c=>c.Id).Single(),
                 Documents = _context.Document.ToList(),
                 Rewards = _context.Reward.Where(c => c.RequiredMiles <= _context.Commute.Where(w => w.UserId == user.Id).Sum(s => s.CommuteDistance)).ToList()
         };
@@ -78,6 +79,7 @@ namespace SmartCommuteEmmet.Controllers
                 BusinessDescription = business.BusinessDescription,
                 BusinessStreet = business.BusinessStreet,
                 BusinessZIP = business.BusinessZIP,
+                BusinessLink = business.BusinessLink,
                 Commutes = commutes,
                 Users = users
             };

@@ -16,7 +16,7 @@
             <h1 class="aboutHeader">@Model.FirstName @Model.LastName</h1>
             <div class="aboutParagraph">
                 <h3 class="profileStats">@Model.Commutes.Sum(c => c.CommuteDistance) Miles traveled over @Model.Commutes.Count commutes.</h3>
-                <p class="profileMemberSince">Smart Commuter with @Model.BusinessName since @Model.DateRegistered.Year</p>
+                <p class="profileMemberSince">Smart Commuter with <a asp-action="BusinessProfile" asp-controller="Profiles" asp-route-id="@Model.BusinessId">@Model.BusinessName</a> since @Model.DateRegistered.Year</p>
                 <hr />
                 <p class="profileBio">@Model.UserBio</p>
             </div>

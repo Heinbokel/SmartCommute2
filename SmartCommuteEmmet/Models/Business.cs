@@ -31,5 +31,9 @@ namespace SmartCommuteEmmet.Models
         [RegularExpression(@"^(\d{5})$", ErrorMessage = "ZIP must be 5 digits.")]
         public string BusinessZIP { get; set; }
 
+        [Display(Name ="Business Link")]
+        [StringLength(maximumLength:500, MinimumLength = 3, ErrorMessage ="Link must be a URL of at least 3 characters. E.g. www.Latitude45.com")]
+        public string BusinessLink { get; set; }
+
     }
 }

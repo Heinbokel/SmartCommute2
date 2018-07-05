@@ -56,7 +56,7 @@ namespace SmartCommuteEmmet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BusinessName,BusinessDescription,BusinessStreet,BusinessCity,BusinessZIP")] Business business)
+        public async Task<IActionResult> Create([Bind("Id,BusinessName,BusinessDescription,BusinessStreet,BusinessCity,BusinessZIP,BusinessLink")] Business business)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace SmartCommuteEmmet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BusinessName,BusinessDescription,BusinessStreet,BusinessCity,BusinessZIP")] Business business)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BusinessName,BusinessDescription,BusinessStreet,BusinessCity,BusinessZIP,BusinessLink")] Business business)
         {
             if (id != business.Id)
             {

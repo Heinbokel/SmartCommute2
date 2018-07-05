@@ -24,6 +24,9 @@ namespace SmartCommuteEmmet.Models.ProfileViewModels
         [Display(Name = "ZIP")]
         public string BusinessZIP { get; set; }
 
+        [Display(Name ="Link")]
+        public string BusinessLink { get; set; }
+
         public List<ApplicationUser> Users { get; set; }
         public List<Commute> Commutes { get; set; }
     }
