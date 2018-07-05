@@ -39,7 +39,7 @@
             {
             <tr>
                 <td>
-                    <a asp-controller="Profiles" asp-action="ProfileBusiness" asp-route-id="@item.BusinessId"><div class="leaderboardNameDiv">@Html.DisplayFor(modelItem => item.BusinessName)</div></a>
+                    <a asp-controller="Profiles" asp-action="BusinessProfile" asp-route-id="@item.BusinessId"><div class="leaderboardNameDiv">@Html.DisplayFor(modelItem => item.BusinessName)</div></a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TeamSize)
@@ -59,11 +59,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TotalCarpools)
                 </td>
-                @*<td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>*@
             </tr>
             }
         </tbody>

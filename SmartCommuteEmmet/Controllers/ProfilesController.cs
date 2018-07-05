@@ -28,7 +28,7 @@ namespace SmartCommuteEmmet.Controllers
             return View();
         }
 
-        // GET: Profiles/Details/5
+        // GET: Profiles/Profile/5
         public async Task<ActionResult> Profile(string id)
         {
             //var user = await _userManager.GetUserAsync(User);
@@ -60,6 +60,28 @@ namespace SmartCommuteEmmet.Controllers
                     }
                 };
             }
+
+            return View(model);
+        }
+
+        // GET: Profiles/Profile/5
+        public IActionResult BusinessProfile(int id)
+        {
+            var business = _context.Business.Find(id);
+            var users = _context.Users.Where(c => c.BusinessId == id).ToList();
+            var commutes = _context.Commute.Where(c => c.User.BusinessId == id).ToList();
+
+            var model = new BusinessProfileViewModel
+            {
+                BusinessName = business.BusinessName,
+                BusinessCity = business.BusinessCity,
+                BusinessDescription = business.BusinessDescription,
+                BusinessStreet = business.BusinessStreet,
+                BusinessZIP = business.BusinessZIP,
+                Commutes = commutes,
+                Users = users
+            };
+            
 
             return View(model);
         }

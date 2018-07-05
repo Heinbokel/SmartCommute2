@@ -13,17 +13,14 @@ namespace SmartCommuteEmmet.Models
 
         [Required][Display(Name ="Business Name")]
         [StringLength(maximumLength: 100, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 100 characters.")]
-
         public string BusinessName { get; set; }
 
         [Display(Name ="Business Description")]
         [StringLength(maximumLength: 100, MinimumLength = 2, ErrorMessage = "Description must be between 2 and 100 characters.")]
-
         public string BusinessDescription { get; set; }
 
         [Display(Name = "Business Street Address")]
         [StringLength(maximumLength: 100, MinimumLength = 2, ErrorMessage = "Street must be between 2 and 100 characters.")]
-
         public string BusinessStreet { get; set; }
 
         [Display(Name = "Business City")]
