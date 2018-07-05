@@ -51,58 +51,36 @@
                                         Total Commutes: @totalCommutes
                                     </p>
 
-                                    @if (totalMiles < 10 && totalCommutes < 2)
-            {
-                        <p>You currently do not have any rewards. Commute at least 10 miles or 2 trips to earn your first!</p>
-}
-else if ((totalMiles >= 10 && totalMiles < 100))
-{
-                        <p>Your current rewards are: <br><span class='emphasizeOrange'> 1 Grand Prize Drawing Entry</span> <br><br> Commute at least 100 miles or 25 trips to earn your next reward!</p>
-}
-else if ((totalMiles >= 100 && totalMiles < 250))
-{
-                        <p>Your current rewards are: <br><span class='emphasizeOrange'> 3 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card </span><br><br> Commute at least 250 miles or 65 trips to earn your next reward!</p>
-}
-else if (totalMiles >= 250 && totalMiles < 500)
-{
-                        <p>
-                            Your current rewards are: <br><span class='emphasizeOrange'> 5 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card <br> $10 Grain Train or Crooked Tree Breadworks Gift Card </span>
-                            <br><br> Commute at least 500 miles or 125 trips to earn your next reward!
-                        </p>
-}
-else if (totalMiles >= 500)
-{
-                        <p>
-                            Your current rewards are: <br><span class='emphasizeOrange'>
-                                9 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card <br> $10 Grain Train or Crooked Tree Breadworks Gift Card
-                                <br> Complimentary Yoga Class at Yoga Roots
-                            </span><br><br> You have achieved the highest possible rewards!
-                        </p>
-}
+                                    @foreach (var item in Model.Rewards)
+                                    {
+                                        <h3 class="emphasizeOrange">@item.RewardName</h3>
+                                        <p>@item.RewardDescription</p>
+                                        <hr />
+                                    }
                                     <p>Remember you can pick up your rewards at the Top Of Michigan Trails Council Office on M-119.<br /> The Grand Prize drawing will take place at the Smart Commute Celebration in October.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="documents" class="collapse">
-                                <h2 class="aboutHeader">Documents & Vouchers</h2>
-                                <div class="aboutParagraph">
-                                    @foreach (var item in Model.Documents)
-            {
-                        <h3>
-                            <a href="~/@item.DocumentFilePath" download>
-                                <img src="~/images/downloadIcon.png" class="thumbnailNavBar" />
-                                @item.DocumentName
-                            </a>
-                        </h3>
-                        <p>@item.DocumentDescription</p>
-                        <hr />
+                                    <div id="documents" class="collapse">
+                                        <h2 class="aboutHeader">Documents & Vouchers</h2>
+                                        <div class="aboutParagraph">
+                                            @foreach (var item in Model.Documents)
+                                            {
+                                                <h3>
+                                                    <a href="~/@item.DocumentFilePath" download>
+                                                        <img src="~/images/downloadIcon.png" class="thumbnailNavBar" />
+                                                        @item.DocumentName
+                                                    </a>
+                                                </h3>
+                                                <p>@item.DocumentDescription</p>
+                                                <hr />
 
-}
+                                            }
+                                        </div>
+                                    </div>
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                                        <button type="submit" class="btn-main">Log out</button>
+                                    </form>
                                 </div>
-                            </div>
-                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
-                                <button type="submit" class="btn-main">Log out</button>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

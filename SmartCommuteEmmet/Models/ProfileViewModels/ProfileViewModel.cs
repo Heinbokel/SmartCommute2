@@ -20,5 +20,7 @@ namespace SmartCommuteEmmet.Models.ProfileViewModels
         public List<Commute> Commutes { get; set; }
 
         public List<Document> Documents { get; set; }
+
+        public List<Reward> Rewards { get; set; }
     }
 }

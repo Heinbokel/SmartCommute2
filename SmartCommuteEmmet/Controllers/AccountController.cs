@@ -302,7 +302,7 @@ namespace SmartCommuteEmmet.Controllers
                     _logger.LogInformation("User created a new account with password.");
 
                     //This will make any new registering users into admins.
-                    //if(!await _roleManager.RoleExistsAsync("Admin"))
+                    //if (!await _roleManager.RoleExistsAsync("Admin"))
                     //{
                     //    var role = new IdentityRole("Admin");
                     //    var res = await _roleManager.CreateAsync(role);
@@ -314,7 +314,7 @@ namespace SmartCommuteEmmet.Controllers
                     //    }
                     //}
 
-                    
+
 
                     return RedirectToLocal(returnUrl);
                 }

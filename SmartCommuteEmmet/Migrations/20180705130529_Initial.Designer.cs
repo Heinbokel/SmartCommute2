@@ -11,8 +11,8 @@ using System;
 namespace SmartCommuteEmmet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180705000417_azuremigration")]
-    partial class azuremigration
+    [Migration("20180705130529_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

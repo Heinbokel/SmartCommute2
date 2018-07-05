@@ -39,15 +39,28 @@ namespace SmartCommuteEmmet.Controllers
 
             var user = await _context.Users.FindAsync(id);
             var business = _context.Business.Where(c => c.Id == user.BusinessId);
-            
+
             var model = new ProfileViewModel
             {
-                FirstName = user.FirstName, LastName = user.LastName, BusinessName = business.Select(c=>c.BusinessName).Single() , DateRegistered = user.DateRegistered, UserBio = user.UserBio, UserPhoto = user.UserPhoto,
+                FirstName = user.FirstName, LastName = user.LastName, BusinessName = business.Select(c => c.BusinessName).Single(), DateRegistered = user.DateRegistered, UserBio = user.UserBio, UserPhoto = user.UserPhoto,
                 Commutes = _context.Commute.Where(c => c.UserId == user.Id).ToList(),
-                UserId = user.Id
-            };
+                UserId = user.Id,
+                Documents = _context.Document.ToList(),
+                Rewards = _context.Reward.Where(c => c.RequiredMiles <= _context.Commute.Where(w => w.UserId == user.Id).Sum(s => s.CommuteDistance)).ToList()
+        };
+            if(model.Rewards.Count == 0)
+            {
+                model.Rewards = new List<Reward>
+                {
+                    new Reward
+                    {
+                        RewardName = "No Rewards",
+                        RewardDescription ="You have not earned any rewards yet. Keep commuting smart to earn some!",
+                        IsGrandPrize = false, RequiredCommutes = 1, RequiredMiles = 1
+                    }
+                };
+            }
 
-            model.Documents = _context.Document.ToList();
             return View(model);
         }
 

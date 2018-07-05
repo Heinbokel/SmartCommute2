@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-SmartCommuteEmmet-F5E22561-B079-451D-8589-1FEDF7D84E9E</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20180705130445_initialcreate.cs" />
+    <Compile Remove="Migrations\20180705130445_initialcreate.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
