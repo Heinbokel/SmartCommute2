@@ -42,5 +42,7 @@ namespace SmartCommuteEmmet.Data
         public DbSet<SmartCommuteEmmet.Models.EndPoint> EndPoint { get; set; }
 
         public DbSet<SmartCommuteEmmet.Models.Reward> Reward { get; set; }
+
+        public DbSet<SmartCommuteEmmet.Models.CarouselSponsorImage> CarouselSponsorImage { get; set; }
     }
 }

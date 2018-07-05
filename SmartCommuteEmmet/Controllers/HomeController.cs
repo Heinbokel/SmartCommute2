@@ -24,10 +24,11 @@ namespace SmartCommuteEmmet.Controllers
             var model = new HomeViewModel()
             {
                 TotalCommutes = _context.Commute.Count(),
-                TotalDistance = _context.Commute.Sum(c=>c.CommuteDistance),
-                GasSaved = (_context.Commute.Sum(c=>c.CommuteDistance)/23),
-                CarbonReduced = ((_context.Commute.Sum(c => c.CommuteDistance) / 23)*20),
-                ConfigDate = _context.ConfigDate.SingleOrDefault()
+                TotalDistance = _context.Commute.Sum(c => c.CommuteDistance),
+                GasSaved = (_context.Commute.Sum(c => c.CommuteDistance) / 23),
+                CarbonReduced = ((_context.Commute.Sum(c => c.CommuteDistance) / 23) * 20),
+                ConfigDate = _context.ConfigDate.SingleOrDefault(),
+                CarouselSponsorImagePath = _context.CarouselSponsorImage.Select(c=>c.CarouselImagePath).FirstOrDefault()
             };
 
             return View(model);

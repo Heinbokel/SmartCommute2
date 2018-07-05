@@ -9,6 +9,8 @@ namespace SmartCommuteEmmet.Models.HomeViewModels
     {
         public ConfigDate ConfigDate { get; set; }
 
+        public string CarouselSponsorImagePath { get; set; }
+
         public float TotalDistance { get; set; }
         public int TotalCommutes { get; set; }
         public float GasSaved { get; set;}

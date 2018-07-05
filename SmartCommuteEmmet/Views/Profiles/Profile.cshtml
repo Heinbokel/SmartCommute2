@@ -12,12 +12,14 @@
         <div class="col-md-3">
             <img src="~/@Model.UserPhoto" class="profilePhoto img-responsive" />
         </div>
-        <div class="col-md-7">
-            <h1 class="profileName">@Model.FirstName @Model.LastName</h1>
-            <h3 class="profileStats">@Model.Commutes.Sum(c => c.CommuteDistance) Miles traveled over @Model.Commutes.Count commutes.</h3>
-            <p class="profileMemberSince">Smart Commuter with @Model.BusinessName since @Model.DateRegistered.Year</p>
-            <hr />
-            <p class="profileBio">@Model.UserBio</p>
+        <div class="col-md-9">
+            <h1 class="aboutHeader">@Model.FirstName @Model.LastName</h1>
+            <div class="aboutParagraph">
+                <h3 class="profileStats">@Model.Commutes.Sum(c => c.CommuteDistance) Miles traveled over @Model.Commutes.Count commutes.</h3>
+                <p class="profileMemberSince">Smart Commuter with @Model.BusinessName since @Model.DateRegistered.Year</p>
+                <hr />
+                <p class="profileBio">@Model.UserBio</p>
+            </div>
         </div>
     </div>
     @if (SignInManager.IsSignedIn(User))
@@ -28,77 +30,79 @@
                 <hr />
                 <div class="col-md-12">
                     <div class="genericSection">
-                        <input type="button" class="btn-main" value="Manage Account" onclick="location.href='@Url.Action("Index", "Manage")'" />
-                        <input type="button" class="btn-main" data-toggle="collapse" data-target="#rewardsCheck" value="Rewards" />
-                        <input type="button" class="btn-main" data-toggle="collapse" data-target="#documents" value="Documents" />
-                        <input type="button" class="btn-main" value="Commute Entry" onclick="location.href='@Url.Action("Create", "Commutes")'" />
-                        <input type="button" class="btn-main" value="My Commutes" onclick="location.href='@Url.Action("Index", "Commutes")'" />
-                        <div id="rewardsCheck" class="collapse">
-                            @*TODO: Put rewards check in partialView and refactor the code to utilize rewards from database.*@
-                            @{
-                                var totalMiles = @Model.Commutes.Where(c => c.CommuteDate.Year == DateTime.Now.Year).Sum(c => c.CommuteDistance);
-                                var totalCommutes = @Model.Commutes.Where(c => c.CommuteDate.Year == DateTime.Now.Year).Count();
-                            }
+                        <h1 class="aboutHeader" >Account Settings</h1>
+                        <div class="aboutParagraph">
+                            <input type="button" class="btn-main" value="Manage Account" onclick="location.href='@Url.Action("Index", "Manage")'" />
+                            <input type="button" class="btn-main" data-toggle="collapse" data-target="#rewardsCheck" value="Rewards" />
+                            <input type="button" class="btn-main" data-toggle="collapse" data-target="#documents" value="Documents" />
+                            <input type="button" class="btn-main" value="Commute Entry" onclick="location.href='@Url.Action("Create", "Commutes")'" />
+                            <input type="button" class="btn-main" value="My Commutes" onclick="location.href='@Url.Action("Index", "Commutes")'" />
+                            <div id="rewardsCheck" class="collapse">
+                                @*TODO: Put rewards check in partialView and refactor the code to utilize rewards from database.*@
+                                @{
+            var totalMiles = @Model.Commutes.Where(c => c.CommuteDate.Year == DateTime.Now.Year).Sum(c => c.CommuteDistance);
+            var totalCommutes = @Model.Commutes.Where(c => c.CommuteDate.Year == DateTime.Now.Year).Count();
+                                }
 
-                            <h2 class="aboutHeader">Rewards For @DateTime.Now.Year</h2>
-                            <div class="aboutParagraph">
-                                <p>
-                                    Total Miles: @totalMiles |
-                                    Total Commutes: @totalCommutes
-                                </p>
-
-                                @if (totalMiles < 10 && totalCommutes < 2)
-                                {
-                                    <p>You currently do not have any rewards. Commute at least 10 miles or 2 trips to earn your first!</p>
-                                }
-                                else if ((totalMiles >= 10 && totalMiles < 100))
-                                {
-                                    <p>Your current rewards are: <br><span class='emphasizeOrange'> 1 Grand Prize Drawing Entry</span> <br><br> Commute at least 100 miles or 25 trips to earn your next reward!</p>
-                                }
-                                else if ((totalMiles >= 100 && totalMiles < 250))
-                                {
-                                    <p>Your current rewards are: <br><span class='emphasizeOrange'> 3 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card </span><br><br> Commute at least 250 miles or 65 trips to earn your next reward!</p>
-                                }
-                                else if (totalMiles >= 250 && totalMiles < 500)
-                                {
+                                <h2 class="aboutHeader">Rewards For @DateTime.Now.Year</h2>
+                                <div class="aboutParagraph">
                                     <p>
-                                        Your current rewards are: <br><span class='emphasizeOrange'> 5 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card <br> $10 Grain Train or Crooked Tree Breadworks Gift Card </span>
-                                        <br><br> Commute at least 500 miles or 125 trips to earn your next reward!
+                                        Total Miles: @totalMiles |
+                                        Total Commutes: @totalCommutes
                                     </p>
-                                }
-                                else if (totalMiles >= 500)
-                                {
-                                    <p>
-                                        Your current rewards are: <br><span class='emphasizeOrange'>
-                                            9 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card <br> $10 Grain Train or Crooked Tree Breadworks Gift Card
-                                            <br> Complimentary Yoga Class at Yoga Roots
-                                        </span><br><br> You have achieved the highest possible rewards!
-                                    </p>
-                                }
-                                <p>Remember you can pick up your rewards at the Top Of Michigan Trails Council Office on M-119.<br /> The Grand Prize drawing will take place at the Smart Commute Celebration in October.</p>
-                            </div>
-                        </div>
-                        <div id="documents" class="collapse">
-                            <h2 class="aboutHeader">Documents & Vouchers</h2>
-                            <div class="aboutParagraph">
-                                @foreach (var item in Model.Documents)
-                                {
-                                    <h3>
-                                        <a href="~/@item.DocumentFilePath" download>
-                                        <img src="~/images/downloadIcon.png" class="thumbnailNavBar" />
-                                        @item.DocumentName
-                                        </a>
-                                    </h3>
-                                    <p>@item.DocumentDescription</p>
-                                    <hr />
 
-                                }
+                                    @if (totalMiles < 10 && totalCommutes < 2)
+            {
+                        <p>You currently do not have any rewards. Commute at least 10 miles or 2 trips to earn your first!</p>
+}
+else if ((totalMiles >= 10 && totalMiles < 100))
+{
+                        <p>Your current rewards are: <br><span class='emphasizeOrange'> 1 Grand Prize Drawing Entry</span> <br><br> Commute at least 100 miles or 25 trips to earn your next reward!</p>
+}
+else if ((totalMiles >= 100 && totalMiles < 250))
+{
+                        <p>Your current rewards are: <br><span class='emphasizeOrange'> 3 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card </span><br><br> Commute at least 250 miles or 65 trips to earn your next reward!</p>
+}
+else if (totalMiles >= 250 && totalMiles < 500)
+{
+                        <p>
+                            Your current rewards are: <br><span class='emphasizeOrange'> 5 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card <br> $10 Grain Train or Crooked Tree Breadworks Gift Card </span>
+                            <br><br> Commute at least 500 miles or 125 trips to earn your next reward!
+                        </p>
+}
+else if (totalMiles >= 500)
+{
+                        <p>
+                            Your current rewards are: <br><span class='emphasizeOrange'>
+                                9 Grand Prize Drawing Entries <br> $10 Latitude 45 Gift Card <br> $10 Grain Train or Crooked Tree Breadworks Gift Card
+                                <br> Complimentary Yoga Class at Yoga Roots
+                            </span><br><br> You have achieved the highest possible rewards!
+                        </p>
+}
+                                    <p>Remember you can pick up your rewards at the Top Of Michigan Trails Council Office on M-119.<br /> The Grand Prize drawing will take place at the Smart Commute Celebration in October.</p>
+                                </div>
                             </div>
-                        </div>
-                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
-                            <button type="submit" class="btn-main">Log out</button>
-                        </form>
+                            <div id="documents" class="collapse">
+                                <h2 class="aboutHeader">Documents & Vouchers</h2>
+                                <div class="aboutParagraph">
+                                    @foreach (var item in Model.Documents)
+            {
+                        <h3>
+                            <a href="~/@item.DocumentFilePath" download>
+                                <img src="~/images/downloadIcon.png" class="thumbnailNavBar" />
+                                @item.DocumentName
+                            </a>
+                        </h3>
+                        <p>@item.DocumentDescription</p>
+                        <hr />
 
+}
+                                </div>
+                            </div>
+                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                                <button type="submit" class="btn-main">Log out</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -11,8 +11,8 @@ using System;
 namespace SmartCommuteEmmet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180614000958_June13")]
-    partial class June13
+    [Migration("20180705000417_azuremigration")]
+    partial class azuremigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,25 +209,72 @@ namespace SmartCommuteEmmet.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("SmartCommuteEmmet.Models.Breakfast", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BreakfastCity")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("BreakfastDescription")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("BreakfastLink");
+
+                    b.Property<string>("BreakfastName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("BreakfastStreet")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("BreakfastZIP");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Breakfast");
+                });
+
             modelBuilder.Entity("SmartCommuteEmmet.Models.Business", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BusinessCity");
+                    b.Property<string>("BusinessCity")
+                        .HasMaxLength(100);
 
-                    b.Property<string>("BusinessDescription");
+                    b.Property<string>("BusinessDescription")
+                        .HasMaxLength(100);
 
                     b.Property<string>("BusinessName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(100);
 
-                    b.Property<string>("BusinessStreet");
+                    b.Property<string>("BusinessStreet")
+                        .HasMaxLength(100);
 
                     b.Property<string>("BusinessZIP");
 
                     b.HasKey("Id");
 
                     b.ToTable("Business");
+                });
+
+            modelBuilder.Entity("SmartCommuteEmmet.Models.CarouselSponsorImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CarouselImagePath");
+
+                    b.Property<DateTime>("DateUploaded");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CarouselSponsorImage");
                 });
 
             modelBuilder.Entity("SmartCommuteEmmet.Models.Commute", b =>
@@ -248,13 +295,17 @@ namespace SmartCommuteEmmet.Migrations
 
                     b.Property<int>("CommuteTypeId");
 
-                    b.Property<string>("EndPointCustom");
+                    b.Property<string>("EndPointCustom")
+                        .HasMaxLength(50);
 
-                    b.Property<int>("EndPointId");
+                    b.Property<int?>("EndPointId")
+                        .IsRequired();
 
-                    b.Property<string>("StartPointCustom");
+                    b.Property<string>("StartPointCustom")
+                        .HasMaxLength(50);
 
-                    b.Property<int>("StartPointId");
+                    b.Property<int?>("StartPointId")
+                        .IsRequired();
 
                     b.Property<string>("UserId")
                         .IsRequired();
@@ -281,15 +332,51 @@ namespace SmartCommuteEmmet.Migrations
 
                     b.Property<string>("CommuteTypeDescription")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(100);
 
                     b.Property<string>("CommuteTypeName")
                         .IsRequired()
-                        .HasMaxLength(25);
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
                     b.ToTable("CommuteType");
+                });
+
+            modelBuilder.Entity("SmartCommuteEmmet.Models.ConfigDate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<DateTime>("RegisterByDate");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConfigDate");
+                });
+
+            modelBuilder.Entity("SmartCommuteEmmet.Models.Document", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DocumentDescription")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("DocumentFilePath");
+
+                    b.Property<string>("DocumentName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Document");
                 });
 
             modelBuilder.Entity("SmartCommuteEmmet.Models.EndPoint", b =>
@@ -298,20 +385,67 @@ namespace SmartCommuteEmmet.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("EndPointDescription")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(200);
 
-                    b.Property<float>("EndPointLatitude");
+                    b.Property<float?>("EndPointLatitude");
 
-                    b.Property<float>("EndPointLongitude");
+                    b.Property<float?>("EndPointLongitude");
 
                     b.Property<string>("EndPointName")
                         .IsRequired()
-                        .HasMaxLength(25);
+                        .HasMaxLength(100);
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
                     b.ToTable("EndPoint");
+                });
+
+            modelBuilder.Entity("SmartCommuteEmmet.Models.Reward", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("IsGrandPrize");
+
+                    b.Property<int>("RequiredCommutes");
+
+                    b.Property<int>("RequiredMiles");
+
+                    b.Property<string>("RewardDescription")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("RewardName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reward");
+                });
+
+            modelBuilder.Entity("SmartCommuteEmmet.Models.Sponsor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("SponsorDescription")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("SponsorImagePath");
+
+                    b.Property<string>("SponsorLink")
+                        .IsRequired();
+
+                    b.Property<string>("SponsorName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sponsor");
                 });
 
             modelBuilder.Entity("SmartCommuteEmmet.Models.StartPoint", b =>
@@ -320,16 +454,17 @@ namespace SmartCommuteEmmet.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("StartPointDescription")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(150);
 
-                    b.Property<float>("StartPointLatitude");
+                    b.Property<float?>("StartPointLatitude");
 
-                    b.Property<float>("StartPointLongitude");
+                    b.Property<float?>("StartPointLongitude");
 
                     b.Property<string>("StartPointName")
                         .IsRequired()
-                        .HasMaxLength(25);
+                        .HasMaxLength(100);
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 

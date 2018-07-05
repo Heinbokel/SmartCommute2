@@ -1,0 +1,35 @@
+﻿@model SmartCommuteEmmet.Models.CarouselSponsorImage
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Carousel Sponsor Image</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" class="genericForm" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CarouselImagePath"></label>
+                <input type="file" name="CarouselImagePath" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+                <span class="text-danger">@ViewData["CarouselUploadError"]</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateUploaded" class="control-label"></label>
+                <input asp-for="DateUploaded" class="form-control" />
+                <span asp-validation-for="DateUploaded" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn-main" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

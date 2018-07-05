@@ -262,6 +262,20 @@ namespace SmartCommuteEmmet.Migrations
                     b.ToTable("Business");
                 });
 
+            modelBuilder.Entity("SmartCommuteEmmet.Models.CarouselSponsorImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CarouselImagePath");
+
+                    b.Property<DateTime>("DateUploaded");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CarouselSponsorImage");
+                });
+
             modelBuilder.Entity("SmartCommuteEmmet.Models.Commute", b =>
                 {
                     b.Property<int>("Id")
