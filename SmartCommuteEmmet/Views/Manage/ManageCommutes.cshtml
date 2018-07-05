@@ -4,94 +4,98 @@
 @{
     ViewData["Title"] = "Manage Commutes";
 }
-
-<div class="genericSection">
-    <h2>Manage Commutes</h2>
-    <hr />
-
-    <form asp-action="ManageCommutes" class="genericForm">
-        <p>Date Filter:</p>
-        <p>Showing from @ViewData["StartDate"] to @ViewData["EndDate"]</p>
-        <label for="startDate">From:</label>
-        <input type="date" id="startDate" name="startDate" />
-        <label for="endDate">To:</label>
-        <input type="date" id="endDate" name="endDate" />
-        <input type="submit" value="Submit" class="btn-main"/>
-    </form>
-    <hr />
-    <p>Commutes: @Model.Count() | Distance: @Model.Sum(c=>c.CommuteDistance) | Commuters: @Model.GroupBy(c=>c.UserId).Count() </p>
-        <table class="table" id="theTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User.FirstName) @Html.DisplayNameFor(model => model.User.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User.Business)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommuteType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommuteDistance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommuteName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartPoint)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndPoint)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommuteDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommuteDescription)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Business.BusinessName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CommuteType.CommuteTypeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CommuteDistance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CommuteName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartPoint.StartPointName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndPoint.EndPointName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CommuteDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CommuteDescription)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-controller="Commutes" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-controller="Commutes" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-controller="Commutes" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-    </table>
+<div class="row">
+    <div class="col-md-12">
+        <div class="genericSection">
+            <h2>Manage Commutes</h2>
+            <hr />
+            <form asp-action="ManageCommutes" class="genericForm">
+                <p>Date Filter:</p>
+                <p>Showing from @ViewData["StartDate"] to @ViewData["EndDate"]</p>
+                    <label for="startDate" class="control-label">From:</label>
+                    <input type="date" id="startDate" name="startDate" />
+                    <label for="endDate" class="control-label">To:</label>
+                    <input type="date" id="endDate" name="endDate" />
+                    <input type="submit" value="Submit" class="btn-main" />
+            </form>
+            <hr />
+            <p>Commutes: @Model.Count() | Distance: @Model.Sum(c => c.CommuteDistance) | Active Commuters: @Model.GroupBy(c => c.UserId).Where(c => c.Select(d=>d.CommuteDistance).Sum() > 0).Count() </p>
+        </div>
+    </div>
 </div>
+        <div class="row">
+            <table class="table" id="theTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User.FirstName) @Html.DisplayNameFor(model => model.User.LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User.Business)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommuteType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommuteDistance)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommuteName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StartPoint)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EndPoint)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommuteDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommuteDescription)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Business.BusinessName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CommuteType.CommuteTypeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CommuteDistance)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CommuteName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartPoint.StartPointName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndPoint.EndPointName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CommuteDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CommuteDescription)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="Commutes" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-controller="Commutes" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-controller="Commutes" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 

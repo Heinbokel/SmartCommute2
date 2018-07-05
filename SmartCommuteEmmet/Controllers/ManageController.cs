@@ -609,10 +609,22 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult ManageCommutesBusiness()
+        public IActionResult ManageCommutesBusiness(DateTime? startDate, DateTime? endDate)
         {
+            if (startDate == null)
+            {
+                startDate = new DateTime();
+            }
+            if (endDate == null)
+            {
+                endDate = DateTime.Now;
+            }
+
+            ViewData["StartDate"] = startDate.Value.ToShortDateString();
+            ViewData["EndDate"] = endDate.Value.ToShortDateString();
+
             var model = new List<LeaderboardsBusinessViewModel>();
-            var Commutes = _context.Commute.Include(c => c.User).ToList();
+            var Commutes = _context.Commute.Include(c => c.User).Where(c => c.CommuteDate >= startDate && c.CommuteDate <= endDate).ToList();
             var Businesses = _context.Business.ToList();
             var Users = _context.Users.Where(c => c.Email != "admin@smartcommuteemmet.org").ToList();
 
