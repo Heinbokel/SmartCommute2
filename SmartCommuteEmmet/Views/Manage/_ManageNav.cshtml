@@ -11,6 +11,12 @@
     {
         <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a asp-action="ExternalLogins">External logins</a></li>
     }
-    <li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"><a asp-action="TwoFactorAuthentication">Two-factor authentication</a></li>
+    @if (User.IsInRole("Admin"))
+    {
+        <li><a asp-action="ManageUsers">Users</a></li>
+        <li><a asp-action="ManageCommutes">Commutes</a></li>
+        <li><a asp-action="ManageCommutesBusiness">Business Commutes</a></li>
+        <li><a asp-action="ManagementConsole">Management Console</a></li>
+    }
 </ul>
 

@@ -583,8 +583,20 @@ namespace SmartCommuteEmmet.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult ManageUsers()
+        public IActionResult ManageUsers(DateTime? startDate, DateTime? endDate)
         {
+            if (startDate == null)
+            {
+                startDate = new DateTime();
+            }
+            if (endDate == null)
+            {
+                endDate = DateTime.Now;
+            }
+
+            ViewData["StartDate"] = startDate.Value.ToShortDateString();
+            ViewData["EndDate"] = endDate.Value.ToShortDateString();
+
             var model = _context.Users.Include(c=>c.Business).ToList();
             return View(model.ToList());
         }
