@@ -11,9 +11,10 @@ using System;
 namespace SmartCommuteEmmet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180705171921_nonrequireduserid")]
+    partial class nonrequireduserid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,8 +268,7 @@ namespace SmartCommuteEmmet.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CarouselImagePath")
-                        .IsRequired();
+                    b.Property<string>("CarouselImagePath");
 
                     b.Property<DateTime>("DateUploaded");
 

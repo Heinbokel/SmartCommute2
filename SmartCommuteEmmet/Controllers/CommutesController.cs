@@ -92,7 +92,7 @@ namespace SmartCommuteEmmet.Controllers
             //If this date contains 2 or more commutes for this user, do not let them post.
             if (CheckCommuteCountForDate(commute, CurrentUser))
             {
-                //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
+                if (ModelState.IsValid)
                 {
                     _context.Add(commute);
                     await _context.SaveChangesAsync();
@@ -180,7 +180,7 @@ namespace SmartCommuteEmmet.Controllers
             //If date has 2 or more commutes entered, prevent this entry.
             if(CheckCommuteCountForDate(commute, CurrentUser))
             {
-                //if (ModelState.IsValid) TODO:WHY IS MODEL STATE INVALID???
+                if (ModelState.IsValid)
                 {
                     _context.Add(commute);
                     await _context.SaveChangesAsync();
@@ -256,7 +256,7 @@ namespace SmartCommuteEmmet.Controllers
                 return NotFound();
             }
 
-            //if (ModelState.IsValid) TODO:Figure out why ModelState is invalid
+            if (ModelState.IsValid)
             {
                 try
                 {

@@ -11,9 +11,10 @@ using System;
 namespace SmartCommuteEmmet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180705173538_endpoint")]
+    partial class endpoint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,9 +304,11 @@ namespace SmartCommuteEmmet.Migrations
                     b.Property<string>("StartPointCustom")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("StartPointId");
+                    b.Property<int?>("StartPointId")
+                        .IsRequired();
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -534,11 +537,13 @@ namespace SmartCommuteEmmet.Migrations
 
                     b.HasOne("SmartCommuteEmmet.Models.StartPoint", "StartPoint")
                         .WithMany()
-                        .HasForeignKey("StartPointId");
+                        .HasForeignKey("StartPointId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SmartCommuteEmmet.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

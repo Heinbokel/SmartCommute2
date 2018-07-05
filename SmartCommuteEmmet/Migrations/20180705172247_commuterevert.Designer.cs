@@ -11,9 +11,10 @@ using System;
 namespace SmartCommuteEmmet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180705172247_commuterevert")]
+    partial class commuterevert
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,8 +268,7 @@ namespace SmartCommuteEmmet.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CarouselImagePath")
-                        .IsRequired();
+                    b.Property<string>("CarouselImagePath");
 
                     b.Property<DateTime>("DateUploaded");
 
@@ -298,14 +298,17 @@ namespace SmartCommuteEmmet.Migrations
                     b.Property<string>("EndPointCustom")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("EndPointId");
+                    b.Property<int?>("EndPointId")
+                        .IsRequired();
 
                     b.Property<string>("StartPointCustom")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("StartPointId");
+                    b.Property<int?>("StartPointId")
+                        .IsRequired();
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -530,15 +533,18 @@ namespace SmartCommuteEmmet.Migrations
 
                     b.HasOne("SmartCommuteEmmet.Models.EndPoint", "EndPoint")
                         .WithMany()
-                        .HasForeignKey("EndPointId");
+                        .HasForeignKey("EndPointId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SmartCommuteEmmet.Models.StartPoint", "StartPoint")
                         .WithMany()
-                        .HasForeignKey("StartPointId");
+                        .HasForeignKey("StartPointId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SmartCommuteEmmet.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
