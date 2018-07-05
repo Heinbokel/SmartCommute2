@@ -4,11 +4,11 @@
     ViewData.AddActivePage(ManageNavPages.Index);
 }
 
-
+<input type="button" class="btn-main" value="Change Password" onclick="location.href='@Url.Action("ChangePassword", "Manage")'" />
 @Html.Partial("_StatusMessage", Model.StatusMessage)
 <div class="row">
     <div class="col-md-12">
-        <form method="post" class="genericFormWide" enctype="multipart/form-data">
+        <form method="post" class="genericForm" enctype="multipart/form-data">
             <h2>@ViewData["Title"]</h2>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>

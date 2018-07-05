@@ -597,7 +597,7 @@ namespace SmartCommuteEmmet.Controllers
             ViewData["StartDate"] = startDate.Value.ToShortDateString();
             ViewData["EndDate"] = endDate.Value.ToShortDateString();
 
-            var model = _context.Users.Include(c=>c.Business).ToList();
+            var model = _context.Users.Include(c=>c.Business).Where(c=>c.DateRegistered >= startDate && c.DateRegistered <=endDate).ToList();
             return View(model.ToList());
         }
 
