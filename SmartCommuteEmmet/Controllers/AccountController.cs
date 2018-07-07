@@ -296,7 +296,7 @@ namespace SmartCommuteEmmet.Controllers
                     }
                 }
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BusinessId = model.BusinessId, DateOfBirth = model.DateOfBirth, DateRegistered = DateTime.Now, FirstName = model.FirstName, LastName = model.LastName, UserCity = model.UserCity, UserStreet = model.UserStreet, UserZIP = model.UserZIP, UserPhoto = model.UserPhoto, UserBio = model.UserBio };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BusinessId = model.BusinessId, DateOfBirth = model.DateOfBirth, DateRegistered = DateTime.Now, FirstName = model.FirstName, LastName = model.LastName, UserCity = model.UserCity, UserStreet = model.UserStreet, UserZIP = model.UserZIP, UserPhoto = model.UserPhoto, UserBio = model.UserBio,IsSubscribed = model.IsSubscribed };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

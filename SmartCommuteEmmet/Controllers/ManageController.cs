@@ -81,6 +81,7 @@ namespace SmartCommuteEmmet.Controllers
                 StatusMessage = StatusMessage,
                 BusinessId = user.BusinessId,
                 DateOfBirth = user.DateOfBirth,
+                IsSubscribed = user.IsSubscribed,
                 FirstName = user.FirstName, LastName = user.LastName, UserBio = user.UserBio, UserCity = user.UserCity,
                 UserStreet = user.UserStreet, UserZIP = user.UserZIP, UserPhoto = user.UserPhoto 
             };
@@ -93,16 +94,7 @@ namespace SmartCommuteEmmet.Controllers
         public async Task<IActionResult> Index(IndexViewModel model)
         {
 
-            if (model.BusinessId == 0)
-            {
-                var business = new Business()
-                {
-                    BusinessName = model.CustomBusiness
-                };
-                _context.Business.Add(business);
-                await _context.SaveChangesAsync();
-                model.BusinessId = business.Id;
-            }
+            
 
             if (!ModelState.IsValid)
             {
@@ -120,6 +112,17 @@ namespace SmartCommuteEmmet.Controllers
             {
                 try
                 {
+                    if (model.BusinessId == 0)
+                    {
+                        var business = new Business()
+                        {
+                            BusinessName = model.CustomBusiness
+                        };
+                        _context.Business.Add(business);
+                        await _context.SaveChangesAsync();
+                        model.BusinessId = business.Id;
+                    }
+
                     var files = HttpContext.Request.Form.Files;
 
                     foreach (var file in files)
@@ -155,7 +158,7 @@ namespace SmartCommuteEmmet.Controllers
                             model.UserPhoto = user.UserPhoto;
                         }
                     }
-                        user.BusinessId = model.BusinessId;
+                    user.BusinessId = model.BusinessId;
                     user.DateOfBirth = model.DateOfBirth;
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
@@ -165,6 +168,7 @@ namespace SmartCommuteEmmet.Controllers
                     user.UserZIP = model.UserZIP;
                     user.Email = model.Email;
                     user.UserPhoto = model.UserPhoto;
+                    user.IsSubscribed = model.IsSubscribed;
 
                     _context.Update(user);
                     await _context.SaveChangesAsync();
@@ -597,7 +601,7 @@ namespace SmartCommuteEmmet.Controllers
             ViewData["StartDate"] = startDate.Value.ToShortDateString();
             ViewData["EndDate"] = endDate.Value.ToShortDateString();
 
-            var model = _context.Users.Include(c=>c.Business).Where(c=>c.DateRegistered >= startDate && c.DateRegistered <=endDate).ToList();
+            var model = _context.Users.Include(c=>c.Business).Where(c=>(c.DateRegistered >= startDate && c.DateRegistered <=endDate) && c.Email != "admin@smartcommuteemmet.org").ToList();
             return View(model.ToList());
         }
 

@@ -62,6 +62,9 @@ namespace SmartCommuteEmmet.Models.ManageViewModels
         [StringLength(maximumLength: 50, ErrorMessage = "Business must be less than 50 characters.")]
         public string CustomBusiness { get; set; }
 
+        [Display(Name ="Subscribe to Alerts?")]
+        public bool IsSubscribed { get; set; }
+
 
         public string StatusMessage { get; set; }
     }

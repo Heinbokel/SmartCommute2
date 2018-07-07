@@ -57,6 +57,9 @@ namespace SmartCommuteEmmet.Models.AccountViewModels
         [Display(Name ="Custom Business")][StringLength(maximumLength:50,ErrorMessage ="Business must be less than 50 characters.")]
         public string CustomBusiness { get; set; }
 
+        [Display(Name ="Subscribe to Alerts?")]
+        public bool IsSubscribed { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
         [DataType(DataType.Password)]

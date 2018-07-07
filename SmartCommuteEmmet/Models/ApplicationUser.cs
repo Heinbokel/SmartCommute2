@@ -46,6 +46,9 @@ namespace SmartCommuteEmmet.Models
         [Display(Name ="Biography")]
         public string UserBio { get; set; }
 
+        [Display(Name = "Subscribe to Alerts?")]
+        public bool IsSubscribed { get; set; }
+
         //FK
         [Required]
         public int BusinessId { get; set; }
