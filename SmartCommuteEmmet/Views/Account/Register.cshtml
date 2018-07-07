@@ -61,7 +61,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CustomBusiness"></label>
-                <input asp-for="CustomBusiness" id="customBusiness" disabled="disabled" placeholder="Select -Add New Business- above to enable this input." class="form-control"/>
+                <input asp-for="CustomBusiness" id="customBusiness" placeholder="Select -Add New Business- above to use this input." class="form-control" onkeypress="ChangeBusinessSelect();"/>
                 <span asp-validation-for="CustomBusiness" class="text-danger">@ViewData["CustomBusinessError"]</span>
             </div>
             <div class="form-group">
@@ -91,6 +91,11 @@
         } else {
             $('#customBusiness').attr('disabled', 'disabled');
         }
+    }
+
+    function ChangeBusinessSelect() {
+            $('#businessDropdown').val(0);   
+
     }
     
 </script>
