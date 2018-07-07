@@ -71,7 +71,7 @@ namespace SmartCommuteEmmet.Controllers
                 };
                 sponsorModel.Breakfasts.Add(userViewModel);
             }
-
+            ViewData["StartDate"] = _context.ConfigDate.Select(c => c.StartDate).SingleOrDefault().ToLongDateString();
             return View(sponsorModel);
         }
 

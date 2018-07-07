@@ -138,6 +138,8 @@ namespace SmartCommuteEmmet.Controllers
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
 
             ViewBag.DateError = "";
+            ViewData["StartDate"] = _context.ConfigDate.Select(c => c.StartDate).SingleOrDefault();
+            ViewData["EndDate"] = _context.ConfigDate.Select(c => c.EndDate).SingleOrDefault();
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName");
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>().Where(c=>c.UserId == null || c.UserId == CurrentUser.Id).OrderBy(c=> c.EndPointName), "Id", "EndPointName");

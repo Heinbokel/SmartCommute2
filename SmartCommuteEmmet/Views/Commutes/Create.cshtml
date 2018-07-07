@@ -3,9 +3,12 @@
 
 @{
     ViewData["Title"] = "Commute Entry";
+    DateTime startDate = (DateTime)ViewData["StartDate"];
+    DateTime endDate = (DateTime)ViewData["EndDate"];
 }
 
-
+@if(@DateTime.Now.DayOfYear >= startDate.DayOfYear && @DateTime.Now.DayOfYear <= endDate.DayOfYear )
+{
 @await Html.PartialAsync("_SavedCommutesForm", ViewData["SavedCommutes"])
 
 <div class="row">
@@ -81,25 +84,39 @@
         </form>
     </div>
 </div>
-
-<script>
-    function CheckStartPointSelect() {
-        if ($('#startPointDropdown').val() == 0 && $('#startPointDropdown').val() != "") {
-            $('#customStartPoint').removeAttr('disabled');
-        } else {
-            $('#customStartPoint').attr('disabled', 'disabled');
+}else{
+<div class="row">
+    <div class="col-md-12">
+        <div class="genericSection">
+            <h2 class="aboutHeader">Commute Entry is Closed.</h2>
+            <p class="aboutParagraph">
+                Smart Commute has concluded for this season. Check <a asp-action="About" asp-controller="Home">here</a> to see when the next season begins.<br />
+                Thank you for your continued interest!
+            </p>
+        </div>
+    </div>
+</div>
         }
-    }
-    function CheckEndPointSelect() {
-        if ($('#endPointDropdown').val() == 0 && $('#endPointDropdown').val() != "") {
-            $('#customEndPoint').removeAttr('disabled');
-        } else {
-            $('#customEndPoint').attr('disabled', 'disabled');
+
+
+        <script>
+            function CheckStartPointSelect() {
+                if ($('#startPointDropdown').val() == 0 && $('#startPointDropdown').val() != "") {
+                    $('#customStartPoint').removeAttr('disabled');
+                } else {
+                    $('#customStartPoint').attr('disabled', 'disabled');
+                }
+            }
+            function CheckEndPointSelect() {
+                if ($('#endPointDropdown').val() == 0 && $('#endPointDropdown').val() != "") {
+                    $('#customEndPoint').removeAttr('disabled');
+                } else {
+                    $('#customEndPoint').attr('disabled', 'disabled');
+                }
+            }
+
+        </script>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
         }
-    }
-
-</script>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
