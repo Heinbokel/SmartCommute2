@@ -66,8 +66,8 @@ a{
 }
 a:hover{
     color:orange;
-    text-decoration:none;
 }
+
 
 .aboutHeader{
     background-color:white;
@@ -173,12 +173,10 @@ a:hover{
 
 .profileLeaderboardLink:hover{
     color:cyan;
-    text-decoration:none;
 }
 
 .profileButtonLink{
     color:white;
-    text-decoration:none;
     text-indent:0px;
     transition:ease-out text-indent 1s;
 }
@@ -213,9 +211,11 @@ table{
     color:white;
     border-radius:10px;
 }
-table a{
-    color:white;
-}
+    table a {
+        color: white;
+        font-weight: bolder;
+        font-size: 12px;
+    }
 
 .tableContainer{
     background-color:darkcyan;

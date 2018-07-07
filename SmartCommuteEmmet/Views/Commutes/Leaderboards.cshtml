@@ -42,8 +42,8 @@
                     <a asp-controller="Profiles" asp-action="Profile" asp-route-id="@item.UserId"><div class="leaderboardNameDiv"><img src="~/@item.UserPhoto" class="thumbnailTiny" />@Html.DisplayFor(modelItem => item.UserName)</div></a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserBusiness.BusinessName)
-                </td>
+                    <a asp-controller="Profiles" asp-action="BusinessProfile" asp-route-id="@item.UserBusiness.Id"> @Html.DisplayFor(modelItem => item.UserBusiness.BusinessName)</a>
+</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TotalCommutes)
                 </td>
