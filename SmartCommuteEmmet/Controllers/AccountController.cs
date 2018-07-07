@@ -327,6 +327,12 @@ namespace SmartCommuteEmmet.Controllers
 
                     return RedirectToLocal(returnUrl);
                 }
+                if(model.CustomBusiness != null && model.CustomBusiness != "")
+                {
+                    var business = _context.Business.Find(user.BusinessId);
+                    _context.Business.Remove(business);//Remove custom business if there are any errors.
+                    await _context.SaveChangesAsync();
+                }
                 AddErrors(result);
             }
 
