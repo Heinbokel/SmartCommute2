@@ -12,6 +12,7 @@ using SmartCommuteEmmet.Models;
 using SmartCommuteEmmet.Models.CommuteViewModels;
 using SmartCommuteEmmet.Models.LeaderboardViewModels;
 using SmartCommuteEmmet.Models.ProfileViewModels;
+using SmartCommuteEmmet.Services;
 
 namespace SmartCommuteEmmet.Controllers
 {
@@ -19,12 +20,14 @@ namespace SmartCommuteEmmet.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        
+        private readonly IEmailSender _emailSender;
 
-        public CommutesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+
+        public CommutesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         // GET: Commutes
@@ -96,11 +99,14 @@ namespace SmartCommuteEmmet.Controllers
                 {
                     _context.Add(commute);
                     await _context.SaveChangesAsync();
+                    SendCommuteSummaryEmail(commute, CurrentUser);
                     return RedirectToAction(nameof(Index));
                 }
             }
 
             ViewBag.DateError = "There are already 2 commutes entered for this date. Please change the date.";
+            ViewData["StartDate"] = _context.ConfigDate.Select(c => c.StartDate).SingleOrDefault();
+            ViewData["EndDate"] = _context.ConfigDate.Select(c => c.EndDate).SingleOrDefault();
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
@@ -186,11 +192,14 @@ namespace SmartCommuteEmmet.Controllers
                 {
                     _context.Add(commute);
                     await _context.SaveChangesAsync();
+                    SendCommuteSummaryEmail(commute,CurrentUser);
                     return RedirectToAction(nameof(Index));
                 }
             }
 
             ViewBag.DateError = "There are already 2 commutes entered for this date. Please change the date.";
+            ViewData["StartDate"] = _context.ConfigDate.Select(c => c.StartDate).SingleOrDefault();
+            ViewData["EndDate"] = _context.ConfigDate.Select(c => c.EndDate).SingleOrDefault();
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName", commute.CommuteTypeId);
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>(), "Id", "EndPointName", commute.EndPointId);
@@ -375,6 +384,26 @@ namespace SmartCommuteEmmet.Controllers
         private bool CommuteExists(int id)
         {
             return _context.Commute.Any(e => e.Id == id);
+        }
+
+        public async void SendCommuteSummaryEmail(Commute commute, ApplicationUser user)
+        {
+            var totalCommutes = _context.Commute.Where(c => c.UserId == commute.UserId).Count();
+            var totalDistance = _context.Commute.Where(c => c.UserId == commute.UserId).Sum(c => c.CommuteDistance);
+            var email = user.Email;
+            var subject = "Congratulations on logging a Smart Commute!";
+
+            var message = "<h1 style='color:white;background-color:black;text-align:center;padding:0px;margin:0px;border-radius: 10px 10px 0px 0px;'>You have successfully logged a Smart Commute.</h1>";
+            message += "<div style='background-color:darkcyan;color:white;text-align:center;padding:0px;margin:0px;border-radius: 0px 0px 10px 10px;'>";
+            message += "Commute Name: " + commute.CommuteName + "<br/>";
+            message += "Commute Distance: " + commute.CommuteDistance + "<br/>";
+            message += "Commute Description: " + commute.CommuteDescription + "<br/>";
+            message += "Commute Date: " + commute.CommuteDate + "<br/>";
+            message += "<br/>";
+            message += "Total Commutes: " + totalCommutes + "<br/>" + "Total Distance: " + totalDistance + "<br/><br/>";
+            message += "Thank you for participating!<br/>Make sure to check your rewards on your Profile Page by selecting the Rewards button.";
+            message += "</div>";
+            await _emailSender.SendEmailAsync(email, subject, message);
         }
     }
 }

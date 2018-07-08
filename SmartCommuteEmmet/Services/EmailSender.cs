@@ -38,6 +38,7 @@ namespace SmartCommuteEmmet.Services
                     emailMessage.From = new MailAddress(_configuration["Email:Email"]);
                     emailMessage.Subject = subject;
                     emailMessage.Body = message;
+                    emailMessage.IsBodyHtml = true;
                     client.Send(emailMessage);
                 }
             }
