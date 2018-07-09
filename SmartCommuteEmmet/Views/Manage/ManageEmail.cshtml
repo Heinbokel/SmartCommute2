@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Manage Email";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Send Email</h2>
+        <p class="emphasizeOrange">Anything you submit here will be sent to ALL SUBSCRIBED USERS.</p>
+        <form asp-action="SendEmailToAllSubscribed" class="genericForm">
+            <h3>@ViewData["EmailStatus"]</h3>
+            <div class="form-group">
+                <label for="Subject" class="control-label">Subject:</label>
+                <input name="Subject" id="Subject" placeholder="Enter the subject for the email here." class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="Message" class="control-label">Message:</label>
+                <textarea name="Message" id="Message" placeholder="Enter your message here." class="form-control" rows="5" cols="40"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn-main" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

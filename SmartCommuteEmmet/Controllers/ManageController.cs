@@ -663,6 +663,35 @@ namespace SmartCommuteEmmet.Controllers
             return View(model.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult ManageEmail()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> SendEmailToAllSubscribed(string subject, string message)
+        {
+            var users = _context.Users.Where(c => c.IsSubscribed == true).ToList();
+            message = message.Replace(System.Environment.NewLine, "<br/>");
+            try
+            {
+                foreach (var user in users)
+                {
+                    await _emailSender.SendEmailAsync(user.Email, subject, message);
+                }
+            }
+            catch(Exception ex)
+            {
+                ViewData["EmailStatus"] = "Encountered an error sending your email : " + ex.ToString();
+                return View("ManageEmail");
+            }
+
+            ViewData["EmailStatus"] = "Email sent successfully.";
+            return View("ManageEmail");
+
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)
