@@ -401,12 +401,12 @@ namespace SmartCommuteEmmet.Controllers
 
             var message = "<h1 style='color:white;background-color:black;text-align:center;padding:5px;margin:0px;border-radius: 10px 10px 0px 0px;'>Smart Commute Logged!</h1>";
             message += "<div style='background-color:darkcyan;color:white;text-align:center;padding:5px;margin:0px;border-radius: 0px 0px 10px 10px;'>";
-            message += "Commute Name: " + commute.CommuteName + "<br/>";
-            message += "Commute Distance: " + commute.CommuteDistance + "<br/>";
-            message += "Commute Description: " + commute.CommuteDescription + "<br/>";
-            message += "Commute Date: " + commute.CommuteDate + "<br/>";
+            message += "<strong>Commute Name:</strong> " + commute.CommuteName + "<br/>";
+            message += "<strong>Commute Distance:</strong> " + commute.CommuteDistance + "<br/>";
+            message += "<strong>Commute Description:</strong> " + commute.CommuteDescription + "<br/>";
+            message += "<strong>Commute Date:</strong> " + commute.CommuteDate + "<br/>";
             message += "<br/>";
-            message += "Total Commutes: " + totalCommutes + "<br/>" + "Total Distance: " + totalDistance + "<br/><br/>";
+            message += "<strong>Total Commutes:</strong> " + totalCommutes + "<br/>" + "<strong>Total Distance:</strong> " + totalDistance + "<br/><br/>";
             message += "Thank you for participating!<br/>Make sure to check your rewards on your Profile Page by selecting the Rewards button.";
             message += "</div>";
             await _emailSender.SendEmailAsync(email, subject, message);
