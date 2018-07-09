@@ -19,6 +19,7 @@ namespace SmartCommuteEmmet.Services
         }
         public async Task SendEmailAsync(string email, string subject, string message)
         {
+            //Add unsubscribe to message here.
             using (var client = new SmtpClient())
             {
                 var credential = new NetworkCredential
