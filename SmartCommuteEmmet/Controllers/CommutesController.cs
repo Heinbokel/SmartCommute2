@@ -99,7 +99,10 @@ namespace SmartCommuteEmmet.Controllers
                 {
                     _context.Add(commute);
                     await _context.SaveChangesAsync();
-                    SendCommuteSummaryEmail(commute, CurrentUser);
+                    if(CurrentUser.IsSubscribed == true)
+                    {
+                        SendCommuteSummaryEmail(commute, CurrentUser);
+                    }
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -192,7 +195,10 @@ namespace SmartCommuteEmmet.Controllers
                 {
                     _context.Add(commute);
                     await _context.SaveChangesAsync();
-                    SendCommuteSummaryEmail(commute,CurrentUser);
+                    if (CurrentUser.IsSubscribed == true)
+                    {
+                        SendCommuteSummaryEmail(commute, CurrentUser);
+                    }
                     return RedirectToAction(nameof(Index));
                 }
             }
