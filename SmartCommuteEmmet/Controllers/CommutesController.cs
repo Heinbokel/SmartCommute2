@@ -399,8 +399,8 @@ namespace SmartCommuteEmmet.Controllers
             var email = user.Email;
             var subject = "Congratulations on logging a Smart Commute!";
 
-            var message = "<h1 style='color:white;background-color:black;text-align:center;padding:0px;margin:0px;border-radius: 10px 10px 0px 0px;'>Smart Commute Logged!</h1>";
-            message += "<div style='background-color:darkcyan;color:white;text-align:center;padding:0px;margin:0px;border-radius: 0px 0px 10px 10px;'>";
+            var message = "<h1 style='color:white;background-color:black;text-align:center;padding:5px;margin:0px;border-radius: 10px 10px 0px 0px;'>Smart Commute Logged!</h1>";
+            message += "<div style='background-color:darkcyan;color:white;text-align:center;padding:5px;margin:0px;border-radius: 0px 0px 10px 10px;'>";
             message += "Commute Name: " + commute.CommuteName + "<br/>";
             message += "Commute Distance: " + commute.CommuteDistance + "<br/>";
             message += "Commute Description: " + commute.CommuteDescription + "<br/>";
