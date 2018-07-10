@@ -114,6 +114,13 @@ namespace SmartCommuteEmmet.Controllers
                 {
                     if (model.BusinessId == 0)
                     {
+                        if (model.CustomBusiness == null)
+                        {
+                            ViewData["CustomBusinessError"] = "Custom Business field is required when entering a new business.";
+                            ViewData["UserPhotoError"] = "Please re-select your photo if needed.";
+                            ViewData["BusinessId"] = new SelectList(_context.Set<Business>().OrderBy(c => c.BusinessName), "Id", "BusinessName");
+                            return View(model);
+                        }
                         var business = new Business()
                         {
                             BusinessName = model.CustomBusiness
@@ -177,6 +184,7 @@ namespace SmartCommuteEmmet.Controllers
                 {
                     throw ex;
                 }
+
                 return RedirectToAction(nameof(Index));
             }
 

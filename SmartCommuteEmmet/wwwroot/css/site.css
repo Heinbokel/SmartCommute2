@@ -123,6 +123,22 @@ a:hover{
         border-color:orange;
     }
 
+.btn-facebook {
+    background-color: royalblue;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    padding: 10px 5px;
+    margin: 5px auto;
+    min-width: 150px;
+    transition: background-color 0.5s, border-color 0.5s;
+}
+
+    .btn-facebook:hover {
+        background-color: lightskyblue;
+        border-color: white;
+    }
+
 /*Images*/
 .thumbnailTiny {
     width: 50px;

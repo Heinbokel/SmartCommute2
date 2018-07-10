@@ -12,6 +12,8 @@ using SmartCommuteEmmet.Data;
 using SmartCommuteEmmet.Models;
 using SmartCommuteEmmet.Services;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Facebook;
 
 namespace SmartCommuteEmmet
 {
@@ -48,6 +50,12 @@ namespace SmartCommuteEmmet
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
 
 
         }

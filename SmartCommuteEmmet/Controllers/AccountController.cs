@@ -410,7 +410,16 @@ namespace SmartCommuteEmmet.Controllers
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
+                var dob = info.Principal.FindFirstValue(ClaimTypes.DateOfBirth);
+                var gender = info.Principal.FindFirstValue(ClaimTypes.Gender);
+                var street = info.Principal.FindFirstValue(ClaimTypes.StreetAddress);
+                var city = info.Principal.FindFirstValue(ClaimTypes.Locality);
+                var zip = info.Principal.FindFirstValue(ClaimTypes.PostalCode);
+                var lastName = info.Principal.FindFirstValue(ClaimTypes.Surname);
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = firstName, LastName = lastName, DateOfBirth = DateTime.Today, DateRegistered = DateTime.Now, IsSubscribed = true, BusinessId = 1, UserStreet = street, UserCity = city, UserZIP = zip, UserPhoto = "userPhotos/defaultUserPhoto.png" };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -419,7 +428,7 @@ namespace SmartCommuteEmmet.Controllers
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToAction("Index", "Manage");
                     }
                 }
                 AddErrors(result);
