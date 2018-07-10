@@ -94,7 +94,7 @@ namespace SmartCommuteEmmet.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Email or Password is incorrect.");
                     return View(model);
                 }
             }

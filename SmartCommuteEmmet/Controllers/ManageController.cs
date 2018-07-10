@@ -174,6 +174,7 @@ namespace SmartCommuteEmmet.Controllers
                     user.UserPhoto = model.UserPhoto;
                     user.IsSubscribed = model.IsSubscribed;
 
+
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
@@ -192,6 +193,7 @@ namespace SmartCommuteEmmet.Controllers
             var email = user.Email;
             if (model.Email != email)
             {
+                user.EmailConfirmed = false;
                 var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
                 if (!setEmailResult.Succeeded)
                 {
