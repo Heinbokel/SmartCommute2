@@ -102,16 +102,3 @@
     </div>
 </div>
 <hr />
-<div class="row">
-    <div class="col-md-12">
-        <div class="genericSection">
-            <h2 class="aboutHeader">All Subscribed Email Addresses:</h2>
-            <p class="aboutParagraph">
-                @foreach (var item in Model.Where(c=>c.IsSubscribed == true))
-                {
-                    @item.NormalizedEmail<br />
-                }
-            </p>
-        </div>
-    </div>
-</div>

@@ -666,7 +666,8 @@ namespace SmartCommuteEmmet.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult ManageEmail()
         {
-            return View();
+            var model = _context.Users.Where(c => c.IsSubscribed == true).ToList();
+            return View(model);
         }
 
         [Authorize(Roles = "Admin")]
