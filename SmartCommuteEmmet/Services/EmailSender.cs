@@ -32,6 +32,7 @@ namespace SmartCommuteEmmet.Services
                 client.Host = _configuration["Email:Host"];
                 client.Port = int.Parse(_configuration["Email:Port"]);
                 client.EnableSsl = true;
+                
 
                 using (var emailMessage = new MailMessage())
                 {

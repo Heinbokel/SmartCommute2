@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SmartCommuteEmmet.Data;
 using SmartCommuteEmmet.Models;
 using SmartCommuteEmmet.Services;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace SmartCommuteEmmet
 {

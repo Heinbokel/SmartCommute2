@@ -685,11 +685,11 @@ namespace SmartCommuteEmmet.Controllers
             catch(Exception ex)
             {
                 ViewData["EmailStatus"] = "Encountered an error sending your email : " + ex.ToString();
-                return View("ManageEmail");
+                return View("ManageEmail",users);
             }
 
             ViewData["EmailStatus"] = "Email sent successfully.";
-            return View("ManageEmail");
+            return View("ManageEmail",users);
 
         }
 
