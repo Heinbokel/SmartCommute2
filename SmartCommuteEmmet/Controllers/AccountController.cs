@@ -237,8 +237,7 @@ namespace SmartCommuteEmmet.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             ViewData["BusinessId"] = new SelectList(_context.Set<Business>().OrderBy(c=> c.BusinessName), "Id", "BusinessName");
 
-            //Todo: Make sure modelstate is chosen before setting businessId. Custom Businesses is not recovered during an error.
-            //Change Password Requirements to something simpler.
+            
             
 
             if (ModelState.IsValid)
