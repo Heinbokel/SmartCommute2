@@ -93,9 +93,6 @@ namespace SmartCommuteEmmet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
         {
-
-            
-
             if (!ModelState.IsValid)
             {
                 ViewData["BusinessId"] = new SelectList(_context.Set<Business>().OrderBy(c => c.BusinessName), "Id", "BusinessName");
@@ -182,10 +179,14 @@ namespace SmartCommuteEmmet.Controllers
                 }
                 catch (Exception ex)
                 {
+                    if (model.CustomBusiness != null && model.CustomBusiness != "")
+                    {
+                        var business = _context.Business.Find(user.BusinessId);
+                        _context.Business.Remove(business);//Remove custom business if there are any errors.
+                        await _context.SaveChangesAsync();
+                    }
                     throw ex;
                 }
-
-                return RedirectToAction(nameof(Index));
             }
 
             var email = user.Email;
@@ -194,6 +195,12 @@ namespace SmartCommuteEmmet.Controllers
                 var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
                 if (!setEmailResult.Succeeded)
                 {
+                    if (model.CustomBusiness != null && model.CustomBusiness != "")
+                    {
+                        var business = _context.Business.Find(user.BusinessId);
+                        _context.Business.Remove(business);//Remove custom business if there are any errors.
+                        await _context.SaveChangesAsync();
+                    }
                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
                 }
             }
