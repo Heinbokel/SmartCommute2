@@ -147,6 +147,7 @@ a:hover{
     display: inline;
     object-fit: cover;
     margin-right: 10px;
+    rotation:initial;
 }
 
 .thumbnailNavBar {
@@ -155,6 +156,7 @@ a:hover{
     border-radius: 3px;
     display: inline;
     object-fit:cover;
+    rotation:initial;
 }
 
 .profilePhoto {
@@ -162,11 +164,13 @@ a:hover{
     min-height: 250px;
     border-radius: 100%;
     object-fit:cover;
+    rotation:initial;
 }
 
 .img-responsive{
     border-radius:10px;
     margin:0 auto;
+    rotation:initial;
 }
 
 /*Profile*/
@@ -220,6 +224,7 @@ a:hover{
 
 th{
     text-align:center;
+    color:darkorange;
 }
 
 table{
@@ -948,5 +953,8 @@ table.dataTable {
         width: 100%;
         margin: 0 auto;
         padding:2%;
+    }
+    .body-content {
+        width: 100%;
     }
 }
