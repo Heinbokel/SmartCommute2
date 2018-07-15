@@ -10,7 +10,7 @@ namespace SmartCommuteEmmet.Models
     {
         public int Id { get; set; }
 
-        [Required][Display(Name ="Image")]
+        [Display(Name ="Image")]
         public string CarouselImagePath { get; set; }
 
         [Required][Display(Name ="Date Modified")]

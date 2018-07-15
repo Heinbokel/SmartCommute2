@@ -97,7 +97,7 @@ namespace SmartCommuteEmmet.Controllers
                     }
                     else
                     {
-                        carouselSponsorImage.CarouselImagePath = null;
+                        carouselSponsorImage.CarouselImagePath = "carouselSponsorPhoto/002865df-d3be-489e-9d88-e5f80eb4f675.png";
                     }
                 }
 
