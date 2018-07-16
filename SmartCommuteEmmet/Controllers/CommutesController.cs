@@ -307,7 +307,7 @@ namespace SmartCommuteEmmet.Controllers
         public IActionResult Leaderboards()
         {
             var model = new List<LeaderboardViewModel>();
-            var Commutes = _context.Commute.ToList();
+            var Commutes = _context.Commute.Where(c=>c.CommuteDate.Year == DateTime.Now.Year).ToList();
             var Users = _context.Users.Include(c=>c.Business).Where(c=>c.Email != "Admin@smartcommuteemmet.org").ToList();
 
             foreach(var user in Users)
@@ -333,7 +333,7 @@ namespace SmartCommuteEmmet.Controllers
         public IActionResult LeaderboardsBusiness()
         {
             var model = new List<LeaderboardsBusinessViewModel>();
-            var Commutes = _context.Commute.Include(c => c.User).ToList();
+            var Commutes = _context.Commute.Where(c => c.CommuteDate.Year == DateTime.Now.Year).Include(c => c.User).ToList();
             var Businesses = _context.Business.ToList();
             var Users = _context.Users.Where(c => c.Email != "admin@smartcommuteemmet.org").ToList();
 
