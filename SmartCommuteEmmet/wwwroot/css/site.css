@@ -958,4 +958,11 @@ table.dataTable {
     .body-content {
         width: 100%;
     }
+    table.dataTable thead th,
+    table.dataTable thead td {
+        padding: 3px 3px;
+        border-bottom: 0px solid #111111;
+        font-size:8px;
+    }
+    
 }
