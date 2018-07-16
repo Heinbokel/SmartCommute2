@@ -24,6 +24,7 @@ namespace SmartCommuteEmmet.Models
         public string CommuteName { get; set; }
 
         [Required][Display(Name ="Commute Date")]
+        [CommuteDateCurrentYear]
         [DataType(DataType.Date)]
         public DateTime CommuteDate { get; set; }
 

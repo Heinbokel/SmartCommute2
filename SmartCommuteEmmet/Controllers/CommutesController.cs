@@ -45,8 +45,10 @@ namespace SmartCommuteEmmet.Controllers
             var commuteCountForDate = _context.Commute.Where(c => c.UserId == currentUser.Id && c.CommuteDate.ToShortDateString() == commute.CommuteDate.ToShortDateString()).Count();
             if(commuteCountForDate >= 2)
             {
+                ViewBag.DateError = "There are already 2 commutes entered for this date. Please change the date.";
                 return false;//False = Too many commutes for this date.
             }
+            ViewBag.DateError = "";
             return true;//True = May add this commute for this date.
         }
 
@@ -107,7 +109,7 @@ namespace SmartCommuteEmmet.Controllers
                 }
             }
 
-            ViewBag.DateError = "There are already 2 commutes entered for this date. Please change the date.";
+            
             ViewData["StartDate"] = _context.ConfigDate.Select(c => c.StartDate).SingleOrDefault();
             ViewData["EndDate"] = _context.ConfigDate.Select(c => c.EndDate).SingleOrDefault();
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
@@ -206,8 +208,6 @@ namespace SmartCommuteEmmet.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-
-            ViewBag.DateError = "There are already 2 commutes entered for this date. Please change the date.";
             ViewData["StartDate"] = _context.ConfigDate.Select(c => c.StartDate).SingleOrDefault();
             ViewData["EndDate"] = _context.ConfigDate.Select(c => c.EndDate).SingleOrDefault();
             ViewData["SavedCommutes"] = GetSavedCommutes(CurrentUser);
