@@ -55,7 +55,8 @@ namespace SmartCommuteEmmet
             {
                 //facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 //facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-                
+                facebookOptions.AppId = "1614718555303134";
+                facebookOptions.AppSecret = "8832fed547ba73aa72435160f7b515bf";
             });
 
 

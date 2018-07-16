@@ -153,7 +153,11 @@ namespace SmartCommuteEmmet.Controllers
             ViewData["CommuteTypeId"] = new SelectList(_context.CommuteType, "Id", "CommuteTypeName");
             ViewData["EndPointId"] = new SelectList(_context.Set<EndPoint>().Where(c=>c.UserId == null || c.UserId == CurrentUser.Id).OrderBy(c=> c.EndPointName), "Id", "EndPointName");
             ViewData["StartPointId"] = new SelectList(_context.Set<StartPoint>().Where(c => c.UserId == null || c.UserId == CurrentUser.Id).OrderBy(c => c.StartPointName), "Id", "StartPointName");
-            return View();
+            var model = new Commute()
+            {
+                CommuteDate = DateTime.Now 
+            };
+            return View(model);
         }
 
         // POST: Commutes/Create

@@ -28,10 +28,12 @@ namespace SmartCommuteEmmet.Models
         public DateTime CommuteDate { get; set; }
 
         //FK
+        [Display(Name ="Commute Type")]
         public int CommuteTypeId { get; set; }
         [ForeignKey("CommuteTypeId")][Display(Name ="Commute Type")]
         public virtual CommuteType CommuteType { get; set; }
 
+        [Display(Name = "Start Point")]
         public int? StartPointId { get; set; }
         [ForeignKey("StartPointId")][Display(Name ="Starting Point")]
         public virtual StartPoint StartPoint { get; set; }
@@ -40,6 +42,7 @@ namespace SmartCommuteEmmet.Models
         [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "Start Point name must be between 2 and 50 characters.")]
         public string StartPointCustom { get; set; }
 
+        [Display(Name = "End Point")]
         public int? EndPointId { get; set; }
         [ForeignKey("EndPointId")][Display(Name ="Ending Point")]
         public EndPoint EndPoint { get; set; }

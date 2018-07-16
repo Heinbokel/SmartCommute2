@@ -12,26 +12,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
+                <label asp-for="CommuteName" class="control-label"></label>
+                <input asp-for="CommuteName" class="form-control" />
+                <span asp-validation-for="CommuteName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="CommuteDistance" class="control-label"></label>
                 <input asp-for="CommuteDistance" class="form-control" />
                 <span asp-validation-for="CommuteDistance" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CommuteDescription" class="control-label"></label>
-                <textarea asp-for="CommuteDescription" class="form-control"></textarea>
-                <span asp-validation-for="CommuteDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="CommuteSaved" /> @Html.DisplayNameFor(model => model.CommuteSaved)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="CommuteName" class="control-label"></label>
-                <input asp-for="CommuteName" class="form-control" />
-                <span asp-validation-for="CommuteName" class="text-danger"></span>
+                <label asp-for="CommuteTypeId" class="control-label"></label>
+                <select asp-for="CommuteTypeId" class="form-control" asp-items="ViewBag.CommuteTypeId"></select>
+                <span asp-validation-for="CommuteTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CommuteDate" class="control-label"></label>
@@ -39,10 +32,12 @@
                 <span asp-validation-for="CommuteDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CommuteTypeId" class="control-label"></label>
-                <select asp-for="CommuteTypeId" class="form-control" asp-items="ViewBag.CommuteTypeId"></select>
-                <span asp-validation-for="CommuteTypeId" class="text-danger"></span>
+                <label asp-for="CommuteDescription" class="control-label"></label>
+                <textarea asp-for="CommuteDescription" class="form-control"></textarea>
+                <span asp-validation-for="CommuteDescription" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <label asp-for="StartPointId" class="control-label"></label>
                 <select asp-for="StartPointId" id="startPointDropdown" class="form-control" asp-items="ViewBag.StartPointId" onchange="CheckStartPointSelect();">
@@ -51,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartPointCustom" class="control-label"></label>
-                <input asp-for="StartPointCustom" id="customStartPoint" placeholder="Enter a custom start point here." class="form-control" disabled="disabled" />
+                <input asp-for="StartPointCustom" id="customStartPoint" placeholder="Enter a custom start point here." class="form-control" onkeypress="ChangeStartPointSelect();" />
                 <span asp-validation-for="StartPointCustom" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -62,8 +57,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="EndPointCustom" class="control-label"></label>
-                <input asp-for="EndPointCustom" id="customEndPoint" placeholder="Enter a custom end point here." class="form-control" disabled="disabled" />
+                <input asp-for="EndPointCustom" id="customEndPoint" placeholder="Enter a custom end point here." class="form-control" onkeypress="ChangeEndPointSelect();" />
                 <span asp-validation-for="EndPointCustom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="CommuteSaved" /> @Html.DisplayNameFor(model => model.CommuteSaved)
+                    </label>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn-main" />
@@ -82,14 +84,25 @@
             $('#customStartPoint').removeAttr('disabled');
         } else {
             $('#customStartPoint').attr('disabled', 'disabled');
+            $('#customStartPoint').val('');
         }
     }
+
+    function ChangeStartPointSelect() {
+        $('#startPointDropdown').val(0);
+    }
+
     function CheckEndPointSelect() {
         if ($('#endPointDropdown').val() == 0 && $('#endPointDropdown').val() != "") {
             $('#customEndPoint').removeAttr('disabled');
         } else {
             $('#customEndPoint').attr('disabled', 'disabled');
+            $('#customEndPoint').val('');
         }
+    }
+
+    function ChangeEndPointSelect() {
+        $('#endPointDropdown').val(0);
     }
 
 </script>
