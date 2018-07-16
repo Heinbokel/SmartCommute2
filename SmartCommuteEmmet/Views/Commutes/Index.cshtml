@@ -16,28 +16,19 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.CommuteDistance)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CommuteDescription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CommuteSaved)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.CommuteName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CommuteDate)
+                    @Html.DisplayNameFor(model => model.CommuteDistance)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CommuteType)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.EndPoint)
+                    @Html.DisplayNameFor(model => model.CommuteDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.StartPoint)
+                    @Html.DisplayNameFor(model => model.CommuteSaved)
                 </th>
                 <th></th>
             </tr>
@@ -45,37 +36,28 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommuteDistance)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommuteDescription)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommuteSaved)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommuteName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommuteDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommuteType.CommuteTypeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndPoint.EndPointName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartPoint.StartPointName)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommuteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommuteDistance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommuteType.CommuteTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommuteDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommuteSaved)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
