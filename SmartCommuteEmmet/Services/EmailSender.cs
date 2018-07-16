@@ -19,7 +19,7 @@ namespace SmartCommuteEmmet.Services
         }
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            message += "<br/><br/>Unsubscribe <a href='http://wwww.smartcommuteemmet.azuresites.net/manage/index'>here.</a> ";
+            message += "<br/><br/>Unsubscribe <a href='http://smartcommuteemmet.azurewebsites.net/manage/index'>here.</a> ";
             //Add unsubscribe to message here.
             using (var client = new SmtpClient())
             {
