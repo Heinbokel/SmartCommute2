@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -281,7 +282,7 @@ namespace SmartCommuteEmmet.Controllers
                             fileName = Path.Combine(_environment.WebRootPath, "userPhotos") + $@"\{newFileName}";
 
                             // if you want to store path of folder in database
-                            model.UserPhoto = "userPhotos/" + newFileName;
+                            model.UserPhoto = "/userPhotos/" + newFileName;
 
                             using (FileStream fs = System.IO.File.Create(fileName))
                             {
@@ -290,7 +291,7 @@ namespace SmartCommuteEmmet.Controllers
                             }
                         }
                         else {
-                            model.UserPhoto = "userPhotos/defaultUserPhoto.png";
+                            model.UserPhoto = "/userPhotos/defaultUserPhoto.png";
                         }
                     }
                 }
@@ -410,6 +411,38 @@ namespace SmartCommuteEmmet.Controllers
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
 
+                var identifier = info.Principal.FindFirstValue(ClaimTypes.NameIdentifier);
+                var picture = $"https://graph.facebook.com/{identifier}/picture?width=9999";
+
+                //string imageUrl = picture;
+                //string saveLocation = "userPhotos/";
+
+                //byte[] imageBytes;
+                //HttpWebRequest imageRequest = (HttpWebRequest)WebRequest.Create(imageUrl);
+                //WebResponse imageResponse = imageRequest.GetResponse();
+
+                //Stream responseStream = imageResponse.GetResponseStream();
+
+                //using (BinaryReader br = new BinaryReader(responseStream))
+                //{
+                //    imageBytes = br.ReadBytes(500000);
+                //    br.Close();
+                //}
+                //responseStream.Close();
+                //imageResponse.Close();
+
+                //FileStream fs = new FileStream(saveLocation, FileMode.Create);
+                //BinaryWriter bw = new BinaryWriter(fs);
+                //try
+                //{
+                //    bw.Write(imageBytes);
+                //}
+                //finally
+                //{
+                //    fs.Close();
+                //    bw.Close();
+                //}
+
                 var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
                 var dob = info.Principal.FindFirstValue(ClaimTypes.DateOfBirth);
                 var gender = info.Principal.FindFirstValue(ClaimTypes.Gender);
@@ -418,7 +451,7 @@ namespace SmartCommuteEmmet.Controllers
                 var zip = info.Principal.FindFirstValue(ClaimTypes.PostalCode);
                 var lastName = info.Principal.FindFirstValue(ClaimTypes.Surname);
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = firstName, LastName = lastName, DateOfBirth = DateTime.Today, DateRegistered = DateTime.Now, IsSubscribed = true, BusinessId = 1, UserStreet = street, UserCity = city, UserZIP = zip, UserPhoto = "userPhotos/defaultUserPhoto.png" };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = firstName, LastName = lastName, DateOfBirth = DateTime.Today, DateRegistered = DateTime.Now, IsSubscribed = true, BusinessId = 1, UserStreet = street, UserCity = city, UserZIP = zip, UserPhoto = picture };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

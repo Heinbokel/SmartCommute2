@@ -149,7 +149,7 @@ namespace SmartCommuteEmmet.Controllers
                             fileName = Path.Combine(_environment.WebRootPath, "userPhotos") + $@"\{newFileName}";
 
                             // if you want to store path of folder in database
-                            model.UserPhoto = "userPhotos/" + newFileName;
+                            model.UserPhoto = "/userPhotos/" + newFileName;
 
                             using (FileStream fs = System.IO.File.Create(fileName))
                             {

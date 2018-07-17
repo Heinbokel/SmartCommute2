@@ -10,7 +10,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                   <img src="~/@UserManager.GetUserAsync(User).Result.UserPhoto" class="thumbnailNavBar" />  @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName
+                   <img src="@UserManager.GetUserAsync(User).Result.UserPhoto" class="thumbnailNavBar" />  @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Profiles" asp-action="Profile" asp-route-id="@UserManager.GetUserAsync(User).Result.Id" title="Profile">My Profile</a>
