@@ -622,6 +622,39 @@ namespace SmartCommuteEmmet.Controllers
             return View(model.ToList());
         }
 
+        //GET: User to delete
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteUser(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user =  _context.Users.Find(id);
+
+            return View(user);
+        }
+
+        // POST: User to delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteUserConfirmed(string id)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(m => m.Id == id);
+            var commutes = _context.Commute.Where(c => c.UserId == id).ToList();
+            if(commutes.Count != 0)
+            {
+                foreach (var item in commutes)
+                {
+                    _context.Commute.Remove(item);
+                }
+            }
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ManageUsers));
+        }
+
         [Authorize(Roles = "Admin")]
         public IActionResult ManageCommutes(DateTime? startDate, DateTime? endDate)
         {
@@ -679,6 +712,8 @@ namespace SmartCommuteEmmet.Controllers
 
             return View(model.ToList());
         }
+
+
 
         [Authorize(Roles = "Admin")]
         public IActionResult ManageEmail()
