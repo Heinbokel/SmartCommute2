@@ -14,6 +14,7 @@ using SmartCommuteEmmet.Services;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SmartCommuteEmmet
 {
@@ -50,6 +51,11 @@ namespace SmartCommuteEmmet
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
