@@ -41,7 +41,7 @@
                             {
                                 <tr>
                                     <td>
-                                        <a asp-controller="Profiles" asp-action="Profile" asp-route-id="@item.Id"><div class="leaderboardNameDiv"><img src="~/@item.UserPhoto" class="thumbnailTiny" />@item.FirstName @item.LastName</div></a>
+                                        <a asp-controller="Profiles" asp-action="Profile" asp-route-id="@item.Id"><div class="leaderboardNameDiv"><img src="@item.UserPhoto" class="thumbnailTiny" />@item.FirstName @item.LastName</div></a>
                                     </td>
                                     <td>
                                         @Model.Commutes.Where(c => c.UserId == item.Id).Count()
