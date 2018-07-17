@@ -965,5 +965,24 @@ table.dataTable {
         border-bottom: 0px solid #111111;
         font-size:8px;
     }
+    table.dataTable thead .sorting {
+        background-image: none;
+    }
+
+    table.dataTable thead .sorting_asc {
+        background-image: none;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background-image: none;
+    }
+
+    table.dataTable thead .sorting_asc_disabled {
+        background-image: none;
+    }
+
+    table.dataTable thead .sorting_desc_disabled {
+        background-image: none;
+    }
     
 }
