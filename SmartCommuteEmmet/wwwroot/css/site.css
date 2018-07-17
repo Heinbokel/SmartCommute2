@@ -957,6 +957,7 @@ table.dataTable {
     }
     .body-content {
         width: 100%;
+        padding:0;
     }
     table.dataTable thead th,
     table.dataTable thead td {
